@@ -1,0 +1,59 @@
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">DataTable with default features</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>Usuario</th>
+                      <th>Nombre</th>
+                      <th>Correo</th>
+                      <th>Estado</th>
+                      <th>Id Rol</th>
+                      <th>Última conexión</th>
+                      <th>Creado por</th>
+                      <th>Fecha creación</th>
+                      <th>Vencimiento</th>
+                      <th>Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let user of listUsuarios" >
+                      <td>{{ user.usuario }}</td>
+                      <td>{{ user.nombre_usuario }}</td>
+                      <td>{{ user.correo_electronico }}</td>
+                      <td>{{ user.estado_usuario }}</td>
+                      <td>{{ user.id_rol }}</td>
+                      <td>{{ user.fecha_ultima_conexion }}</td>
+                      <td>{{ user.creado_por }}</td>
+                      <td>{{ user.fecha_creacion }}</td>
+                      <td>{{ user.fecha_vencimiento }}</td>
+                      <td> 
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-warning">Editar</button>
+                          <button type="button" class="btn btn-danger">Inactivar</button>
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->

@@ -1,0 +1,81 @@
+<body>
+
+    <div *ngIf="!loading" class="body">
+        <div class="form-principal" *ngIf="divLogin">
+            <div class="form-cabecera">
+                <h2>Iniciar Sesión</h2>
+                <p>Ingresa tus credenciales para iniciar sesión</p>
+                <hr>
+            </div>
+            <div class="form-login">
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Usuario</label>
+                      <input type="text" maxlength="10" [(ngModel)]="usuario" name="usuario" (input)="eliminarEspaciosBlanco()" autocomplete="false" class="form-control" placeholder="Ingrese usuario">
+                    </div><br>
+                    
+                    <div class="form-group">
+                      <label for="contraseña">Contraseña</label>
+                      <input type="password" maxlength="10" [(ngModel)]="contrasena" name="contrasena" (input)="eliminarEspaciosBlanco()" autocomplete="false" class="form-control" id="contraseña" placeholder="Ingrese su contraseña">
+                    </div><br>
+                    
+                    <div class="boton-container">
+                        <button type="submit" (click)="login()" class="boton">Ingresar</button>
+                        <hr>
+                    </div>
+
+                    <div class="link-container">
+                        <label class="form-check-label" for="btnRestablecer">¿Has olvidado tu contraseña?</label>
+                        <button type="submit" (click)="mostrarMetodoOpcion()" id="btnRestablecer" class="btn btn-link">Restablecer contraseña</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="form-principal" *ngIf="divFirst">
+            <div class="form-cabecera">
+                <h2>Restablecer Contraseña</h2>
+                <p>Para restablecer la contraseña selecciona el método</p>
+                <hr>
+            </div>
+            <div class="form-restablecer-password">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Usuario</label>
+                        <input type="text" maxlength="10" [(ngModel)]="usuario" name="usuario" (input)="eliminarEspaciosBlanco()" autocomplete="false" class="form-control" placeholder="Ingrese usuario">
+
+                    </div>
+                    
+                    <div class="select-list" >
+                        <label for="list">Seleccionar método:</label>
+                        <br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [(ngModel)]="metodoSeleccionado" name="metodo" id="radioCorreo" value="correo" checked>
+                            <label class="form-check-label" for="list">
+                              Correo electrónico
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [(ngModel)]="metodoSeleccionado" name="metodo" id="radioPreguntas" value="preguntas">
+                            <label class="form-check-label" for="list">
+                              Preguntas de seguridad
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="boton-container">
+                        <br>
+                        <hr>
+                        <button type="submit" class="boton" (click)="mostrarMetodoRespuestas()">Siguiente</button>
+                        <button type="submit" class="boton" (click)="navigateLogin()">Cancelar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <app-form-preguntas *ngIf="divSecond" [usuarioLogin]="valorEnviar"></app-form-preguntas>
+    </div>
+    <app-spinner *ngIf="loading"></app-spinner>
+    
+</body>

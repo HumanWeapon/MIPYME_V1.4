@@ -1,0 +1,61 @@
+:root {
+    --color-amarillo: #ECAB0F;
+    --color-azul: #00008B;
+    --primary: #1254a1;
+    --warning: #ffd973;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #e9e9e9;
+    background-size: cover;
+    background: rgb(0,0,139);
+    background: radial-gradient(circle, rgba(0, 0, 139, 0.219) 0%, rgba(18,84,161,1) 100%);
+}
+.form-principal-preguntas{
+    width: 800px;
+    height: 90vh;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+option, select{
+    font-size: 12px;
+}
+.form-cabecera {
+    display: block;
+    width: 100%;
+    height: 20%;
+    text-align: center;
+    padding-top: 20px;
+}
+.form-preguntas{
+    width: 100%;
+    height: 80%;
+    padding: 10px 40px 40px 40px;
+    align-items: center;
+}
+
+p{
+    text-align: center;
+}
+.boton-container {
+    display: block;
+    padding-top: 0px;
+}
+.boton {
+    width: 100%;
+    height: 40px;
+    display: block;
+    margin-bottom: 20px; /* Espacio entre los botones (ajusta según sea necesario) */
+    background-color: #1254a1;;
+    color: white;
+    border-radius: 5px;
+    border-color: #1254a1;;
+}
