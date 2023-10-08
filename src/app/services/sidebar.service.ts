@@ -11,15 +11,6 @@ export class SidebarService {
       icono: 'nav-icon fas fa-solid fa-user',
       submenu: []
     },
-
-    {
-      titulo:'Usuarios',
-      url: 'usuarios',
-      icono: 'nav-icon fas fa-solid fa-user',
-      submenu: []
-    },
-
-
     {
       titulo:'Mantenimiento',
       url: ' ',

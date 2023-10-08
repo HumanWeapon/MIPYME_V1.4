@@ -12,6 +12,7 @@ import { RolesComponent } from './mantenimiento/roles/roles.component';
 import { PermisosComponent } from './mantenimiento/permisos/permisos.component';
 import { UsuariosComponent } from './mantenimiento/usuarios/usuarios.component';
 import { FormsModule } from '@angular/forms';
+import { DataTablesModule } from 'angular-datatables';
 
 
 
@@ -26,19 +27,21 @@ import { FormsModule } from '@angular/forms';
     ObjetosComponent,
     RolesComponent,
     PermisosComponent,
-    UsuariosComponent
+    UsuariosComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule
   ],
   exports:[
     DashboardComponent,
     InicioComponent,
     PerfilComponent,
-    PagesComponent
+    PagesComponent,
+    MantenimientoComponent
   ]
 })
 export class PagesModule { }
