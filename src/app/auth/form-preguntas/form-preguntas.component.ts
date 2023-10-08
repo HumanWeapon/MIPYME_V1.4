@@ -25,6 +25,7 @@ export class FormPreguntasComponent implements OnInit{
   @Input() usuarioLogin: string = ''; 
   selectedValue: any;
   usuario: Usuario |any;
+  respuestaValid: boolean = false;
 
   constructor(
     private _preguntasService: PreguntasService,
@@ -42,9 +43,6 @@ export class FormPreguntasComponent implements OnInit{
   }
 
   conbinarPreguntas(){
-
-    console.log(this.listPreguntas);
-    console.log(this.listPreguntasUsuario);
     for(const item1 of this.listPreguntas){
       for(const item2 of this.listPreguntasUsuario){
         if(item1.id_pregunta === item2.id_pregunta){
@@ -137,17 +135,39 @@ export class FormPreguntasComponent implements OnInit{
     else{
       
       for(const item of this.listPreguntasUsuario){
-        if(item.respuesta !== this.respuesta[0] || item.respuesta !== this.respuesta[1] || item.respuesta !== this.respuesta[2]){
-          this.toastr.error('No se ha podido restablecer la contraseña, intenta otro método', 'Error');
-        }else{
-          
+        const respuesta: Preguntas_Usuario = {
+          id_preguntas_usuario: item.id_preguntas_usuario,
+          id_pregunta: 0,
+          id_usuario: 0,
+          respuesta: 'REYNALDO',
+          creado_por: '',
+          fecha_creacion: new Date(),
+          modificado_por: '',
+          fecha_modificacion: new Date()
         }
+        this._preguntasUsuarioService.validarRespuesta(respuesta).subscribe(data =>{
+          if (data){
+            this.respuestaValid = true
+            console.log(this.respuestaValid);
+          }else{}
+            this.respuestaValid = false
+            console.log(this.respuestaValid);
+        })
+
       }
 
 
       this.toastr.success('Respuestas guardadas', 'Error');
     }
+
   }
+  validarRespuesta(){
+
+
+    
+  }
+
+
 
   selectedPregunta(e: any){
 
@@ -156,6 +176,5 @@ export class FormPreguntasComponent implements OnInit{
     this.pregunta[2] = this.pregunta[2];
 
     this.selectedValue = e.target.value;
-    console.log(this.selectedValue);
   }
 }
