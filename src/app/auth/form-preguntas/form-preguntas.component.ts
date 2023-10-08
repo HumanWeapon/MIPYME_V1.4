@@ -25,6 +25,7 @@ export class FormPreguntasComponent implements OnInit{
   @Input() usuarioLogin: string = ''; 
   selectedValue: any;
   usuario: Usuario |any;
+  respuestaValid: boolean = false;
 
   constructor(
     private _preguntasService: PreguntasService,
@@ -135,15 +136,44 @@ export class FormPreguntasComponent implements OnInit{
     }
     else{
       for(const item of this.listPreguntasUsuario){
+<<<<<<< HEAD
         console.log(item);
         if(item.respuesta !== this.respuesta[0] || item.respuesta !== this.respuesta[1] || item.respuesta !== this.respuesta[2]){
           this.toastr.error('No se ha podido restablecer la contraseña, intenta otro método', 'Error');
         }else{
           this.toastr.success('Respuestas guardadas', 'Error');
+=======
+        const respuesta: Preguntas_Usuario = {
+          id_preguntas_usuario: item.id_preguntas_usuario,
+          id_pregunta: 0,
+          id_usuario: 0,
+          respuesta: 'REYNALDO',
+          creado_por: '',
+          fecha_creacion: new Date(),
+          modificado_por: '',
+          fecha_modificacion: new Date()
+>>>>>>> aa9ac75799f23d0278498d74bedc020a0cc51194
         }
+        this._preguntasUsuarioService.validarRespuesta(respuesta).subscribe(data =>{
+          if (data){
+            this.respuestaValid = true
+            console.log(this.respuestaValid);
+          }else{}
+            this.respuestaValid = false
+            console.log(this.respuestaValid);
+        })
+
       }
     }
+
   }
+  validarRespuesta(){
+
+
+    
+  }
+
+
 
   selectedPregunta(e: any){
 
@@ -152,6 +182,9 @@ export class FormPreguntasComponent implements OnInit{
     this.pregunta[2] = this.pregunta[2];
 
     this.selectedValue = e.target.value;
+<<<<<<< HEAD
 
+=======
+>>>>>>> aa9ac75799f23d0278498d74bedc020a0cc51194
   }
 }
