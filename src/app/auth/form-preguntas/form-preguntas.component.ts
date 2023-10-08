@@ -42,9 +42,6 @@ export class FormPreguntasComponent implements OnInit{
   }
 
   conbinarPreguntas(){
-
-    console.log(this.listPreguntas);
-    console.log(this.listPreguntasUsuario);
     for(const item1 of this.listPreguntas){
       for(const item2 of this.listPreguntasUsuario){
         if(item1.id_pregunta === item2.id_pregunta){
@@ -52,7 +49,7 @@ export class FormPreguntasComponent implements OnInit{
         }
       }
     }
-  console.log(this.preguntasFiltradas);
+  /*console.log(this.preguntasFiltradas);*/
   }
 
   getUsuario(){
@@ -109,6 +106,7 @@ export class FormPreguntasComponent implements OnInit{
   }
 
 
+
   navigateLogin() {
     this.router.navigate(['/login']);
    }
@@ -131,21 +129,19 @@ export class FormPreguntasComponent implements OnInit{
     }
     if(this.pregunta[2] == this.pregunta[0] || this.pregunta[2] == this.pregunta[1]){
       this.toastr.error('Las preguntas no de seben repetir', 'Error');
-    }else if(this.respuesta[0] == "" || this.respuesta[1] == "" || this.respuesta[2] == ""){
+    }
+    if(this.respuesta[0] == "" || this.respuesta[1] == "" || this.respuesta[2] == ""){
       this.toastr.error('Todos los campos son obligatorios', 'Error');
     }
     else{
-      
       for(const item of this.listPreguntasUsuario){
+        console.log(item);
         if(item.respuesta !== this.respuesta[0] || item.respuesta !== this.respuesta[1] || item.respuesta !== this.respuesta[2]){
           this.toastr.error('No se ha podido restablecer la contraseña, intenta otro método', 'Error');
         }else{
-          
+          this.toastr.success('Respuestas guardadas', 'Error');
         }
       }
-
-
-      this.toastr.success('Respuestas guardadas', 'Error');
     }
   }
 
@@ -156,6 +152,6 @@ export class FormPreguntasComponent implements OnInit{
     this.pregunta[2] = this.pregunta[2];
 
     this.selectedValue = e.target.value;
-    console.log(this.selectedValue);
+
   }
 }
