@@ -106,12 +106,7 @@ export class FormPreguntasComponent implements OnInit{
     });
   }
 
-
-  navigateLogin() {
-    this.router.navigate(['/login']);
-   }
-
-  submitForm() {
+  submitForm(): void {
 
     this.respuesta[0] = this.respuesta[0];
     this.respuesta[1] = this.respuesta[1];
@@ -139,7 +134,7 @@ export class FormPreguntasComponent implements OnInit{
           id_preguntas_usuario: item.id_preguntas_usuario,
           id_pregunta: 0,
           id_usuario: 0,
-          respuesta: 'REYNALDO',
+          respuesta: '',
           creado_por: '',
           fecha_creacion: new Date(),
           modificado_por: '',
@@ -161,14 +156,9 @@ export class FormPreguntasComponent implements OnInit{
     }
 
   }
-  validarRespuesta(){
-
-
-    
-  }
-
-
-
+  navigateLogin() {
+    this.router.navigate(['/login']);
+   }
   selectedPregunta(e: any){
 
     this.pregunta[0] = this.pregunta[0];
