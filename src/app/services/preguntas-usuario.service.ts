@@ -23,4 +23,7 @@ export class PreguntasUsuarioService {
   validarRespuesta(Pregunta: Preguntas_Usuario): Observable<Preguntas_Usuario[]>{
     return this.http.post<Preguntas_Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/validarRespuestas`, Pregunta)
   }
+  validatePreguntas(): Observable<Preguntas_Usuario[]>{
+    return this.http.get<Preguntas_Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/preguntasUsuarioPreguntas`)
+  }
 }
