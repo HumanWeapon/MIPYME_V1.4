@@ -118,14 +118,8 @@ export class FormPreguntasComponent implements OnInit{
       console.error('Error al obtener preguntas de usuario:', error);
     });
   }
+  submitForm(): void {
 
-
-
-  navigateLogin() {
-    this.router.navigate(['/login']);
-   }
-
-  submitForm() {
 
     this.respuesta[0] = this.respuesta[0];
     this.respuesta[1] = this.respuesta[1];
@@ -161,7 +155,9 @@ export class FormPreguntasComponent implements OnInit{
           id_preguntas_usuario: indice.id_preguntas_usuario,
           id_pregunta: 0,
           id_usuario: 0,
-          respuesta: indice2,
+          respuesta: '',
+          respuesta: '',
+
           creado_por: '',
           fecha_creacion: new Date(),
           modificado_por: '',
@@ -176,10 +172,12 @@ export class FormPreguntasComponent implements OnInit{
           console.error('Error al obtener preguntas de usuario:', error);
         });
       }
-
     }*/
-}
-  
+  }
+
+  navigateLogin() {
+    this.router.navigate(['/login']);
+   }
   selectedPregunta(e: any){
 
     this.pregunta[0] = this.pregunta[0];

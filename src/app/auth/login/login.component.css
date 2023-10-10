@@ -13,14 +13,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 80vh;
     background-size: cover;
     background: radial-gradient(circle, rgba(0, 0, 139, 0.219) 0%, rgba(18,84,161,1) 100%);
 }
 
 .form-principal {
-    width: 500px;
-    height: 600px;
+    width: 400px;
+    height: 650px;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
