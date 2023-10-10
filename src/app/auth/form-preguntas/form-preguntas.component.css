@@ -5,7 +5,7 @@
     --warning: #ffd973;
 }
 
-body {
+.div-principal {
     width: 400px;
     padding: 0;
     margin: 0;
@@ -14,7 +14,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 650px;
     background-size: cover;
     background: radial-gradient(circle, rgba(0, 0, 139, 0.219) 0%, rgba(18,84,161,1) 100%);
 }

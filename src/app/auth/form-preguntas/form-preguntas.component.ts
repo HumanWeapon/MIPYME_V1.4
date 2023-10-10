@@ -79,24 +79,24 @@ export class FormPreguntasComponent implements OnInit{
       estado_usuario: false,
       id_rol: 0,
       fecha_ultima_conexion: new Date(),
-      preguntas_contestadas: 0,
       primer_ingreso: new Date(),
-      fecha_vencimiento: new Date()
+      fecha_vencimiento: new Date(),
+      intentos_fallidos: 0
     }
     this._userService.getUsuario(user).subscribe(data =>{
       this.usuario = data; 
       this.getPreguntasUsuario(); // Llama a getPreguntasUsuario después de que usuario se inicialice
-      this.getPreguntas(); // Llama a getPreguntas después de que usuario se inicialice
+      //this.getPreguntas(); // Llama a getPreguntas después de que usuario se inicialice
     })
   }
 
-  getPreguntas() {
+  /*getPreguntas() {
     this._preguntasService.getPreguntas().subscribe(data => {
       this.listPreguntas = data; // Accede a la propiedad _pregunta del objeto de respuesta
       this.conbinarPreguntas();
       this.conbinarRespuestas();
     });
-  }
+  }*/
 
   getPreguntasUsuario() {
     const preguntasUsuario: Preguntas_Usuario = {
