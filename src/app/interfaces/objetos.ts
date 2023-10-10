@@ -1,4 +1,4 @@
-export interface objetos{
+export interface Objetos{
 id_objeto: number, 
 objeto: string, 
 descripcion:string, 
