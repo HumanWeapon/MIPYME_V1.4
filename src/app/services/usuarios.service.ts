@@ -28,4 +28,10 @@ export class UsuariosService {
    getAllUsuarios(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/getAllUsuarios`)
    }
+   inactivarUsuario(usuario: Usuario): Observable<Usuario>{
+    return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/inactivateUsuario`, usuario)
+   }
+   activarUsuario(usuario: Usuario): Observable<Usuario>{
+    return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/activateUsuario`, usuario)
+   }
 }

@@ -20,12 +20,14 @@ export class FormPreguntasComponent implements OnInit{
   listPreguntasUsuario: Preguntas_Usuario[] = [];
   listPreguntas: Preguntas[] = [];
   preguntasFiltradas: Preguntas[] = [];
+  respuestasFiltradas: Preguntas_Usuario[]=[];
   pregunta: Preguntas[] = [];
   respuesta: string[] = ['', '', ''];
   @Input() usuarioLogin: string = ''; 
   selectedValue: any;
   usuario: Usuario |any;
   respuestaValid: boolean = false;
+  RespuestasUsuario: Preguntas_Usuario[] = [];
 
   constructor(
     private _preguntasService: PreguntasService,
@@ -50,7 +52,17 @@ export class FormPreguntasComponent implements OnInit{
         }
       }
     }
-  /*console.log(this.preguntasFiltradas);*/
+    console.log(this.preguntasFiltradas);
+  }
+  conbinarRespuestas(){
+    for(const item1 of this.listPreguntasUsuario){
+      for(const item2 of this.preguntasFiltradas){
+        if(item1.id_pregunta === item2.id_pregunta){
+          this.respuestasFiltradas.push(item1)
+        }
+      }
+    }
+    console.log(this.respuestasFiltradas);
   }
 
   getUsuario(){
@@ -82,6 +94,7 @@ export class FormPreguntasComponent implements OnInit{
     this._preguntasService.getPreguntas().subscribe(data => {
       this.listPreguntas = data; // Accede a la propiedad _pregunta del objeto de respuesta
       this.conbinarPreguntas();
+      this.conbinarRespuestas();
     });
   }
 
@@ -135,46 +148,38 @@ export class FormPreguntasComponent implements OnInit{
       this.toastr.error('Todos los campos son obligatorios', 'Error');
     }
     else{
-      for(const item of this.listPreguntasUsuario){
-<<<<<<< HEAD
-        console.log(item);
-        if(item.respuesta !== this.respuesta[0] || item.respuesta !== this.respuesta[1] || item.respuesta !== this.respuesta[2]){
-          this.toastr.error('No se ha podido restablecer la contraseña, intenta otro método', 'Error');
-        }else{
-          this.toastr.success('Respuestas guardadas', 'Error');
-=======
-        const respuesta: Preguntas_Usuario = {
-          id_preguntas_usuario: item.id_preguntas_usuario,
+      this.validarRespuesta();
+    }
+
+  }
+
+  validarRespuesta() {
+
+    /*for(const indice of this.respuestasFiltradas){
+      for(const indice2 of this.respuesta){
+        const a: Preguntas_Usuario = {
+          id_preguntas_usuario: indice.id_preguntas_usuario,
           id_pregunta: 0,
           id_usuario: 0,
-          respuesta: 'REYNALDO',
+          respuesta: indice2,
           creado_por: '',
           fecha_creacion: new Date(),
           modificado_por: '',
           fecha_modificacion: new Date()
->>>>>>> aa9ac75799f23d0278498d74bedc020a0cc51194
         }
-        this._preguntasUsuarioService.validarRespuesta(respuesta).subscribe(data =>{
-          if (data){
-            this.respuestaValid = true
-            console.log(this.respuestaValid);
-          }else{}
-            this.respuestaValid = false
-            console.log(this.respuestaValid);
-        })
-
+        console.log(a)
+        this._preguntasUsuarioService.validarRespuesta(a).subscribe(data => {
+          this.listPreguntasUsuario = data; // Accede a la propiedad _pregunta del objeto de respuesta
+          console.log(this.listPreguntasUsuario)
+        }, error => {
+          // Manejar cualquier error aquí, si es necesario
+          console.error('Error al obtener preguntas de usuario:', error);
+        });
       }
-    }
 
-  }
-  validarRespuesta(){
-
-
-    
-  }
-
-
-
+    }*/
+}
+  
   selectedPregunta(e: any){
 
     this.pregunta[0] = this.pregunta[0];
@@ -182,9 +187,6 @@ export class FormPreguntasComponent implements OnInit{
     this.pregunta[2] = this.pregunta[2];
 
     this.selectedValue = e.target.value;
-<<<<<<< HEAD
-
-=======
->>>>>>> aa9ac75799f23d0278498d74bedc020a0cc51194
+    console.log(this.selectedValue)
   }
 }
