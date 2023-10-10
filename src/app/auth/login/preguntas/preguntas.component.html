@@ -1,0 +1,12 @@
+<form [formGroup]="securityForm" (submit)="onSubmit()">
+    <div *ngFor="let pregunta of preguntasRespuestas">
+      <label>{{ pregunta.pregunta.pregunta }}</label>
+      <input
+        type="text"
+        [formControlName]="pregunta.id_pregunta"
+        class="form-control"
+        placeholder="Respuesta"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>

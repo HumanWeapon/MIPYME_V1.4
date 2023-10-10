@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Preguntas } from 'src/app/interfaces/preguntas';
-import { Preguntas_Usuario } from 'src/app/interfaces/preguntasUsuario';
-import { PreguntasService } from 'src/app/services/preguntas.service';
+import { Route, Router } from '@angular/router';
+import { PreguntasUsuarioService } from 'src/app/services/preguntas-usuario.service';
 
 @Component({
   selector: 'app-preguntas',
@@ -11,53 +9,64 @@ import { PreguntasService } from 'src/app/services/preguntas.service';
   styleUrls: ['./preguntas.component.css']
 })
 export class PreguntasComponent implements OnInit {
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-  /*securityQuestions: Preguntas[] = [];
-  resetPasswordForm: FormGroup | null = null; // Inicializa resetPasswordForm como nulo
-  userAnswers: Preguntas_Usuario[] = [];
-  userId: Preguntas_Usuario;
+
+  datos: any;
+  securityForm: FormGroup;
+  preguntasRespuestas: any[] = []
 
   constructor(
-    private formBuilder: FormBuilder,
-    private _preguntasSeguridadService: PreguntasService,
-    private route: ActivatedRoute
-  ) {}
-
-  ngOnInit(): void {
-    // Se obtiene el ID de usuario de la ruta actual si está presente
-    const userIdFromRoute = this.route.snapshot.paramMap.get('userId');
-    this.userId.id_usuario = 57;
-    // Se verifica si userIdFromRoute no es nulo antes de continuar
-    if (userIdFromRoute !== null) {
-      // Convierte userIdFromRoute a un número
-      const numericUserId = +userIdFromRoute;
-
-      // Asigna el valor a userId
-      this.userId.id_usuario = numericUserId;
-
-      // Llama al servicio solo si userId es un número válido
-      if (!isNaN(this.userId.id_usuario)) {
-        // Obtiene las preguntas de seguridad por usuario desde la API
-        this._preguntasSeguridadService.getPreguntasPorUsuario(this.userId)
-          .subscribe((questions) => {
-            this.securityQuestions = questions;
-
-            // Crea dinámicamente los controles del formulario
-            const formControls: { [key: string]: any } = {};
-            for (const question of questions) {
-              formControls[`answer${question.id_pregunta}`] = ['', Validators.required];
-            }
-            this.resetPasswordForm = this.formBuilder.group(formControls);
-          });
-      }
-    }
+    private fb: FormBuilder,
+    private _preguntasUsuario: PreguntasUsuarioService,
+    private router: Router
+    ){
+      this.securityForm = this.fb.group({});
   }
 
-  onSubmit(): void {
-    // Implementa el manejo de envío del formulario aquí
-    // Verifica las respuestas del usuario en this.userAnswers
-    // this.userAnswers contiene las respuestas seleccionadas por el usuario
-  }*/
+  ngOnInit(): void {
+    // Llama al servicio para obtener las preguntas y respuestas desde la API
+    this._preguntasUsuario.validatePreguntas().subscribe((data) => {
+      this.preguntasRespuestas = data;
+      this.crearFormulario();
+    });
+  }
+
+  crearFormulario() {
+    const formGroup: { [key: string]: any } = {}; // Declaración explícita del tipo de formGroup
+  
+    for (const item of this.preguntasRespuestas) {
+      formGroup[item.id_pregunta] = [
+        '', // Valor inicial del campo de respuesta
+        Validators.required, // Validador requerido
+      ];
+    }
+  
+    this.securityForm = this.fb.group(formGroup);
+  }
+
+  onSubmit() {
+    if (this.securityForm.valid) {
+      // Recopila las respuestas del usuario y compáralas con las de la API
+      const respuestasUsuario = this.securityForm.value;
+
+      for (const item of this.preguntasRespuestas) {
+        const respuestaUsuario = respuestasUsuario[item.id_pregunta];
+        const respuestaCorrecta = item.respuesta;
+
+        if (respuestaUsuario !== respuestaCorrecta) {
+          // Las respuestas no coinciden, puedes manejar esto como desees
+          console.log('Respuesta incorrecta para la pregunta:', item.pregunta);
+          return;
+        }
+      }
+
+      // Todas las respuestas son correctas, puedes continuar con la lógica deseada
+      console.log('Todas las respuestas son correctas');
+      this.navigateRecuperar();
+    }
+  }
+  navigateRecuperar(){
+    this.router.navigate(['/recuperar'])
+  }
+
+  
 }

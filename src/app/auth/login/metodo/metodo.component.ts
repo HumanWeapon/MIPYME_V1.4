@@ -21,11 +21,15 @@ export class MetodoComponent {
       // Navegar al método de restablecer contraseña por correo electrónico
     } else if (this.selectedOption === 'preguntas') {
       // Navegar al método de restablecer contraseña por preguntas de seguridad
-      this.navigateLogin();
+      this.navigatePreguntas();
     }
   }
 
   navigateLogin() {
     this.router.navigate(['/login'])
+  }
+
+  navigatePreguntas() {
+    this.router.navigate(['/preguntas'])
   }
 }
