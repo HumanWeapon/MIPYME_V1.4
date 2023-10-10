@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
+
 export class PerfilComponent {
 
 }
