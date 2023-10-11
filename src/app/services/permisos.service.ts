@@ -14,7 +14,7 @@ export class PermisoService {
 
   constructor(private http: HttpClient) {
     this.myAppUrl = environment.endpoint;
-    this.myApiUrl = 'api/permiso'
+    this.myApiUrl = 'api/permisos'
    }
 
    login(permisos: Permisos): Observable<string> {

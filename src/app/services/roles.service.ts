@@ -14,7 +14,7 @@ export class RolService {
 
   constructor(private http: HttpClient) {
     this.myAppUrl = environment.endpoint;
-    this.myApiUrl = 'api/rol'
+    this.myApiUrl = 'api/roles'
    }
 
    login(roles: Roles): Observable<string> {

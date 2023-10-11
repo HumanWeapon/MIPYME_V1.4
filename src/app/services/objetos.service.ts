@@ -14,24 +14,24 @@ export class ObjetService {
 
   constructor(private http: HttpClient) {
     this.myAppUrl = environment.endpoint;
-    this.myApiUrl = 'api/objet'
+    this.myApiUrl = 'api/objetos'
    }
 
-   login(objetos: Objetos): Observable<string> {
-    return this.http.post<string>(`${this.myAppUrl}${this.myApiUrl}/login`, objetos)
+   login(objeto: Objetos): Observable<string> {
+    return this.http.post<string>(`${this.myAppUrl}${this.myApiUrl}/login`, objeto)
    }
 
-   getObjeto(objetos: Objetos): Observable<Objetos> {
-    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/getObjeto`, objetos)
+   getObjeto(objeto: Objetos): Observable<Objetos> {
+    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/getObjeto`, objeto)
    }
 
    getAllObjetos(): Observable<Objetos[]> {
     return this.http.get<Objetos[]>(`${this.myAppUrl}${this.myApiUrl}/getAllObjetos`)
    }
-   inactivarObjeto(objetos: Objetos): Observable<Objetos>{
-    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/inactivarteObjeto`, objetos)
+   inactivarObjeto(objeto: Objetos): Observable<Objetos>{
+    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/inactivarteObjeto`, objeto)
    }
-   activarObjeto(objetos: Objetos): Observable<Objetos>{
-    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/activatarObjeto`, objetos)
+   activarObjeto(objeto: Objetos): Observable<Objetos>{
+    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/activatarObjeto`, objeto)
    }
 }

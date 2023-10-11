@@ -20,7 +20,7 @@ export class ObjetosComponent implements OnInit{
     this.dtOptions = {
       ajax: (dataTablesParameters: any, callback) => {
         this._objetService.getAllObjetos().subscribe((objetos) => {
-          // Mapea los datos de usuarios en el formato esperado por DataTables
+          // Mapea los datos de los objetos en el formato esperado por DataTables
           const dataTableData = {
             recordsTotal: objetos.length,
             recordsFiltered: objetos.length,
