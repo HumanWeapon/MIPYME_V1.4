@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/interfaces/usuario';
@@ -12,17 +12,12 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   usuario: string = '';
   contrasena: string = '';
   loading: boolean = false;
-  divLogin: boolean = true;
-  divFirst: boolean = false;
-  divSecond: boolean = false;
 
-  radio1: boolean = false;
-  radio2: boolean = false;
+
 
   metodoSeleccionado: string = ''; // Variable para controlar la opción seleccionada
 
@@ -41,14 +36,10 @@ export class LoginComponent implements OnInit {
 
 
   //Función que permite navegar al primer formulario del login, ocultando las otras ventanas
-  navigateLogin() {
-    this.divLogin = true;
-    this.divFirst = false;
-   }
+
   //Muestra el segundo formulario del Login
-  mostrarMetodoOpcion(){
-    this.divLogin = false;
-    this.divFirst = true;
+  navegateToMetodo(){
+    this.router.navigate(['/metodo'])
   }
   //Función que valida campos del login
   eliminarEspaciosBlanco() {
@@ -66,9 +57,6 @@ export class LoginComponent implements OnInit {
       this.toastr.success('Radio 1 seleccionado. Realizar acción para Correo electrónico.', 'Error');
     } else if (this.metodoSeleccionado === 'preguntas') {
       // Realiza la acción correspondiente para la opción "Preguntas de seguridad"
-      this.divLogin = false;
-      this.divFirst = false;
-      this.divSecond = true
       this.valorEnviar = this.usuario;
       this.toastr.success('Radio 2 seleccionado. Realizar acción para Preguntas de seguridad.', 'Error');
     } else {
@@ -99,22 +87,22 @@ export class LoginComponent implements OnInit {
       estado_usuario: false,
       id_rol: 0,
       fecha_ultima_conexion: new Date(),
-      preguntas_contestadas: 0,
       primer_ingreso: new Date(),
-      fecha_vencimiento: new Date()
+      fecha_vencimiento: new Date(),
+      intentos_fallidos: 0
     }
     
     this.loading = true;
 
-   this._userService.login(usuario).subscribe({
-      next: (data) => {
-        localStorage.setItem('token', data);
-        this.router.navigate(['/dashboard/perfil'])
-      },
-      error: (e: HttpErrorResponse) => {
-        this._errorService.msjError(e);
-        this.loading = false
-      }
-    })
-  }
+    this._userService.login(usuario).subscribe({
+        next: (data) => {
+          localStorage.setItem('token', data);
+          this.router.navigate(['/dashboard/perfil'])
+        },
+        error: (e: HttpErrorResponse) => {
+          this._errorService.msjError(e);
+          this.loading = false
+        }
+      })
+    }
 }

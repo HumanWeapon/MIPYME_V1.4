@@ -3,9 +3,9 @@ export interface Parametros {
     parametro: string,
     valor: string,
     //id_usuario: string,
-    fecha_creacion: Date,
-    fecha_modificacion: Date,
     creado_por: string,
+    fecha_creacion: Date,
     modificado_por: string,
-    alerta_busqueda: number, 
+    fecha_modificacion: Date,
+    //alerta_busqueda: number, 
 }

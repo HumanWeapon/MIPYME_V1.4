@@ -1,7 +1,7 @@
 export interface Permisos {
-    id_Permisos: number,
-    id_Rol: number,
-    id_Objeto: number,
+    id_permisos: number,
+    id_rol: number,
+    id_objeto: number,
     permiso_insercion: boolean,
     permiso_eliminacion: boolean,
     permiso_actualizacion: boolean,

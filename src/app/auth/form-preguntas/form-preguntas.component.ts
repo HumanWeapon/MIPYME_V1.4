@@ -20,12 +20,14 @@ export class FormPreguntasComponent implements OnInit{
   listPreguntasUsuario: Preguntas_Usuario[] = [];
   listPreguntas: Preguntas[] = [];
   preguntasFiltradas: Preguntas[] = [];
+  respuestasFiltradas: Preguntas_Usuario[]=[];
   pregunta: Preguntas[] = [];
   respuesta: string[] = ['', '', ''];
   @Input() usuarioLogin: string = ''; 
   selectedValue: any;
   usuario: Usuario |any;
   respuestaValid: boolean = false;
+  RespuestasUsuario: Preguntas_Usuario[] = [];
 
   constructor(
     private _preguntasService: PreguntasService,
@@ -50,7 +52,17 @@ export class FormPreguntasComponent implements OnInit{
         }
       }
     }
-  console.log(this.preguntasFiltradas);
+    console.log(this.preguntasFiltradas);
+  }
+  conbinarRespuestas(){
+    for(const item1 of this.listPreguntasUsuario){
+      for(const item2 of this.preguntasFiltradas){
+        if(item1.id_pregunta === item2.id_pregunta){
+          this.respuestasFiltradas.push(item1)
+        }
+      }
+    }
+    console.log(this.respuestasFiltradas);
   }
 
   getUsuario(){
@@ -67,23 +79,24 @@ export class FormPreguntasComponent implements OnInit{
       estado_usuario: false,
       id_rol: 0,
       fecha_ultima_conexion: new Date(),
-      preguntas_contestadas: 0,
       primer_ingreso: new Date(),
-      fecha_vencimiento: new Date()
+      fecha_vencimiento: new Date(),
+      intentos_fallidos: 0
     }
     this._userService.getUsuario(user).subscribe(data =>{
       this.usuario = data; 
       this.getPreguntasUsuario(); // Llama a getPreguntasUsuario después de que usuario se inicialice
-      this.getPreguntas(); // Llama a getPreguntas después de que usuario se inicialice
+      //this.getPreguntas(); // Llama a getPreguntas después de que usuario se inicialice
     })
   }
 
-  getPreguntas() {
+  /*getPreguntas() {
     this._preguntasService.getPreguntas().subscribe(data => {
       this.listPreguntas = data; // Accede a la propiedad _pregunta del objeto de respuesta
       this.conbinarPreguntas();
+      this.conbinarRespuestas();
     });
-  }
+  }*/
 
   getPreguntasUsuario() {
     const preguntasUsuario: Preguntas_Usuario = {
@@ -105,8 +118,8 @@ export class FormPreguntasComponent implements OnInit{
       console.error('Error al obtener preguntas de usuario:', error);
     });
   }
-
   submitForm(): void {
+
 
     this.respuesta[0] = this.respuesta[0];
     this.respuesta[1] = this.respuesta[1];
@@ -124,38 +137,44 @@ export class FormPreguntasComponent implements OnInit{
     }
     if(this.pregunta[2] == this.pregunta[0] || this.pregunta[2] == this.pregunta[1]){
       this.toastr.error('Las preguntas no de seben repetir', 'Error');
-    }else if(this.respuesta[0] == "" || this.respuesta[1] == "" || this.respuesta[2] == ""){
+    }
+    if(this.respuesta[0] == "" || this.respuesta[1] == "" || this.respuesta[2] == ""){
       this.toastr.error('Todos los campos son obligatorios', 'Error');
     }
     else{
-      
-      for(const item of this.listPreguntasUsuario){
-        const respuesta: Preguntas_Usuario = {
-          id_preguntas_usuario: item.id_preguntas_usuario,
+      this.validarRespuesta();
+    }
+
+  }
+
+  validarRespuesta() {
+
+    /*for(const indice of this.respuestasFiltradas){
+      for(const indice2 of this.respuesta){
+        const a: Preguntas_Usuario = {
+          id_preguntas_usuario: indice.id_preguntas_usuario,
           id_pregunta: 0,
           id_usuario: 0,
           respuesta: '',
+          respuesta: '',
+
           creado_por: '',
           fecha_creacion: new Date(),
           modificado_por: '',
           fecha_modificacion: new Date()
         }
-        this._preguntasUsuarioService.validarRespuesta(respuesta).subscribe(data =>{
-          if (data){
-            this.respuestaValid = true
-            console.log(this.respuestaValid);
-          }else{}
-            this.respuestaValid = false
-            console.log(this.respuestaValid);
-        })
-
+        console.log(a)
+        this._preguntasUsuarioService.validarRespuesta(a).subscribe(data => {
+          this.listPreguntasUsuario = data; // Accede a la propiedad _pregunta del objeto de respuesta
+          console.log(this.listPreguntasUsuario)
+        }, error => {
+          // Manejar cualquier error aquí, si es necesario
+          console.error('Error al obtener preguntas de usuario:', error);
+        });
       }
-
-
-      this.toastr.success('Respuestas guardadas', 'Error');
-    }
-
+    }*/
   }
+
   navigateLogin() {
     this.router.navigate(['/login']);
    }
@@ -166,5 +185,6 @@ export class FormPreguntasComponent implements OnInit{
     this.pregunta[2] = this.pregunta[2];
 
     this.selectedValue = e.target.value;
+    console.log(this.selectedValue)
   }
 }
