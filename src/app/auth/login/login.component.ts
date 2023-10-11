@@ -6,6 +6,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { ErrorService } from 'src/app/services/error.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PerfilComponent } from './inicio/perfil/perfil.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
@@ -14,7 +13,6 @@ const routes: Routes = [
   {path:'dashboard',component:PagesComponent, 
   children:[
     {path:' ', component:DashboardComponent},
-    {path: 'perfil', component: PerfilComponent},
     {path: 'usuarios', component: UsuariosComponent},
     {path: 'objetos', component: ObjetosComponent},
     {path: 'permisos', component: PermisosComponent},
