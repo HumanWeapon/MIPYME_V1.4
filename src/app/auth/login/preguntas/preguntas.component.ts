@@ -69,7 +69,6 @@ export class PreguntasComponent implements OnInit {
         Validators.required, // Validador requerido
       ];
     }
-  
     this.securityForm = this.fb.group(formGroup);
   }
 
@@ -77,9 +76,9 @@ export class PreguntasComponent implements OnInit {
 
     const respuestasUsuario = this.securityForm.value;
 
-    for (const item of respuestasUsuario) {
-      console.log(this.securityForm.value)
-      this.securityForm.value;
+    for (const key of Object.keys(respuestasUsuario)) {
+      const respuesta = respuestasUsuario[key];
+      console.log(`Pregunta ${key}: ${respuesta}`);
     }
 
     if (this.securityForm.valid) {
@@ -106,6 +105,4 @@ export class PreguntasComponent implements OnInit {
   navigateRecuperar(){
     this.router.navigate(['/recuperar'])
   }
-
-  
 }
