@@ -6,18 +6,27 @@
           <a class="h1"><b>MIPYME</b></a>
         </div>
         <div class="card-body">
-          <p class="login-box-msg">Selecciona un método para restablecer tu contraseña</p>
+          <p class="login-box-msg">ingresa tu usuario y selecciona el método para restablecer tu contraseña</p>
     
           <form  method="post">
             <div class="row mb-3">
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn active">
-                    <input type="radio" [(ngModel)]="selectedOption" value="correo" name="options" id="option_a1" autocomplete="off" checked=""> Correo electrónico
-                    </label>
-                    <label class="btn">
-                    <input type="radio" [(ngModel)]="selectedOption" value="preguntas" name="options" id="option_a3" autocomplete="off"> Preguntas seguridad
-                    </label>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
                 </div>
+                <input type="text" [(ngModel)]="usuario.usuario" name="usuario.usuario" class="form-control" placeholder="Usuario">
+              </div>
+
+
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn active">
+                  <input type="radio" [(ngModel)]="selectedOption" value="correo" name="options" id="option_a1" autocomplete="off" checked=""> Correo electrónico
+                  </label>
+                  <label class="btn">
+                  <input type="radio" [(ngModel)]="selectedOption" value="preguntas" name="options" id="option_a3" autocomplete="off"> Preguntas seguridad
+                  </label>
+              </div>
             </div>
             <div class="row mb-3">
               <div class="col-12">

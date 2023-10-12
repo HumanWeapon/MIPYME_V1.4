@@ -8,7 +8,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UsuariosService {
-  
+
+  public usuario: Usuario | undefined;
+
   private myAppUrl: string;
   private myApiUrl: string;
 

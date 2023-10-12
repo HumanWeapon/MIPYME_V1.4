@@ -20,10 +20,11 @@ export class PreguntasUsuarioService {
   getPreguntasUsuario(id_usuario: Preguntas_Usuario): Observable<Preguntas_Usuario[]> {
     return this.http.post<Preguntas_Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/getPreguntasusuario`, id_usuario)
   }
-  validarRespuesta(Pregunta: Preguntas_Usuario): Observable<Preguntas_Usuario[]>{
-    return this.http.post<Preguntas_Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/validarRespuestas`, Pregunta)
+  validarRespuesta(respuesta: Preguntas_Usuario): Observable<Preguntas_Usuario[]>{
+    return this.http.post<Preguntas_Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/validarRespuestas`, respuesta)
   }
-  validatePreguntas(): Observable<Preguntas_Usuario[]>{
-    return this.http.get<Preguntas_Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/preguntasUsuarioPreguntas`)
+  preguntasRespuestas(id_usuario: number): Observable<Preguntas_Usuario[]>{
+    const requestData = { id_usuario: id_usuario };
+    return this.http.post<Preguntas_Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/preguntasRespuestas`, requestData)
   }
 }
