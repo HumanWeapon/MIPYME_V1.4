@@ -105,4 +105,8 @@ export class LoginComponent {
         }
       })
     }
+
+    perfilejemplo() {
+      this.router.navigate(['/perfil']);
+    }
 }

@@ -1,247 +1,244 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-
-
 :root {
- --border-color: rgba(113 119 144 / 25%);
- --inactive-color: rgb(113 119 144 / 78%);
- --body-font: "Poppins", sans-serif;
- --hover-menu-bg: rgba(12 15 25 / 30%);
- --content-bg: rgb(146 151 179 / 13%);
- --button-inactive: rgb(249 250 251 / 55%);
- --dropdown-bg: #21242d;
- --dropdown-hover: rgb(42 46 60);
- --popup-bg: rgb(22 25 37);
- --search-bg:  #14162b;
- --overlay-bg: rgba(36, 39, 59, 0.3);
- --scrollbar-bg: rgb(1 2 3 / 40%);
-}
-
-body {
- font-family: var(--body-font);
- background-size: cover;
- background-position: center;
- display: flex;
- justify-content: center;
- align-items: center;
- flex-direction: column;
- padding: 2em;
- width: 100%;
- height: 100vh;
-}
-
-.fondohtml {
- position: fixed;
- right: 0;
- top: 0;
- width: 100%;
- height: 100%;
- background: radial-gradient(circle, rgba(0, 0, 139, 0.219) 0%, rgba(18,84,161,1) 100%);
-}
-
-img {
- max-width: 100%;
-}
-
-.menu {
- max-width: 1250px;
- max-height: 190px;
- height: 10px;
- display: flex;
- flex-direction: column;
- position: relative;
- width: 100%;
- font-size: 15px;
- font-weight: 500;
-}
-
-.header {
- display: flex;
- align-items: center;
- flex-shrink: 0;
- width: 100%;
- padding: 0 10px;
- white-space: nowrap;
- &-menu {
+  --border-color: rgba(113 119 144 / 25%);
+  --inactive-color: rgb(113 119 144 / 78%);
+  --body-font: "Poppins", sans-serif;
+  --hover-menu-bg: rgba(12 15 25 / 30%);
+  --content-bg: rgb(146 151 179 / 13%);
+  --button-inactive: rgb(249 250 251 / 55%);
+  --dropdown-bg: #21242d;
+  --dropdown-hover: rgb(42 46 60);
+  --popup-bg: rgb(22 25 37);
+  --search-bg:  #14162b;
+  --overlay-bg: rgba(36, 39, 59, 0.3);
+  --scrollbar-bg: rgb(1 2 3 / 40%);
+ }
+ 
+ body {
+  font-family: var(--body-font);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2em;
+  width: 100%;
+  height: 100vh;
+ }
+ 
+ .fondohtml {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0, 0, 139, 0.219) 0%, rgba(18,84,161,1) 100%);
+ }
+ 
+ img {
+  max-width: 100%;
+ }
+ 
+ .menu {
+  max-width: 1250px;
+  max-height: 190px;
+  height: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 500;
+ }
+ 
+ .header {
   display: flex;
   align-items: center;
-  a {
-   padding: 18px 18px;
-   text-decoration: none;
-   color: black;
-   border-bottom: 2px solid transparent;
-   transition: 0.8s;
-   font-size: 18px;
+  flex-shrink: 0;
+  width: 100%;
+  padding: 0 10px;
+  white-space: nowrap;
+  &-menu {
+   display: flex;
+   align-items: center;
+   a {
+    padding: 18px 18px;
+    text-decoration: none;
+    color: black;
+    border-bottom: 2px solid transparent;
+    transition: 0.8s;
+    font-size: 18px;
+   }
   }
  }
-}
-
-a:hover {
-text-decoration: underline;
-}
-/************/
-
-.msuser {
-	margin: 70px auto;
-	text-align: center;
-	position: absolute;
-  width: 545px;
-  height: 350px;
-  right: 1265px /*Movimiento a la Izquierda*/
-
-}
-.msuser fieldset {
- background: white;
-	border: 0 none;
-	border-radius: 3px;
-	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-	padding: 10px 35px;
-	box-sizing: border-box;
-	width: 85%;
- margin: 0 100%;
-}
-
-.msuser fieldset:not(:first-of-type) {
-	display: none;
-}
-
-.msuser input, .msuser textarea {
-	padding: 12px;
-	border: 2px solid #ccc;
-	border-radius: 5px;
-	margin-bottom: 15px;
-	width: 100%;
-	box-sizing: border-box;
-	font-family: montserrat;
-	font-size: 14px;
-}
-
-.fs-titulo {
-	font-weight: normal;
-	margin-bottom: 5px;
- color: black;
- font-size: 16px;
-}
-
-/**************************/
-
-.mspassword {
-	margin: 70px auto;
-	text-align: center;
-	position: absolute;
-  width: 700px;
-  height: 350px;
-  left: 500px;
-
-}
-.mspassword fieldset {
-	background-color: white;
-	border: 0 none;
-	border-radius: 3px;
-	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-	padding: 15px 30px;
-	box-sizing: border-box;
-	width: 70%;
- margin: 0 35%;
-	
-	position: relative;
-}
-
-.mspassword fieldset:not(:first-of-type) {
-	display: none;
-}
-
-.mspassword input, .mspassword textarea {
-	padding: 12px;
-	border: 2px solid #ccc;
-	border-radius: 5px;
-	margin-bottom: 15px;
-	width: 100%;
-	box-sizing: border-box;
-	font-family: montserrat;
-	font-size: 14px;
-}
-
-
-/****************************/
-
-.savebutton {
-	background: #27AE60;
-	color: white;
-	cursor: pointer;
- font-size: 14px;
-}
-.savebutton:hover, .savebutton:focus {
-	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
-}
-
-.espaciado {
-    display: block; /* Asegura que el <br> sea un elemento de bloque*/
-    height: 15px; /* Añade espacio vertical */
-    content: " ";
+ 
+ a:hover {
+ text-decoration: underline;
+ }
+ /************/
+ 
+ .msuser {
+   margin: 70px auto;
+   text-align: center;
+   position: absolute;
+   width: 545px;
+   height: 350px;
+   right: 1265px /*Movimiento a la Izquierda*/
+ 
+ }
+ .msuser fieldset {
+  background: white;
+   border: 0 none;
+   border-radius: 3px;
+   box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+   padding: 10px 35px;
+   box-sizing: border-box;
+   width: 85%;
+  margin: 0 100%;
+ }
+ 
+ .msuser fieldset:not(:first-of-type) {
+   display: none;
+ }
+ 
+ .msuser input, .msuser textarea {
+   padding: 12px;
+   border: 2px solid #ccc;
+   border-radius: 5px;
+   margin-bottom: 15px;
+   width: 100%;
+   box-sizing: border-box;
+   font-family: montserrat;
+   font-size: 14px;
+ }
+ 
+ .fs-titulo {
+   font-weight: normal;
+   margin-bottom: 5px;
+  color: black;
+  font-size: 16px;
+ }
+ 
+ /**************************/
+ 
+ .mspassword {
+   margin: 70px auto;
+   text-align: center;
+   position: absolute;
+   width: 700px;
+   height: 350px;
+   left: 500px;
+ 
+ }
+ .mspassword fieldset {
+   background-color: white;
+   border: 0 none;
+   border-radius: 3px;
+   box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+   padding: 15px 30px;
+   box-sizing: border-box;
+   width: 70%;
+  margin: 0 35%;
+   
+   position: relative;
+ }
+ 
+ .mspassword fieldset:not(:first-of-type) {
+   display: none;
+ }
+ 
+ .mspassword input, .mspassword textarea {
+   padding: 12px;
+   border: 2px solid #ccc;
+   border-radius: 5px;
+   margin-bottom: 15px;
+   width: 100%;
+   box-sizing: border-box;
+   font-family: montserrat;
+   font-size: 14px;
+ }
+ 
+ 
+ /****************************/
+ 
+ .savebutton {
+   background: #27AE60;
+   color: white;
+   cursor: pointer;
+  font-size: 14px;
+ }
+ .savebutton:hover, .savebutton:focus {
+   box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+ }
+ 
+ .espaciado {
+     display: block; /* Asegura que el <br> sea un elemento de bloque*/
+     height: 15px; /* Añade espacio vertical */
+     content: " ";
+    }
+ 
+ /*******************************/
+ 
+ .mspreguntas {
+     position: relative; /* Posicionamiento relativo */
+     top: 535px; /* Desplazamiento hacia abajo*/
+     left: 255px; /* Desplazamiento hacia la Derecha*/
+     width: 980px; /*Ancho del Objeto*/
    }
-
-/*******************************/
-
-.mspreguntas {
-    position: relative; /* Posicionamiento relativo */
-    top: 535px; /* Desplazamiento hacia abajo*/
-    left: 255px; /* Desplazamiento hacia la Derecha*/
-    width: 980px; /*Ancho del Objeto*/
-  }
-  
-  .mspreguntas fieldset {
-      background: white;
-      border-radius: 5px;
-      box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-   padding: 18px 35px;
-  
-      position: relative;
-  }
-  /*Hide all except first fieldset*/
-  .mspreguntas fieldset:not(:first-of-type) {
-      display: none;
-  }
-  
-  
-  .select-button {
-      width: 85px;
-      background: #ff9800;
-      font-weight: bold;
-      color: white;
-      border: 0 none;
-      border-radius: 1px;
-      cursor: pointer;
+   
+   .mspreguntas fieldset {
+       background: white;
+       border-radius: 5px;
+       box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+    padding: 18px 35px;
+   
+       position: relative;
+   }
+   /*Hide all except first fieldset*/
+   .mspreguntas fieldset:not(:first-of-type) {
+       display: none;
+   }
+   
+   
+   .select-button {
+       width: 85px;
+       background: #ff9800;
+       font-weight: bold;
+       color: white;
+       border: 0 none;
+       border-radius: 1px;
+       cursor: pointer;
+       padding: 10px;
+       margin: 5px 5px;
+     text-decoration: none;
+     font-size: 12px;
+     
+   }
+   .select-button:hover {
+     background: #e68a00;
+   }
+   
+   table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 15px;
+   }
+   
+   .pregunta {
+      border: 1px solid #ddd;
+      padding: 4px;
+      text-align: left;
+   }
+   
+   th{
+      border: 1px solid #ddd;
       padding: 10px;
-      margin: 5px 5px;
-    text-decoration: none;
-    font-size: 12px;
-    
-  }
-  .select-button:hover {
-    background: #e68a00;
-  }
-  
-  table {
-     width: 100%;
-     border-collapse: collapse;
-     margin-bottom: 15px;
-  }
-  
-  .pregunta {
-     border: 1px solid #ddd;
-     padding: 4px;
-     text-align: left;
-  }
-  
-  th{
-     border: 1px solid #ddd;
-     padding: 10px;
+      text-align: center;
+      background-color: #e7e7e7;
+   }
+ 
+   .accion{
+     vertical-align: middle;
      text-align: center;
-     background-color: #e7e7e7;
-  }
-
-  .accion{
-    vertical-align: middle;
-    text-align: center;
-    border: 1px solid #ddd;
-  }
+     border: 1px solid #ddd;
+   }
