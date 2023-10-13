@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -9,6 +10,25 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class UsuariosComponent implements OnInit{
 
+  usuario: Usuario = {
+    id_usuario: 0,
+    creado_por: '',
+    fecha_creacion: new Date(),
+    modificado_por: '',
+    fecha_modificacion: new Date(),
+    usuario: '',
+    nombre_usuario: '',
+    correo_electronico: '',
+    estado_usuario: false,
+    contrasena: '',
+    id_rol: 0,
+    fecha_ultima_conexion: new Date(),
+    primer_ingreso: new Date(),
+    fecha_vencimiento: new Date(),
+    intentos_fallidos: 0
+  };
+
+
   listUsuarios: Usuario[] = [];
   constructor(
     private _userService: UsuariosService) { }
@@ -18,6 +38,10 @@ export class UsuariosComponent implements OnInit{
   ngOnInit(): void {
     this.getAllUsers();
     this.dtOptions = {
+      searching: true,
+      responsive: true,
+      language: {url:'//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'},
+
       ajax: (dataTablesParameters: any, callback) => {
         this._userService.getAllUsuarios().subscribe((usuarios) => {
           // Mapea los datos de usuarios en el formato esperado por DataTables
@@ -27,8 +51,11 @@ export class UsuariosComponent implements OnInit{
             data: usuarios,
           };
           callback(dataTableData);
+
         });
       },
+
+      
       columns: [
         {
           title: 'Usuario',
@@ -84,6 +111,7 @@ export class UsuariosComponent implements OnInit{
     };
   }
 
+  
   inactivarUsuario(usuario: Usuario) {
     // Llama al servicio para inactivar al usuario en la base de datos
     this._userService.inactivarUsuario(usuario).subscribe(() => {
@@ -109,6 +137,17 @@ export class UsuariosComponent implements OnInit{
     this._userService.getAllUsuarios().subscribe(data => {
       this.listUsuarios = data;
       console.log(this.listUsuarios)
+    })
+  }
+
+
+  agregarNuevoUsuario() {
+    this._userService.addUsuario(this.usuario).subscribe((data) => {
+      // Realiza alguna ac  ción después de agregar el usuario, como recargar la lista de usuarios
+      console.log(data);  
+      this.getAllUsers();
+      // Cierra el modal
+      document.getElementById('agregarUsuario')?.click();
     })
   }
 }

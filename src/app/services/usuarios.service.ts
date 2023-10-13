@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/enviroments/enviromet';
 import { Usuario } from '../interfaces/usuario';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,19 @@ export class UsuariosService {
     this.myApiUrl = 'api/users'
    }
 
+   addUsuario(user: Usuario): Observable<any> {
+    const nuevoUsuario = {
+      id_usuario: user.id_usuario,
+      usuario: user.usuario,
+      contrasena: 'xxx1',
+      nombre_usuario: user.nombre_usuario,
+      correo_electronico: user.correo_electronico,
+      intentos_fallidos: 0
+      };
+
+    return this.http.post(`${this.myAppUrl}${this.myApiUrl}/postUsuario`, nuevoUsuario)
+  }
+  
    login(usuario: Usuario): Observable<string> {
     return this.http.post<string>(`${this.myAppUrl}${this.myApiUrl}/login`, usuario)
    }
@@ -36,5 +49,9 @@ export class UsuariosService {
    activarUsuario(usuario: Usuario): Observable<Usuario>{
     return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/activateUsuario`, usuario)
    }
+<<<<<<< HEAD
+}
+=======
 
 }
+>>>>>>> fd653c2fe2b243deed8c3def4a6f9f741b44c558

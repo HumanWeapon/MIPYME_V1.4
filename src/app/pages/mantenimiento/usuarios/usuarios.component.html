@@ -5,7 +5,9 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">USUARIOS</h3>
+                <h3 class="card-title">USUARIOS</h3><br>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarUsuario">
+                  <i class="fas fa-user-plus"></i> Agregar Usuario</button>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -22,3 +24,63 @@
       <!-- /.container-fluid -->
   </section>
     <!-- /.content -->
+
+    <div class="modal fade" id="agregarUsuario">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h4 class="modal-title">Agregar Usuarios</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <form class="form">
+                      <div class="form-group">
+                          <label for="usuario">
+                              <i class='bx bx-user'></i> Nombre de usuario:
+                          </label>
+                          <input type="text" [(ngModel)]="usuario.usuario" name="usuario.usuario" class="form-control" id="usuario" placeholder="Usuario">
+                      </div>
+                      <div class="form-group">
+                          <label for="nombreCompleto">
+                              <i class='bx bx-lock-alt'></i> Nombre completo:
+                          </label>
+                          <input type="text" [(ngModel)]="usuario.nombre_usuario" name="usuario.nombre_usuario" class="form-control" id="nombre_usuario" placeholder="Usuario">
+                      </div>
+                      <div class="form-group">
+                          <label for="correoElectronico">
+                              <i class='bx bx-envelope'></i> Correo Electrónico:
+                          </label>
+                          <input type="text" [(ngModel)]="usuario.correo_electronico" name="usuario.correo_electronico" class="form-control" id="correo_electronico" placeholder="Usuario">
+                      </div>
+                      <div class="form-group">
+                          <label for="rol">
+                              <i class='bx bx-lock-alt'></i> Rol:
+                          </label>
+                          <input type="text" [(ngModel)]="usuario.id_rol" name="usuario.id_rol" class="form-control" id="id_rol" placeholder="Usuario">
+                      </div>
+                      <div class="form-group">
+                          <label for="fechaCreacion">
+                              <i class='bx bx-lock-alt'></i> Fecha de Creación:
+                          </label>
+                          <input type="text" [(ngModel)]="usuario.fecha_creacion" name="usuario.fecha_creacion" class="form-control" id="fecha_creacion" placeholder="Usuario">
+                      </div>
+                      <div class="form-group">
+                          <label for="fechaVencimiento">
+                              <i class='bx bx-lock-alt'></i> Fecha de Vencimiento:
+                          </label>
+                          <input type="text" [(ngModel)]="usuario.fecha_vencimiento" name="usuario.fecha_vencimiento" class="form-control" id="fecha_vencimiento" placeholder="Usuario">
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" (click)="agregarNuevoUsuario()">Guardar</button>
+
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  

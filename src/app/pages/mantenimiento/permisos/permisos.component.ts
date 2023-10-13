@@ -18,6 +18,10 @@ export class PermisosComponent implements OnInit{
   ngOnInit(): void {
     this.getAllPermisos();
     this.dtOptions = {
+      searching: true,
+      responsive: true,
+      language: {url:'//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'},
+      
       ajax: (dataTablesParameters: any, callback) => {
         this._permiService.getAllPermisos().subscribe((permisos) => {
           // Mapea los datos de usuarios en el formato esperado por DataTables
