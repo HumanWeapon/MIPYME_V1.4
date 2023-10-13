@@ -18,6 +18,10 @@ export class RolesComponent implements OnInit{
   ngOnInit(): void {
     this.getAllRoles();
     this.dtOptions = {
+      searching: true,
+      responsive: true,
+      language: {url:'//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'},
+      
       ajax: (dataTablesParameters: any, callback) => {
         this._rolService.getAllRoles().subscribe((roles) => {
           // Mapea los datos de usuarios en el formato esperado por DataTables

@@ -18,6 +18,9 @@ export class ObjetosComponent implements OnInit{
   ngOnInit(): void {
     this.getAllObjetos();
     this.dtOptions = {
+      searching: true,
+      responsive: true,
+      language: {url:'//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'},
       ajax: (dataTablesParameters: any, callback) => {
         this._objetService.getAllObjetos().subscribe((objetos) => {
           // Mapea los datos de los objetos en el formato esperado por DataTables
