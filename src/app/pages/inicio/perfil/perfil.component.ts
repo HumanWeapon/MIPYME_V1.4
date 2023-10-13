@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-import { ErrorService } from 'src/app/services/error.service';
-import { Usuario } from 'src/app/interfaces/usuario';
+import { UsuariosService } from '../../../services/usuarios.service';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-perfil',
@@ -10,7 +9,18 @@ import { Usuario } from 'src/app/interfaces/usuario';
   styleUrls: ['./perfil.component.css']
 })
 
-export class PerfilComponent {
+export class PerfilComponent  implements OnInit{
+    
+  constructor (private _userService: UsuariosService,) {
+
+  }
+   
+  ngOnInit(): void {
+    this._userService.getAllUsuarios().subscribe(data =>{
+      console.log(data)
+    })
+  }
+
 
   }
 

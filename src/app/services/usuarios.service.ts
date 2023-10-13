@@ -36,4 +36,5 @@ export class UsuariosService {
    activarUsuario(usuario: Usuario): Observable<Usuario>{
     return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/activateUsuario`, usuario)
    }
+
 }
