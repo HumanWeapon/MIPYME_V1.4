@@ -38,6 +38,10 @@ export class MetodoComponent {
   onSubmit() {
     this.usuario = this.usuario;
     this._usuarioService.usuario = this.usuario;
+    localStorage.setItem("usuario" , this.usuario.usuario);
+
+    localStorage.setItem("usuario", this.usuario.usuario)
+
     // Aquí puedes acceder a this.selectedOption para determinar cuál opción se seleccionó
     if (this.selectedOption === 'correo') {
       // Navegar al método de restablecer contraseña por correo electrónico
@@ -46,6 +50,8 @@ export class MetodoComponent {
       this.navigatePreguntas();
     }
   }
+
+  
 
   navigateLogin() {
     this.router.navigate(['/login'])

@@ -10,13 +10,15 @@ import { Observable, catchError } from 'rxjs';
 export class UsuariosService {
 
   public usuario: Usuario | undefined;
-
+  
   private myAppUrl: string;
   private myApiUrl: string;
 
   constructor(private http: HttpClient) {
     this.myAppUrl = environment.endpoint;
     this.myApiUrl = 'api/users'
+    // Asignar un valor a una clave en localStorage
+
    }
 
    addUsuario(user: Usuario): Observable<any> {
@@ -31,7 +33,6 @@ export class UsuariosService {
 
     return this.http.post(`${this.myAppUrl}${this.myApiUrl}/postUsuario`, nuevoUsuario)
   }
-  
    login(usuario: Usuario): Observable<string> {
     return this.http.post<string>(`${this.myAppUrl}${this.myApiUrl}/login`, usuario)
    }
@@ -49,9 +50,7 @@ export class UsuariosService {
    activarUsuario(usuario: Usuario): Observable<Usuario>{
     return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/activateUsuario`, usuario)
    }
-<<<<<<< HEAD
+   cambiarContrasena(usuario: Usuario): Observable<Usuario>{
+    return this.http.put<Usuario>(`${this.myAppUrl}${this.myApiUrl}/cambiarContrasena`, usuario)
+   }
 }
-=======
-
-}
->>>>>>> fd653c2fe2b243deed8c3def4a6f9f741b44c558

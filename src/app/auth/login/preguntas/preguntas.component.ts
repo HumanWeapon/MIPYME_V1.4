@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { data } from 'jquery';
 import { Preguntas_Usuario } from 'src/app/interfaces/preguntasUsuario';
 import { Usuario } from 'src/app/interfaces/usuario';
 
@@ -19,6 +18,7 @@ export class PreguntasComponent implements OnInit {
   preguntasRespuestas: any[] = []
   id_usuario: any;
   usuario: Usuario | any = {};
+  validador: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -47,8 +47,6 @@ export class PreguntasComponent implements OnInit {
       this.id_usuario = data;
       this.obtenerPreguntas(this.id_usuario);
     });
-
-    
   }
 
   obtenerPreguntas(id_usuario: Preguntas_Usuario){
@@ -79,28 +77,53 @@ export class PreguntasComponent implements OnInit {
     for (const key of Object.keys(respuestasUsuario)) {
       const respuesta = respuestasUsuario[key];
       console.log(`Pregunta ${key}: ${respuesta}`);
-    }
-
-    if (this.securityForm.valid) {
-      // Recopila las respuestas del usuario y compáralas con las de la API
-      const respuestasUsuario = this.securityForm.value;
-
-      for (const item of this.preguntasRespuestas) {
-        const respuestaUsuario = respuestasUsuario[item.id_pregunta];
-        const respuestaCorrecta = item.respuesta;
-
-        if (respuestaUsuario !== respuestaCorrecta) {
-          // Las respuestas no coinciden, puedes manejar esto como desees
-          console.log('Respuesta incorrecta para la pregunta:', item.pregunta);
-          return;
-        }
-      }
-
-      // Todas las respuestas son correctas, puedes continuar con la lógica deseada
-      console.log('Todas las respuestas son correctas');
       
     }
-    //this.navigateRecuperar();
+
+    
+    if (this.securityForm.valid) {
+      // Recopila las respuestas del usuario y compáralas con las de la API
+
+      for (const item of this.preguntasRespuestas) {
+
+        const respuestaUsuario = respuestasUsuario[item.id_pregunta]; 
+        //console.log('id_preguntas_usuario => '+ item.id_preguntas_usuario)
+        //console.log('Respuesta de usuario => '+ respuestaUsuario)
+
+        const body: Preguntas_Usuario = {
+          id_preguntas_usuario: item.id_preguntas_usuario,
+          id_pregunta: 0,
+          id_usuario: 0,
+          respuesta: respuestaUsuario,
+          creado_por: '',
+          fecha_creacion: new Date(),
+          modificado_por: '',
+          fecha_modificacion: new Date()
+        };
+
+        this._preguntasUsuario.validarRespuesta(body).subscribe((data) => {
+          if(data){
+            this.validador = true
+            console.log(data);
+            console.log('Respuesta correcta');
+          }
+          else{
+          console.log(data);
+          this.validador = false
+          console.log('respuesta incorrecta');
+          }
+        },
+        (error) => {
+          console.error('Error al validar respuesta:', error);
+        }
+        );
+
+      }
+      if(this.validador){
+        this.navigateRecuperar();
+      }
+      
+    }
   }
   navigateRecuperar(){
     this.router.navigate(['/recuperar'])

@@ -5,10 +5,10 @@
           <a href="../../index2.html" class="h1"><b>MIPYME</b>LTE</a>
         </div>
         <div class="card-body">
-          <p class="login-box-msg">Estás a sólo un paso de tu nueva contraseña, recupera tu contraseña ahora.</p>
-          <form method="post">
+          <p class="login-box-msg">Estás a solo un paso de tu nueva contraseña, recupera tu contraseña ahora.</p>
+          <form method="post" (submit)="validarPassword()">
             <div class="input-group mb-3">
-              <input type="password" class="form-control" placeholder="Contraseña">
+              <input type="password" [(ngModel)]="user.contrasena" name="user.contrasena"class="form-control" placeholder="Contraseña">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>
@@ -16,7 +16,7 @@
               </div>
             </div>
             <div class="input-group mb-3">
-              <input type="password" class="form-control" placeholder="Confirma tu contraseña">
+              <input type="password" [(ngModel)]="confirPassword" name="confirPassword" class="form-control" placeholder="Confirma tu contraseña">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>
