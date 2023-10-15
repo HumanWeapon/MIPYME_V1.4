@@ -11,6 +11,7 @@ import { PreguntasComponent } from './login/preguntas/preguntas.component';
 import { CorreoComponent } from './login/correo/correo.component';
 import { MetodoComponent } from './login/metodo/metodo.component';
 import { RecuperarComponent } from './login/recuperar/recuperar.component';
+import { FirstLoginComponent } from './login/first-login/first-login.component';
 
 
 
@@ -25,6 +26,7 @@ import { RecuperarComponent } from './login/recuperar/recuperar.component';
     CorreoComponent,
     MetodoComponent,
     RecuperarComponent,
+    FirstLoginComponent,
 
   ],
   imports: [
