@@ -16,8 +16,7 @@ export class LoginComponent {
   usuario: string = '';
   contrasena: string = '';
   loading: boolean = false;
-
-
+  ultimaConexion: string = '';
 
   metodoSeleccionado: string = ''; // Variable para controlar la opción seleccionada
 
@@ -96,17 +95,21 @@ export class LoginComponent {
 
     this._userService.login(usuario).subscribe({
         next: (data) => {
-          localStorage.setItem('token', data);
-          this.router.navigate(['/dashboard/perfil'])
+          this.ultimaConexion = data
+          if(this.ultimaConexion == null){
+            console.log(this.ultimaConexion);
+            localStorage.setItem('firstLogin', this.usuario);
+            this.router.navigate(['/firstlogin'])
+          }
+          else{
+            localStorage.setItem('token', data);
+            this.router.navigate(['/dashboard'])
+          }
         },
         error: (e: HttpErrorResponse) => {
           this._errorService.msjError(e);
           this.loading = false
         }
       })
-    }
-
-    perfilejemplo() {
-      this.router.navigate(['/perfil']);
     }
 }

@@ -87,7 +87,6 @@ export class UsuariosComponent implements OnInit{
     this.listUsuarios[i].estado_usuario = 1;
   }
 
-
   agregarNuevoUsuario() {
     this._userService.addUsuario(this.nuevoUsuario).subscribe(data => {
       this.toastr.success('Usuario agregado con éxito');

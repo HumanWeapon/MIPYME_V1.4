@@ -11,6 +11,7 @@ import { MetodoComponent } from './login/metodo/metodo.component';
 import { RecuperarComponent } from './login/recuperar/recuperar.component';
 import { CorreoComponent } from './login/correo/correo.component';
 import { PreguntasComponent } from './login/preguntas/preguntas.component';
+import { FirstLoginComponent } from './login/first-login/first-login.component';
 
 
 
@@ -24,6 +25,7 @@ const routes: Routes =[
   {path: 'preguntas', component: PreguntasComponent},
   {path: 'correo', component: CorreoComponent},
   {path: 'recuperar', component: RecuperarComponent},
+  {path: 'firstlogin', component: FirstLoginComponent},
 
 ];
 
