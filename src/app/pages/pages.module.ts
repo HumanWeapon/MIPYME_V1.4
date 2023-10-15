@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { DataTablesModule } from "angular-datatables";
 import { Tabla2Component } from './mantenimiento/tabla2/tabla2.component';
 import { MatIconModule } from '@angular/material/icon';
+import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
     PermisosComponent,
     UsuariosComponent,
     Tabla2Component,
+    PreguntasComponent,
   ],
   imports: [
     CommonModule,

@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/enviroments/enviromet';
 import { Objetos } from '../interfaces/objetos';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ObjetService {
+
+  public objetos: Objetos | undefined;
   
   private myAppUrl: string;
   private myApiUrl: string;
@@ -15,23 +17,48 @@ export class ObjetService {
   constructor(private http: HttpClient) {
     this.myAppUrl = environment.endpoint;
     this.myApiUrl = 'api/objetos'
+    // Asignar un valor a una clave en localStorage
+
    }
 
-   login(objeto: Objetos): Observable<string> {
-    return this.http.post<string>(`${this.myAppUrl}${this.myApiUrl}/login`, objeto)
-   }
 
-   getObjeto(objeto: Objetos): Observable<Objetos> {
-    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/getObjeto`, objeto)
+
+   addObjeto(obj: Objetos): Observable<any> {
+    const nuevoObjeto = {
+      id_objeto: obj.id_objeto,
+      objeto: obj.objeto,
+      descripcion: obj.descripcion,
+      tipo_objeto: obj.tipo_objeto,
+      estado_objeto: obj.estado_objeto,
+      creado_por: obj.creado_por,
+      fecha_creacion: obj.fecha_creacion,
+      modificado_por: obj.modificado_por,
+      fecha_modificacion: obj.fecha_modificacion,
+      };
+      return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/postObjetos`, nuevoObjeto)
+  }
+
+   getUsuario(objetos: Objetos): Observable<Objetos> {
+    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/getObjeto`, objetos)
    }
 
    getAllObjetos(): Observable<Objetos[]> {
     return this.http.get<Objetos[]>(`${this.myAppUrl}${this.myApiUrl}/getAllObjetos`)
    }
-   inactivarObjeto(objeto: Objetos): Observable<Objetos>{
-    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/inactivarteObjeto`, objeto)
+   inactivarObjeto(objetos: Objetos): Observable<Objetos>{
+    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/inactivarObjeto`, objetos)
    }
-   activarObjeto(objeto: Objetos): Observable<Objetos>{
-    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/activatarObjeto`, objeto)
+   activarObjeto(objetos: Objetos): Observable<Objetos>{
+    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/activarObjeto`, objetos)
    }
+  
+   editarUsuario(objetos: Objetos): Observable<any> {
+    // Construye la URL del servicio que actualiza un usuario por su ID, por ejemplo.
+    const url = `${this.myAppUrl}${this.myApiUrl}/updateObjetos/${objetos.id_objeto}`;
+  
+    // Realiza una solicitud HTTP PUT para actualizar el usuario.
+    return this.http.put(url, objetos);
+  }
+  
+
 }

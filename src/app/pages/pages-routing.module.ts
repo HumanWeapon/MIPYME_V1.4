@@ -20,6 +20,7 @@ const routes: Routes = [
     {path: 'roles', component: RolesComponent},
     {path: 'dashboard', component: DashboardComponent},
     {path: 'table2', component: Tabla2Component},
+    {path: 'form-group', component: UsuariosComponent},
   ]}
 ];
 

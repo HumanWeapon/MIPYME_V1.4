@@ -4,36 +4,34 @@ import { Router } from '@angular/router';
 import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
-import { Objetos } from 'src/app/interfaces/objetos';
+import { Preguntas } from 'src/app/interfaces/preguntas';
 import { ErrorService } from 'src/app/services/error.service';
-import { ObjetService } from 'src/app/services/objetos.service';
+import { PreguntasService } from 'src/app/services/preguntas.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
-  selector: 'app-objetos',
-  templateUrl:'./objetos.component.html',
-  styleUrls: ['./objetos.component.css']
+  selector: 'app-preguntas',
+  templateUrl:'./preguntas.component.html',
+  styleUrls: ['./preguntas.component.css']
 })
-export class ObjetosComponent implements OnInit{
+export class PreguntasComponent implements OnInit{
 
 
-  nuevoObjeto: Objetos = {
-    id_objeto: 0,
-    objeto: '',
-    descripcion: '',
-    tipo_objeto: '',
-    estado_objeto: 0,
+  nuevoPregunta: Preguntas = {
+
+    id_pregunta: 0,
+    pregunta: '',
     creado_por: '',
     fecha_creacion: new Date,
     modificado_por: '',
     fecha_modificacion: new Date,
-
+    
   };
  
 
   dtOptions: DataTables.Settings = {};
-  listObjetos: Objetos[] = [];
+  listPreguntas: Preguntas[] = [];
   data: any;
 
   // We use this trigger because fetching the list of persons can be quite long,
@@ -42,7 +40,7 @@ export class ObjetosComponent implements OnInit{
   modalEditar: NgbModalRef | undefined;
 
   constructor(
-    private _objService: ObjetService,
+    private _questionService: PreguntasService,
     private toastr: ToastrService,
     private router: Router, 
     private _errorService: ErrorService,
@@ -57,9 +55,9 @@ export class ObjetosComponent implements OnInit{
       language: {url:'//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'},
       responsive: true
     };
-    this._objService.getAllObjetos()
+    this._questionService.getAllPreguntas()
       .subscribe((res: any) => {
-        this.listObjetos = res;
+        this.listPreguntas = res;
         this.dtTrigger.next(null);
       });
   }
@@ -70,40 +68,26 @@ export class ObjetosComponent implements OnInit{
   }
 
 
- 
-  
-  inactivarObjeto(objeto: Objetos, i: any){
-    this._objService.inactivarObjeto(objeto).subscribe(data => this.toastr.success('El objeto: '+ objeto.objeto+ ' ha sido activado'));
-    this.listObjetos[i].estado_objeto = 2;
-  }
-  activarObjeto(objeto: Objetos, i: any){
-    this._objService.activarObjeto(objeto).subscribe(data => this.toastr.success('El objeto: '+ objeto.objeto+ ' ha sido activado'));
-    this.listObjetos[i].estado_objeto = 1;
-  }
 
-
-  agregarNuevoObjeto() {
-    this._objService.addObjeto(this.nuevoObjeto).subscribe(data => {
-      this.toastr.success('Objeto agregado con éxito');
-      this.listObjetos.push(data); // Agregar el nuevo usuario a la lista
-      this.nuevoObjeto = {
-        id_objeto: 0,
-        objeto: '',
-        descripcion: '',
-        tipo_objeto: '',
-        estado_objeto: 0,
+  agregarNuevoPregunta() {
+    this._questionService.addPregunta(this.nuevoPregunta).subscribe(data => {
+      this.toastr.success('Pregunta agregada con éxito');
+      this.listPreguntas.push(data); // Agregar el nuevo usuario a la lista
+      this.nuevoPregunta = {
+        id_pregunta: 0,
+        pregunta: '',
         creado_por: '',
         fecha_creacion: new Date,
         modificado_por: '',
         fecha_modificacion: new Date,
     
-      }; 
+      }; // Limpiar el formulario
     });
   }
 
 
 
-  editarrObjeto(){
+  editarPregunta(){
 
   }
 }
