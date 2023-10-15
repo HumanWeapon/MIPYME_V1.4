@@ -1,6 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 import { Usuario } from 'src/app/interfaces/usuario';
+import { ErrorService } from 'src/app/services/error.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -10,144 +15,48 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class UsuariosComponent implements OnInit{
 
-  usuario: Usuario = {
-    id_usuario: 0,
-    creado_por: '',
-    fecha_creacion: new Date(),
-    modificado_por: '',
-    fecha_modificacion: new Date(),
-    usuario: '',
-    nombre_usuario: '',
-    correo_electronico: '',
-    estado_usuario: false,
-    contrasena: '',
-    id_rol: 0,
-    fecha_ultima_conexion: new Date(),
-    primer_ingreso: new Date(),
-    fecha_vencimiento: new Date(),
-    intentos_fallidos: 0
-  };
-
-
-  listUsuarios: Usuario[] = [];
-  constructor(
-    private _userService: UsuariosService) { }
-
   dtOptions: DataTables.Settings = {};
+  listUsuarios: Usuario[] = [];
+  data: any;
+
+  // We use this trigger because fetching the list of persons can be quite long,
+  // thus we ensure the data is fetched before rendering
+  dtTrigger: Subject<any> = new Subject<any>();
+
+  constructor(
+    private _userService: UsuariosService,
+    private toastr: ToastrService,
+    private router: Router, 
+    private _errorService: ErrorService
+    ) { }
   
   ngOnInit(): void {
-    this.getAllUsers();
     this.dtOptions = {
-      searching: true,
-      responsive: true,
+      pagingType: 'full_numbers',
+      pageLength: 8,
       language: {url:'//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'},
-
-      ajax: (dataTablesParameters: any, callback) => {
-        this._userService.getAllUsuarios().subscribe((usuarios) => {
-          // Mapea los datos de usuarios en el formato esperado por DataTables
-          const dataTableData = {
-            recordsTotal: usuarios.length,
-            recordsFiltered: usuarios.length,
-            data: usuarios,
-          };
-          callback(dataTableData);
-
-        });
-      },
-
-      
-      columns: [
-        {
-          title: 'Usuario',
-          data: 'usuario',
-        },
-        {
-          title: 'Nombre',
-          data: 'nombre_usuario',
-        },
-        {
-          title: 'Correo',
-          data: 'correo_electronico',
-        },
-        {
-          title: 'Estado',
-          data: 'estado_usuario',
-        },
-        {
-          title: 'Id Rol',
-          data: 'id_rol',
-        },
-        {
-          title: 'Última conexión',
-          data: 'fecha_ultima_conexion',
-        },
-        {
-          title: 'Creado por',
-          data: 'creado_por',
-        },
-        {
-          title: 'Fecha creación',
-          data: 'fecha_creacion',
-        },
-        {
-          title: 'Vencimiento',
-          data: 'fecha_vencimiento',
-        },
-        {
-          title: 'Action',
-          render: function (data, type, row) {
-            return `
-              <ng-container>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-danger" (click)="inactivarUsuario(usuario)"><i class="fas fa-solid fa-user-lock"></i></button>
-                  <button type="button" class="btn btn-success" (click)="activarUsuario(usuario)"><i class="fas fa-solid fa-lock-open"></i></button>
-                  <button type="button" class="btn btn-warning" (click)="editarUsuario(usuario)"><i class="fas fa-solid fa-pen"></i></button>
-                </div>
-              </ng-container>
-            `;
-          }
-        }
-      ],
+      responsive: true
     };
+    this._userService.getAllUsuarios()
+      .subscribe((res: any) => {
+        this.listUsuarios = res;
+        this.dtTrigger.next(null);
+      });
   }
 
-  
-  inactivarUsuario(usuario: Usuario) {
-    // Llama al servicio para inactivar al usuario en la base de datos
-    this._userService.inactivarUsuario(usuario).subscribe(() => {
-      // Realiza alguna acción después de la inactivación, como recargar la lista de usuarios
-      this.getAllUsers();
-    });
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
+  editarUsuario(usuario: Usuario, i: any){
 
-  activarUsuario(usuario: Usuario) {
-    // Llama al servicio para activar al usuario en la base de datos
-    this._userService.activarUsuario(usuario).subscribe(() => {
-      // Realiza alguna acción después de la activación, como recargar la lista de usuarios
-      this.getAllUsers();
-    });
   }
-
-  editarUsuario(usuario: Usuario) {
-    // Implementa la lógica para editar al usuario, por ejemplo, navegando a una página de edición
-    // Puedes usar Angular Router para navegar a una página de edición
+  inactivarUsuario(usuario: Usuario, i: any){
+    this._userService.inactivarUsuario(usuario).subscribe(data => this.toastr.success('El usuario: '+ usuario.usuario+ ' ha sido activado'));
+    this.listUsuarios[i].estado_usuario = 2;
   }
-
-  getAllUsers(){
-    this._userService.getAllUsuarios().subscribe(data => {
-      this.listUsuarios = data;
-      console.log(this.listUsuarios)
-    })
-  }
-
-
-  agregarNuevoUsuario() {
-    this._userService.addUsuario(this.usuario).subscribe((data) => {
-      // Realiza alguna ac  ción después de agregar el usuario, como recargar la lista de usuarios
-      console.log(data);  
-      this.getAllUsers();
-      // Cierra el modal
-      document.getElementById('agregarUsuario')?.click();
-    })
+  activarUsuario(usuario: Usuario, i: any){
+    this._userService.activarUsuario(usuario).subscribe(data => this.toastr.success('El usuario: '+ usuario.usuario+ ' ha sido activado'));
+    this.listUsuarios[i].estado_usuario = 1;
   }
 }

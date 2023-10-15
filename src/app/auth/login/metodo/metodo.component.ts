@@ -19,7 +19,7 @@ export class MetodoComponent {
     usuario: '',
     nombre_usuario: '',
     correo_electronico: '',
-    estado_usuario: false,
+    estado_usuario: 0,
     contrasena: '',
     id_rol: 0,
     fecha_ultima_conexion: new Date(),

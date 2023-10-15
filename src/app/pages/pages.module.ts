@@ -12,11 +12,9 @@ import { RolesComponent } from './mantenimiento/roles/roles.component';
 import { PermisosComponent } from './mantenimiento/permisos/permisos.component';
 import { UsuariosComponent } from './mantenimiento/usuarios/usuarios.component';
 import { FormsModule } from '@angular/forms';
-import { DataTablesModule } from 'angular-datatables';
-
-
-
-
+import { DataTablesModule } from "angular-datatables";
+import { Tabla2Component } from './mantenimiento/tabla2/tabla2.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -29,13 +27,15 @@ import { DataTablesModule } from 'angular-datatables';
     RolesComponent,
     PermisosComponent,
     UsuariosComponent,
+    Tabla2Component,
   ],
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
     FormsModule,
-    DataTablesModule
+    DataTablesModule,
+    MatIconModule
   ],
   exports:[
     DashboardComponent,
