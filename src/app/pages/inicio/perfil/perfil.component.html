@@ -1,33 +1,33 @@
-<header> </header>
-<div class="fondohtml">
-    
+
+<div class="msuser">
+    <fieldset>
+    <h2 style="padding: 15px; border-left: 15px solid #1254a1" align="left">Datos del Usuario</h2>
+    <h1 class="fs-titulo" align="left">Usuario</h1>
+    <input type="password" [disabled]="inputDeshabilitado" name="usuario" placeholder="Usuario" />
+     <h1 class="fs-titulo" align="left">Nombre</h1>
+     <input type="password" [disabled]="inputDeshabilitado" name="nombre" placeholder="Nombre" />
+       <h1 class="fs-titulo"  align="left">Correo Electronico</h1>
+       <input type="password" [disabled]="inputDeshabilitado" name="email" placeholder="Email" />
+    <div style="display: flex; gap: 10px; float: right;">
+     <input type="button" name="save" class="savebutton" value="Guardar Usuario">
+     <input type="button" (click)="habilitarInput()" name="edit" class="editbutton" value="Editar Usuario">
     </div>
-    
-      <div class="msuser">
-        <fieldset>
-        <h2 style="padding: 15px; border-left: 15px solid #1254a1; "align="left">Datos del Usuario</h2>
-        <h1 class="fs-titulo" align="left">Usuario</h1>
-        <input type="text" name="usuario" placeholder="Usuario" [value]="datosUsuario.usuario">
-         <h1 class="fs-titulo" align="left">Nombre</h1>
-         <input type="text" name="nombre" placeholder="Nombre" [value]="datosUsuario.nombre_usuario">
-          <h1 class="fs-titulo" align="left">Email</h1>
-           <input type="email" name="email" placeholder="Correo Electronico" [value]="datosUsuario.correo_electronico">
-           <br class="espaciado">
-           <input type="button" name="save" class="savebutton" value="Guardar">
-       </fieldset>
-        </div>
-      
+   </fieldset>
+    </div>
+
       <div class="mspassword">
         <fieldset>
         <h2 style="padding: 15px; border-left: 15px solid #1254a1" align="left">Cambio de Contraseña</h2>
         <h1 class="fs-titulo" align="left">Contraseña Anterior</h1>
-        <input type="password" name="usuario" placeholder="********" />
-         <h1 class="fs-titulo" align="left">Nueva Contraseña</h1>
-         <input type="password" name="nombre" placeholder="" />
+        <input type="password" [disabled]="inputDeshabilitado" name="oldpassword" placeholder="********" />
+         <h1 class="fs-titulo"  align="left">Nueva Contraseña</h1>
+         <input type="password" [disabled]="inputDeshabilitado" name="newpassword" placeholder="" />
            <h1 class="fs-titulo" align="left">Confirmar Contraseña</h1>
-           <input type="password" name="email" placeholder="" />
-         <br class="espaciado">
-         <input type="button" name="save" class="savebutton" value="Guardar">
+           <input type="password" [disabled]="inputDeshabilitado" name="confirmpassword" placeholder="" />
+           <div style="display: flex; gap: 10px; float: right;">
+         <input type="button" (click)="passwordChanged()" name="save" class="savebutton" value="Guardar Contraseña">
+         <input type="button" (click)="habilitarInput()" name="edit" class="editbutton" value="Cambiar Contraseña">
+        </div>
        </fieldset>
         </div>
 
@@ -51,7 +51,7 @@
                   <tr>
                       <td class="pregunta">¿En qué ciudad nació tu madre?</td>
                       <td class="accion">
-                          <button class="select-button">Editar</button>
+                          <button class="select-button" href="#">Editar</button>
                       </td>
                   </tr>
                   <!-- Agrega más filas según sea necesario -->
@@ -61,5 +61,4 @@
          <br>
          <br>
         </div>
-  
-        <footer> </footer>
+
