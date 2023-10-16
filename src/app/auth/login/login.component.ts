@@ -20,6 +20,23 @@ export class LoginComponent {
 
   metodoSeleccionado: string = ''; // Variable para controlar la opción seleccionada
 
+  getUser: Usuario = {
+    id_usuario: 0,
+    creado_por: '',
+    fecha_creacion: new Date(),
+    modificado_por: '',
+    fecha_modificacion: new Date(),
+    usuario: '',
+    nombre_usuario: '',
+    correo_electronico: '',
+    estado_usuario: 0,
+    contrasena: '',
+    id_rol: 0,
+    fecha_ultima_conexion: new Date(),
+    primer_ingreso: new Date(),
+    fecha_vencimiento: new Date(),
+    intentos_fallidos: 0
+  };
   
   valorEnviar: string = "";
 
@@ -94,22 +111,66 @@ export class LoginComponent {
     this.loading = true;
 
     this._userService.login(usuario).subscribe({
-        next: (data) => {
-          this.ultimaConexion = data
-          if(this.ultimaConexion == null){
-            console.log(this.ultimaConexion);
-            localStorage.setItem('firstLogin', this.usuario);
-            this.router.navigate(['/firstlogin'])
-          }
-          else{
-            localStorage.setItem('token', data);
-            this.router.navigate(['/dashboard'])
-          }
-        },
-        error: (e: HttpErrorResponse) => {
-          this._errorService.msjError(e);
-          this.loading = false
+      next: (data) => {
+        this.ultimaConexion = data
+        this.getUsuario();
+        if(this.ultimaConexion == null){
+          localStorage.setItem('firstLogin', this.usuario);
+          this.router.navigate(['/firstlogin'])
         }
-      })
+        else{
+          localStorage.setItem('token', data);
+          this.router.navigate(['/dashboard'])
+        }
+      },
+      error: (e: HttpErrorResponse) => {
+        this._errorService.msjError(e);
+        this.loading = false
+      }
+    })
+  }
+  getUsuario(){
+     this.getUser = {
+      usuario: this.usuario,
+      id_usuario: 0,
+      creado_por: '',
+      fecha_creacion: new Date(),
+      modificado_por: '',
+      fecha_modificacion: new Date(),
+      nombre_usuario: '',
+      correo_electronico: '',
+      estado_usuario: 0,
+      contrasena: '',
+      id_rol: 0,
+      fecha_ultima_conexion: new Date(),
+      primer_ingreso: new Date(),
+      fecha_vencimiento: new Date(),
+      intentos_fallidos: 0
     }
+    this._userService.getUsuario(this.getUser).subscribe(data => {
+      this.getUser = data;
+      this.updateUltimaConexionUsuario()
+    });
+  }
+  updateUltimaConexionUsuario(){
+    const updateUsuario = {
+      id_usuario: this.getUser.id_usuario,
+      creado_por: this.getUser.creado_por,
+      fecha_creacion: this.getUser.fecha_creacion,
+      modificado_por: this.getUser.modificado_por,
+      fecha_modificacion: this.getUser.fecha_modificacion,
+      usuario: this.getUser.usuario,
+      nombre_usuario: this.getUser.nombre_usuario,
+      correo_electronico: this.getUser.correo_electronico,
+      estado_usuario: this.getUser.estado_usuario,
+      contrasena: this.getUser.contrasena,
+      id_rol: this.getUser.id_rol,
+      fecha_ultima_conexion: new Date(),
+      primer_ingreso: this.getUser.primer_ingreso,
+      fecha_vencimiento: this.getUser.fecha_vencimiento,
+      intentos_fallidos: this.getUser.intentos_fallidos
+    }
+    this._userService.editarUsuario(updateUsuario).subscribe(data => {
+    })
+  }
 }
