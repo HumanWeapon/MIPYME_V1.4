@@ -25,14 +25,19 @@ export class UsuariosService {
 
    addUsuario(user: Usuario): Observable<any> {
     const nuevoUsuario = {
-      id_usuario: user.id_usuario,
+      creado_por: "SYSTEM",
+      fecha_creacion: user.fecha_creacion,
+      modificado_por: "SYSTEM",
+      fecha_modificacion: "",
       usuario: user.usuario,
       nombre_usuario: user.nombre_usuario,
       correo_electronico: user.correo_electronico,
+      estado_usuario: user.estado_usuario,
+      contrasena: user.contrasena,
       id_rol: user.id_rol,
-      fecha_creacion: user.fecha_creacion,
+      fecha_ultima_conexion: "",
       fecha_vencimiento: user.fecha_vencimiento,
-      intentos_fallidos: 0
+      intentos_fallidos: user.intentos_fallidos
       };
       return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/postUsuario`, nuevoUsuario)
   }
@@ -59,12 +64,6 @@ export class UsuariosService {
    }
 
    editarUsuario(usuario: Usuario): Observable<any> {
-    // Construye la URL del servicio que actualiza un usuario por su ID, por ejemplo.
-    const url = `${this.myAppUrl}${this.myApiUrl}/updateUsuario/${usuario.id_usuario}`;
-  
-    // Realiza una solicitud HTTP PUT para actualizar el usuario.
-    return this.http.put(url, usuario);
+    return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/updateUsuario`, usuario)
   }
-  
-
 }
