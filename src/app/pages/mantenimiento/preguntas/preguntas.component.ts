@@ -17,18 +17,26 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 })
 export class PreguntasComponent implements OnInit{
 
-
-  nuevoPregunta: Preguntas = {
-
+  preguntaEditando: Preguntas = {
     id_pregunta: 0,
     pregunta: '',
     creado_por: '',
-    fecha_creacion: new Date,
-    modificado_por: '',
-    fecha_modificacion: new Date,
-    
+    fecha_creacion: new Date() ,
+    modificado_por: '' ,
+    fecha_modificacion: new Date() 
+
   };
- 
+
+  nuevoPregunta: Preguntas = {
+    id_pregunta: 0,
+    pregunta: '',
+    creado_por: '',
+    fecha_creacion: new Date() ,
+    modificado_por: '' ,
+    fecha_modificacion: new Date() 
+
+  };
+  indice: any;
 
   dtOptions: DataTables.Settings = {};
   listPreguntas: Preguntas[] = [];
@@ -68,26 +76,45 @@ export class PreguntasComponent implements OnInit{
   }
 
 
+ 
 
   agregarNuevoPregunta() {
+
+    this.nuevoPregunta = {
+      id_pregunta: 0,
+      pregunta: this.nuevoPregunta.pregunta,
+      creado_por: 'SYSTEM',
+      fecha_creacion: new Date() ,
+      modificado_por: 'SYSTEM' ,
+      fecha_modificacion: new Date() 
+
+    };
+
     this._questionService.addPregunta(this.nuevoPregunta).subscribe(data => {
-      this.toastr.success('Pregunta agregada con éxito');
-      this.listPreguntas.push(data); // Agregar el nuevo usuario a la lista
-      this.nuevoPregunta = {
-        id_pregunta: 0,
-        pregunta: '',
-        creado_por: '',
-        fecha_creacion: new Date,
-        modificado_por: '',
-        fecha_modificacion: new Date,
-    
-      }; // Limpiar el formulario
+      this.toastr.success('Pregunta agregado con éxito');
     });
   }
 
 
+  obtenerIdPregunta(preguntas: Preguntas, i: any){
+    this.preguntaEditando = {  
+      id_pregunta: preguntas.id_pregunta,
+      pregunta: preguntas.pregunta,
+      creado_por: preguntas.creado_por,
+      fecha_creacion: preguntas.fecha_creacion ,
+      modificado_por: preguntas.modificado_por,
+      fecha_modificacion: preguntas.fecha_modificacion 
+
+    };
+    this.indice = i;
+  }
+
 
   editarPregunta(){
-
+    this._questionService.editarPregunta(this.preguntaEditando).subscribe(data => {
+      this.toastr.success('Pregunta editada con éxito');
+      this.listPreguntas[this.indice].pregunta = this.preguntaEditando.pregunta;
+      
+    });
   }
 }
