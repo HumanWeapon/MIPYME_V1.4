@@ -7,7 +7,7 @@ import { Observable, catchError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ObjetService {
+export class ObjetosService {
 
   public objetos: Objetos | undefined;
   
@@ -25,20 +25,20 @@ export class ObjetService {
 
    addObjeto(obj: Objetos): Observable<any> {
     const nuevoObjeto = {
-      id_objeto: obj.id_objeto,
-      objeto: obj.objeto,
-      descripcion: obj.descripcion,
-      tipo_objeto: obj.tipo_objeto,
+      objeto: obj.objeto, 
+      descripcion: obj.descripcion, 
+      tipo_objeto: obj.tipo_objeto, 
       estado_objeto: obj.estado_objeto,
-      creado_por: obj.creado_por,
-      fecha_creacion: obj.fecha_creacion,
-      modificado_por: obj.modificado_por,
-      fecha_modificacion: obj.fecha_modificacion,
+      creado_por: obj.creado_por, 
+      fecha_creacion: obj.fecha_creacion, 
+      modificado_por: obj.modificado_por, 
+      fecha_modificacion: obj.fecha_modificacion
       };
-      return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/postObjetos`, nuevoObjeto)
+      return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/postObjeto`, nuevoObjeto)
   }
 
-   getUsuario(objetos: Objetos): Observable<Objetos> {
+  
+   getObjeto(objetos: Objetos): Observable<Objetos> {
     return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/getObjeto`, objetos)
    }
 
@@ -46,19 +46,13 @@ export class ObjetService {
     return this.http.get<Objetos[]>(`${this.myAppUrl}${this.myApiUrl}/getAllObjetos`)
    }
    inactivarObjeto(objetos: Objetos): Observable<Objetos>{
-    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/inactivarObjeto`, objetos)
+    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/inactivateObjetos`, objetos)
    }
    activarObjeto(objetos: Objetos): Observable<Objetos>{
-    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/activarObjeto`, objetos)
+    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/activateObjeto`, objetos)
    }
-  
-   editarUsuario(objetos: Objetos): Observable<any> {
-    // Construye la URL del servicio que actualiza un usuario por su ID, por ejemplo.
-    const url = `${this.myAppUrl}${this.myApiUrl}/updateObjetos/${objetos.id_objeto}`;
-  
-    // Realiza una solicitud HTTP PUT para actualizar el usuario.
-    return this.http.put(url, objetos);
-  }
-  
 
+   editarObjeto(objetos: Objetos): Observable<any> {
+    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/updateObjetos`, objetos)
+  }
 }

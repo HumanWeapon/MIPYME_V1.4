@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { Objetos } from 'src/app/interfaces/objetos';
 import { ErrorService } from 'src/app/services/error.service';
-import { ObjetService } from 'src/app/services/objetos.service';
+import { ObjetosService } from 'src/app/services/objetos.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -17,20 +17,32 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ObjetosComponent implements OnInit{
 
-
-  nuevoObjeto: Objetos = {
-    id_objeto: 0,
-    objeto: '',
-    descripcion: '',
-    tipo_objeto: '',
+  objetoEditando: Objetos = {
+    id_objeto: 0, 
+    objeto: '', 
+    descripcion:'', 
+    tipo_objeto: '', 
     estado_objeto: 0,
-    creado_por: '',
-    fecha_creacion: new Date,
-    modificado_por: '',
-    fecha_modificacion: new Date,
+    creado_por: '', 
+    fecha_creacion: new Date(), 
+    modificado_por: '', 
+    fecha_modificacion: new Date()
 
   };
- 
+
+  nuevoObjeto: Objetos = {
+    id_objeto: 0, 
+    objeto: '', 
+    descripcion:'', 
+    tipo_objeto: '', 
+    estado_objeto: 0,
+    creado_por: '', 
+    fecha_creacion: new Date(), 
+    modificado_por: '', 
+    fecha_modificacion: new Date()
+
+  };
+  indice: any;
 
   dtOptions: DataTables.Settings = {};
   listObjetos: Objetos[] = [];
@@ -42,7 +54,7 @@ export class ObjetosComponent implements OnInit{
   modalEditar: NgbModalRef | undefined;
 
   constructor(
-    private _objService: ObjetService,
+    private _objService: ObjetosService,
     private toastr: ToastrService,
     private router: Router, 
     private _errorService: ErrorService,
@@ -72,38 +84,60 @@ export class ObjetosComponent implements OnInit{
 
  
   
-  inactivarObjeto(objeto: Objetos, i: any){
-    this._objService.inactivarObjeto(objeto).subscribe(data => this.toastr.success('El objeto: '+ objeto.objeto+ ' ha sido activado'));
+  inactivarObjeto(objetos: Objetos, i: any){
+    this._objService.inactivarObjeto(objetos).subscribe(data => this.toastr.success('El objeto: '+ objetos.objeto+ ' ha sido activado'));
     this.listObjetos[i].estado_objeto = 2;
   }
-  activarObjeto(objeto: Objetos, i: any){
-    this._objService.activarObjeto(objeto).subscribe(data => this.toastr.success('El objeto: '+ objeto.objeto+ ' ha sido activado'));
+  activarObjeto(objetos: Objetos, i: any){
+    this._objService.activarObjeto(objetos).subscribe(data => this.toastr.success('El objeto: '+ objetos.objeto+ ' ha sido activado'));
     this.listObjetos[i].estado_objeto = 1;
   }
 
-
   agregarNuevoObjeto() {
+
+    this.nuevoObjeto = {
+      id_objeto: 0, 
+      objeto: this.nuevoObjeto.objeto, 
+      descripcion:this.nuevoObjeto.descripcion, 
+      tipo_objeto: this.nuevoObjeto.tipo_objeto, 
+      estado_objeto: 0,
+      creado_por: 'SYSTEM', 
+      fecha_creacion: new Date(), 
+      modificado_por: 'SYSTEM', 
+      fecha_modificacion: new Date()
+
+    };
+
     this._objService.addObjeto(this.nuevoObjeto).subscribe(data => {
       this.toastr.success('Objeto agregado con éxito');
-      this.listObjetos.push(data); // Agregar el nuevo usuario a la lista
-      this.nuevoObjeto = {
-        id_objeto: 0,
-        objeto: '',
-        descripcion: '',
-        tipo_objeto: '',
-        estado_objeto: 0,
-        creado_por: '',
-        fecha_creacion: new Date,
-        modificado_por: '',
-        fecha_modificacion: new Date,
-    
-      }; 
     });
   }
 
 
+  obtenerIdObjeto(objetos: Objetos, i: any){
+    this.objetoEditando = {
+    id_objeto: objetos.id_objeto, 
+    objeto: objetos.objeto, 
+    descripcion: objetos.descripcion, 
+    tipo_objeto: objetos.tipo_objeto, 
+    estado_objeto: objetos.estado_objeto,
+    creado_por: objetos.creado_por, 
+    fecha_creacion: objetos.fecha_creacion, 
+    modificado_por: objetos.modificado_por, 
+    fecha_modificacion: objetos.fecha_modificacion
 
-  editarrObjeto(){
+    };
+    this.indice = i;
+  }
 
+
+  editarObjeto(){
+    this._objService.editarObjeto(this.objetoEditando).subscribe(data => {
+      this.toastr.success('Objeto editado con éxito');
+      this.listObjetos[this.indice].objeto = this.objetoEditando.objeto;
+      this.listObjetos[this.indice].descripcion = this.objetoEditando.descripcion;
+      this.listObjetos[this.indice].estado_objeto = this.objetoEditando.estado_objeto;
+    
+    });
   }
 }
