@@ -65,4 +65,5 @@ export class UsuariosService {
   editarUsuario(usuario: Usuario): Observable<any> {
     return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/updateUsuario`, usuario)
   }
+
 }
