@@ -85,7 +85,7 @@ export class ObjetosComponent implements OnInit{
  
   
   inactivarObjeto(objetos: Objetos, i: any){
-    this._objService.inactivarObjeto(objetos).subscribe(data => this.toastr.success('El objeto: '+ objetos.objeto+ ' ha sido activado'));
+    this._objService.inactivarObjeto(objetos).subscribe(data => this.toastr.success('El objeto: '+ objetos.objeto+ ' ha sido inactivado'));
     this.listObjetos[i].estado_objeto = 2;
   }
   activarObjeto(objetos: Objetos, i: any){

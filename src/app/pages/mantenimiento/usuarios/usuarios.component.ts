@@ -95,7 +95,7 @@ export class UsuariosComponent implements OnInit{
  
   
   inactivarUsuario(usuario: Usuario, i: any){
-    this._userService.inactivarUsuario(usuario).subscribe(data => this.toastr.success('El usuario: '+ usuario.usuario+ ' ha sido activado'));
+    this._userService.inactivarUsuario(usuario).subscribe(data => this.toastr.success('El usuario: '+ usuario.usuario+ ' ha sido inactivado'));
     this.listUsuarios[i].estado_usuario = 2;
   }
   activarUsuario(usuario: Usuario, i: any){

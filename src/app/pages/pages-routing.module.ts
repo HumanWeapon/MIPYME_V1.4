@@ -7,8 +7,8 @@ import { UsuariosComponent } from './mantenimiento/usuarios/usuarios.component';
 import { ObjetosComponent } from './mantenimiento/objetos/objetos.component';
 import { PermisosComponent } from './mantenimiento/permisos/permisos.component';
 import { RolesComponent } from './mantenimiento/roles/roles.component';
-import { Tabla2Component } from './mantenimiento/tabla2/tabla2.component';
 import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.component';
+import { ParametrosComponent } from './mantenimiento/parametros/parametros.component';
 
 
 const routes: Routes = [
@@ -20,9 +20,9 @@ const routes: Routes = [
     {path: 'permisos', component: PermisosComponent},
     {path: 'roles', component: RolesComponent},
     {path: 'dashboard', component: DashboardComponent},
-    {path: 'table2', component: Tabla2Component},
     {path: 'form-group', component: UsuariosComponent},
     {path: 'preguntas', component: PreguntasComponent},
+    {path: 'parametros', component: ParametrosComponent},
   ]}
 ];
 
