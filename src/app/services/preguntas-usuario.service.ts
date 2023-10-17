@@ -27,4 +27,7 @@ export class PreguntasUsuarioService {
     const requestData = { id_usuario: id_usuario };
     return this.http.post<Preguntas_Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/preguntasRespuestas`, requestData)
   }
+  postPreguntasUsuario(preguntas: Preguntas_Usuario): Observable<Preguntas_Usuario>{
+    return this.http.post<Preguntas_Usuario>(`${this.myAppUrl}${this.myApiUrl}/postPreguntaUsuario`, preguntas)
+  }
 }

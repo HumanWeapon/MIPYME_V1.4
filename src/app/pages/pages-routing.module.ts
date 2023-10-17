@@ -9,6 +9,9 @@ import { PermisosComponent } from './mantenimiento/permisos/permisos.component';
 import { RolesComponent } from './mantenimiento/roles/roles.component';
 import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.component';
 import { ParametrosComponent } from './mantenimiento/parametros/parametros.component';
+import { PerfilComponent } from './inicio/perfil/perfil.component';
+
+
 
 
 const routes: Routes = [
@@ -23,6 +26,7 @@ const routes: Routes = [
     {path: 'form-group', component: UsuariosComponent},
     {path: 'preguntas', component: PreguntasComponent},
     {path: 'parametros', component: ParametrosComponent},
+    {path: 'perfil', component: PerfilComponent},
   ]}
 ];
 

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuariosService } from '../../../services/usuarios.service';
+import { Preguntas } from 'src/app/interfaces/preguntas';
+import { Preguntas_Usuario } from 'src/app/interfaces/preguntasUsuario';
 import { Usuario } from 'src/app/interfaces/usuario';
-import { FormGroup,FormControl,Validators } from '@angular/forms';
+import { PreguntasUsuarioService } from 'src/app/services/preguntas-usuario.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+
 
 @Component({
   selector: 'app-perfil',
@@ -10,68 +13,47 @@ import { FormGroup,FormControl,Validators } from '@angular/forms';
 })
 
 export class PerfilComponent  implements OnInit{
-  
-    
-  constructor (private _userService: UsuariosService) {}
 
-    datosUsuario!:Usuario;
-     editarform = new FormGroup({
-         usuario: new FormControl(''),
-         nombre: new FormControl(''),
-         email: new FormControl(''),
-     });
-     
+  usuario: Usuario = {
+    id_usuario: 0,
+    creado_por: '',
+    fecha_creacion: new Date(),
+    modificado_por: '',
+    fecha_modificacion: new Date(),
+    usuario: '',
+    nombre_usuario: '',
+    correo_electronico: '',
+    estado_usuario: 0,
+    contrasena: '',
+    id_rol: 0,
+    fecha_ultima_conexion: new Date(),
+    primer_ingreso: new Date(),
+    fecha_vencimiento: new Date(),
+    intentos_fallidos: 0
+  };
+  preguntas: Preguntas_Usuario[] = [];
+  listPreguntas: any[] = [];
 
-   
+  constructor(
+    private _preguntasUsuarioService: PreguntasUsuarioService,
+    private _userService: UsuariosService,
+    ){}
+
   ngOnInit(): void {
-
- /*this.getUsuario();*/
-
- this._userService.getAllUsuarios().subscribe(data => {
-  this.datosUsuario = data [8];
-  this.editarform.setValue({
-   'usuario': this.datosUsuario.usuario,
-   'nombre': this.datosUsuario.nombre_usuario,
-   'email': this.datosUsuario.correo_electronico,
- });
-
- console.log(this.editarform.value);
-});
-
+    this.getUsuario();
   }
 
-    /*getUsuario(){
-      const user: Usuario = {
-        usuario: this.usuarioLogin,
-        contrasena: '',
-        id_usuario: 0,
-        creado_por: '',
-        fecha_creacion: new Date(),
-        modificado_por: '',
-        fecha_modificacion: new Date(),
-        nombre_usuario: '',
-        correo_electronico: '',
-        estado_usuario: false,
-        id_rol: 0,
-        fecha_ultima_conexion: new Date(),
-        primer_ingreso: new Date(),
-        fecha_vencimiento: new Date(),
-        intentos_fallidos: 0
-      }
+  getUsuario(){
+    const userLocal = localStorage.getItem('usuario');
+    if(userLocal == null){
 
-      this._userService.getUsuario(user).subscribe(data => {
+    }else{
+      this.usuario.usuario = userLocal;
+      this._userService.getUsuario(this.usuario).subscribe(data => {
         this.usuario = data;
-       this.editarform.setValue({
-         'usuario': this.datosUsuario.usuario,
-         'nombre': this.datosUsuario.nombre_usuario,
-         'email': this.datosUsuario.correo_electronico,
-       });
-       console.log(this.editarform.value);
       });
- 
-    }*/
-
+    }
   }
-  
+}
 
 

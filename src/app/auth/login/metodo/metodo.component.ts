@@ -40,8 +40,6 @@ export class MetodoComponent {
     this._usuarioService.usuario = this.usuario;
     localStorage.setItem("usuario" , this.usuario.usuario);
 
-    localStorage.setItem("usuario", this.usuario.usuario)
-
     // Aquí puedes acceder a this.selectedOption para determinar cuál opción se seleccionó
     if (this.selectedOption === 'correo') {
       // Navegar al método de restablecer contraseña por correo electrónico

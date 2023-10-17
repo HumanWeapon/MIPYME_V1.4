@@ -42,28 +42,27 @@ export class UsuariosService {
       return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/postUsuario`, nuevoUsuario)
   }
 
-   login(usuario: Usuario): Observable<string> {
+  login(usuario: Usuario): Observable<string> {
     return this.http.post<string>(`${this.myAppUrl}${this.myApiUrl}/login`, usuario)
-   }
+  }
 
-   getUsuario(usuario: Usuario): Observable<Usuario> {
+  getUsuario(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/getUsuario`, usuario)
-   }
+  }
 
-   getAllUsuarios(): Observable<Usuario[]> {
+  getAllUsuarios(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/getAllUsuarios`)
-   }
-   inactivarUsuario(usuario: Usuario): Observable<Usuario>{
+  }
+  inactivarUsuario(usuario: Usuario): Observable<Usuario>{
     return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/inactivateUsuario`, usuario)
-   }
-   activarUsuario(usuario: Usuario): Observable<Usuario>{
+  }
+  activarUsuario(usuario: Usuario): Observable<Usuario>{
     return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/activateUsuario`, usuario)
-   }
-   cambiarContrasena(usuario: Usuario): Observable<Usuario>{
+  }
+  cambiarContrasena(usuario: Usuario): Observable<Usuario>{
     return this.http.put<Usuario>(`${this.myAppUrl}${this.myApiUrl}/cambiarContrasena`, usuario)
-   }
-
-   editarUsuario(usuario: Usuario): Observable<any> {
+  }
+  editarUsuario(usuario: Usuario): Observable<any> {
     return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/updateUsuario`, usuario)
   }
 }
