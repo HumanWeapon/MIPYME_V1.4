@@ -21,7 +21,8 @@ export class SidebarService {
         {titulo:'Objetos', url: 'objetos', icono: 'fa fa-cubes ml-1'},
         {titulo:'Permisos', url: 'permisos', icono: 'fa fa-user-shield ml-1'},
         {titulo:'Roles', url: 'roles', icono: 'fas fa-solid fa-street-view ml-1'},
-        {titulo:'Preguntas', url: 'preguntas', icono: 'fas fa-solid fa-street-view ml-1'}
+        {titulo:'Preguntas', url: 'preguntas', icono: 'fas fa-solid fa-street-view ml-1'},
+        {titulo:'Parametros', url: 'parametros', icono: 'fas fa-solid fa-street-view ml-1'}
       ]
     },
     {
