@@ -9,6 +9,7 @@ import { PermisosComponent } from './mantenimiento/permisos/permisos.component';
 import { RolesComponent } from './mantenimiento/roles/roles.component';
 import { Tabla2Component } from './mantenimiento/tabla2/tabla2.component';
 import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.component';
+import { PerfilComponent } from './inicio/perfil/perfil.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
     {path: 'table2', component: Tabla2Component},
     {path: 'form-group', component: UsuariosComponent},
     {path: 'preguntas', component: PreguntasComponent},
+    {path: 'perfil', component: PerfilComponent},
   ]}
 ];
 

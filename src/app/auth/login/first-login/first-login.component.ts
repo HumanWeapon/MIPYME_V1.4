@@ -79,7 +79,6 @@ export class FirstLoginComponent {
     }
   }
   updateUltimaConexionUsuario(update: Usuario){
-    console.log(update)
     this._usuarioService.editarUsuario(update).subscribe(data => {
       console.log(data)
     })
@@ -132,7 +131,6 @@ export class FirstLoginComponent {
         primer_ingreso: this.usuario.primer_ingreso,
         fecha_vencimiento: this.usuario.fecha_vencimiento,
         intentos_fallidos: this.usuario.intentos_fallidos
-        
       }
       this.updateUltimaConexionUsuario(updateUsuario);
     }
