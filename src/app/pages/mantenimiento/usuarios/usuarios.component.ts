@@ -148,6 +148,7 @@ export class UsuariosComponent implements OnInit{
       intentos_fallidos: usuario.intentos_fallidos,
     };
     this.indice = i;
+    
   }
 
 
