@@ -20,6 +20,10 @@ export class PerfilComponent  implements OnInit{
   inputDeshabilitado: boolean = true; // input Deshabilitado/bloqueado
   mostrarBoton: boolean = false; //Oculta el Boton de Cancelar
 
+  contrasenaActual: string = '';
+  nuevaContrasena: string = '';
+  confirmarContrasena: string = '';
+  
   usuario: Usuario = {
     id_usuario: 0,
     creado_por: '',
@@ -81,7 +85,25 @@ mostrarboton() {
     
   }
 
+  cambiarContrasena() {
+    if (this.nuevaContrasena !== this.confirmarContrasena) {
+      alert('Las contraseñas no coinciden');
+      return;
+    }
 
+    // Realizar la verificación de contraseña actual y cambiar la contraseña en el servicio
+   /* this.usuarioService.cambiarContrasena(this.contrasenaActual, this.nuevaContrasena)
+      .subscribe(
+        response => {
+          alert('Contraseña cambiada con éxito');
+          // Puedes redirigir al usuario a una página de inicio de sesión u otra página de tu aplicación aquí.
+        },
+        error => {
+          alert('Error al cambiar la contraseña');
+        }
+      );
+  }*/
+}
 
 
 
