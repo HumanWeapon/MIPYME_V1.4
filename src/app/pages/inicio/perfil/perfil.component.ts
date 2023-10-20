@@ -4,6 +4,7 @@ import { Preguntas_Usuario } from 'src/app/interfaces/preguntasUsuario';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { PreguntasUsuarioService } from 'src/app/services/preguntas-usuario.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class PerfilComponent  implements OnInit{
 /*************************************************************/
   inputDeshabilitadoPassword: boolean = true; // input Deshabilitado/bloqueado Password
   inputDeshabilitado: boolean = true; // input Deshabilitado/bloqueado
+  botonDeshabilitado: boolean = true;
   mostrarBoton: boolean = false; //Oculta el Boton de Cancelar
 /********************************************************************************************** */
   usuario: Usuario = {
@@ -45,6 +47,7 @@ export class PerfilComponent  implements OnInit{
   constructor(
     private _preguntasUsuarioService: PreguntasUsuarioService,
     private _userService: UsuariosService,
+    private toastr: ToastrService,
     ){}
 
   ngOnInit(): void {
@@ -64,7 +67,7 @@ export class PerfilComponent  implements OnInit{
   }
 
   //Bloqueo y Desbloqueo de Inputs
- habilitarInput() {
+habilitarInput() {
   this.inputDeshabilitado = false;
 }
 
@@ -88,18 +91,38 @@ this.mostrarBoton=false;
 this.inputDeshabilitado = true;
 }
 
+habilitarBoton() {
+  this.botonDeshabilitado = false;
+}
+
 mostrarboton() {
 this.mostrarBoton=true;
+this.botonDeshabilitado = false;
 }
 //Fin Metodo de Ocultar/Mostrar Boton
 
+editarUsuario() {
+  this._userService.editarUsuario(this.usuario).subscribe(data => {
+    this.toastr.success('Usuario editado con éxito');
+    this.usuario.nombre_usuario = this.usuario.nombre_usuario;
+    this.usuario.correo_electronico = this.usuario.correo_electronico;
+  });
+this.mostrarBoton=false;
+this.botonDeshabilitado = true;
+this.inputDeshabilitado = true;
+}
 
 cambiarContrasena() {
   if (this.nuevaContrasena !== this.confirmarContrasena) {
     alert('Las contraseñas no coinciden');
     return;
   }
+
+
+
+  
 }
+
 
 
 }

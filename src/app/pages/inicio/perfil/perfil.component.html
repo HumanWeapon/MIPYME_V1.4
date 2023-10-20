@@ -22,8 +22,8 @@
                   </div>
                   <div class="row">
                     <div style="display: flex; gap: 10px">
-                      <button type="submit"  class="savebutton" >Guardar Cambios</button>
-                      <button type="submit"  class="editbutton" (click)="habilitarInput()" (click)="mostrarboton()">Editar Usuario</button>
+                      <button type="submit"  class="savebutton" [disabled]="botonDeshabilitado" (click)="editarUsuario()" >Guardar Cambios</button>
+                      <button type="submit"  class="editbutton"  (click)="habilitarInput()" (click)="mostrarboton()">Editar Usuario</button>
                       <button type="submit"  class="cancelbutton" *ngIf="mostrarBoton" (click)="cancelarInput()">Cancelar</button>
                     </div>
                       <!-- /.col -->
@@ -45,7 +45,7 @@
                         <p class="login-box-msg">Ingresa tu contraseña actual y configura una contraseña nueva</p>
                         <form action="#" method="post">
                           <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Contraseña actual">
+                            <input type="password" [(ngModel)]="usuario.contrasena" class="form-control" placeholder="Contraseña actual">
                             <div class="input-group-append">
                               <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
