@@ -78,7 +78,6 @@ export class FormPreguntasComponent implements OnInit{
       correo_electronico: '',
       estado_usuario: 0,
       id_rol: 0,
-      rol:'',
       fecha_ultima_conexion: new Date(),
       primer_ingreso: new Date(),
       fecha_vencimiento: new Date(),

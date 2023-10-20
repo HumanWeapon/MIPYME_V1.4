@@ -22,7 +22,6 @@ export class MetodoComponent {
     estado_usuario: 0,
     contrasena: '',
     id_rol: 0,
-    rol:'',
     fecha_ultima_conexion: new Date(),
     primer_ingreso: new Date(),
     fecha_vencimiento: new Date(),

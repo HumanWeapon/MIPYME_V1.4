@@ -26,7 +26,6 @@ export class UsuariosComponent implements OnInit {
     estado_usuario: 0,
     contrasena: '',
     id_rol: 0,
-    rol: '',
     fecha_ultima_conexion: new Date(),
     primer_ingreso: new Date(),
     fecha_vencimiento: new Date(),
@@ -45,7 +44,6 @@ export class UsuariosComponent implements OnInit {
     estado_usuario: 0,
     contrasena: '',
     id_rol: 0,
-    rol: '',
     fecha_ultima_conexion: new Date(),
     primer_ingreso: new Date(),
     fecha_vencimiento: new Date(),
@@ -54,6 +52,7 @@ export class UsuariosComponent implements OnInit {
   indice: any;
 
   rol: Roles[] = [];
+  usuariosAllRoles: any[] = []
 
   dtOptions: DataTables.Settings = {};
   listUsuarios: Usuario[] = [];
@@ -87,8 +86,11 @@ export class UsuariosComponent implements OnInit {
       this.dtTrigger.next(null);
     });
 
-    this.RolesService.getRol().subscribe((rol: Roles[]) => {
-      this.rol = rol;
+    this._userService.usuariosAllRoles().subscribe({
+      next: (data) =>{
+        this.usuariosAllRoles = data;
+        console.log(this.usuariosAllRoles)
+      }
     });
   }
 
@@ -130,13 +132,8 @@ export class UsuariosComponent implements OnInit {
       nombre_usuario: this.nuevoUsuario.nombre_usuario,
       correo_electronico: this.nuevoUsuario.correo_electronico,
       estado_usuario: 1,
-<<<<<<< HEAD
-      contrasena: 'pyme12345',
-=======
       contrasena: this.nuevoUsuario.usuario,
->>>>>>> cd0bdd0db3bad5d75ba8e02e506d0697a7852fae
       id_rol: this.nuevoUsuario.id_rol,
-      rol: this.nuevoUsuario.rol,
       fecha_ultima_conexion: new Date(),
       primer_ingreso: new Date(),
       fecha_vencimiento: this.nuevoUsuario.fecha_vencimiento,
@@ -161,7 +158,6 @@ export class UsuariosComponent implements OnInit {
       estado_usuario: usuario.estado_usuario,
       contrasena: usuario.contrasena,
       id_rol: usuario.id_rol,
-      rol: usuario.rol,
       fecha_ultima_conexion: usuario.fecha_ultima_conexion,
       primer_ingreso: usuario.primer_ingreso,
       fecha_vencimiento: usuario.fecha_vencimiento,
@@ -178,7 +174,6 @@ export class UsuariosComponent implements OnInit {
       this.listUsuarios[this.indice].nombre_usuario = this.usuarioEditando.nombre_usuario;
       this.listUsuarios[this.indice].correo_electronico = this.usuarioEditando.correo_electronico;
       this.listUsuarios[this.indice].id_rol = this.usuarioEditando.id_rol;
-      this.listUsuarios[this.indice].rol = this.usuarioEditando.rol;
       this.listUsuarios[this.indice].fecha_vencimiento = this.usuarioEditando.fecha_vencimiento;
     });
   }

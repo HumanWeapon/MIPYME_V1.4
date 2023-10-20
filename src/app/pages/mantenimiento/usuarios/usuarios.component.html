@@ -25,26 +25,26 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let person of listUsuarios; let i = index">
-                            <td>{{ person.usuario }}</td>
-                            <td>{{ person.nombre_usuario }}</td>
-                            <td>{{ person.correo_electronico }}</td>
-                            <td>{{ person.rol }}</td>
+                          <tr *ngFor="let usuer of usuariosAllRoles; let i = index">
+                            <td>{{ usuer.usuario }}</td>
+                            <td>{{ usuer.nombre_usuario }}</td>
+                            <td>{{ usuer.correo_electronico }}</td>
+                            <td>{{ usuer.roles.rol }}</td>
                             <td>
-                                <ng-container *ngIf="person.estado_usuario === 1">Activo</ng-container>
-                                <ng-container *ngIf="person.estado_usuario === 2">Inactivo</ng-container>
-                                <ng-container *ngIf="person.estado_usuario === 3">Bloqueado</ng-container>
-                                <ng-container *ngIf="person.estado_usuario === 4">Vencido</ng-container>
+                                <ng-container *ngIf="usuer.estado_usuario === 1">Activo</ng-container>
+                                <ng-container *ngIf="usuer.estado_usuario === 2">Inactivo</ng-container>
+                                <ng-container *ngIf="usuer.estado_usuario === 3">Bloqueado</ng-container>
+                                <ng-container *ngIf="usuer.estado_usuario === 4">Vencido</ng-container>
                                 
                               </td>
-                            <td>{{ person.fecha_creacion }}</td>
-                            <td>{{ person.fecha_ultima_conexion }}</td>
-                            <td>{{ person.fecha_vencimiento }}</td>
+                            <td>{{ usuer.fecha_creacion }}</td>
+                            <td>{{ usuer.fecha_ultima_conexion }}</td>
+                            <td>{{ usuer.fecha_vencimiento }}</td>
                             <td class="text-center">
                               <div class="btn-group">
-                                  <button type="button" (click)="obtenerIdUsuario(person, i)" data-toggle="modal" data-target="#abrirModalEditar"data-toggle="modal" data-target="#abrirModalEditar" class="btn btn-warning" ><i class="fas fa-solid fa-pen"></i></button>
-                                  <button type="button" (click)="inactivarUsuario(person, i)" class="btn btn-danger"><i class="fas fa-solid fa-user-lock"></i></button>
-                                  <button type="button" (click)="activarUsuario(person, i)" class="btn btn-primary"><i class="fas fa-solid fa-lock-open"></i></button>
+                                  <button type="button" (click)="obtenerIdUsuario(usuer, i)" data-toggle="modal" data-target="#abrirModalEditar"data-toggle="modal" data-target="#abrirModalEditar" class="btn btn-warning" ><i class="fas fa-solid fa-pen"></i></button>
+                                  <button type="button" (click)="inactivarUsuario(usuer, i)" class="btn btn-danger"><i class="fas fa-solid fa-user-lock"></i></button>
+                                  <button type="button" (click)="activarUsuario(usuer, i)" class="btn btn-primary"><i class="fas fa-solid fa-lock-open"></i></button>
                                 </div>
                             </td>
                           </tr>
@@ -139,13 +139,6 @@
                 <div class="form-group">
                     <label for="editarCorreo">Correo Electrónico:</label>
                     <input type="email" [(ngModel)]="usuarioEditando.correo_electronico" name="correo_electronico" (input)="onInputChange($event)" class="form-control" id="editarCorreo" placeholder="Correo Electrónico">
-                </div>
-                <div class="form-group">
-                  <label for="editarRol">Rol:</label>
-                  <select [(ngModel)]="usuarioEditando.rol" name="id_rol" class="form-control" id="editarRol">
-                    <option value="0">Selecciona un rol</option>
-                    <option *ngFor="let roles of rol " [value]="roles.id_rol">{{ roles.rol }}</option>
-                  </select>
                 </div>
                 <div class="form-group">
                   <label for="editarFechaVencimiento">Fecha Vencimiento:</label>

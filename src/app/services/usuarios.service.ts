@@ -21,8 +21,6 @@ export class UsuariosService {
 
    }
 
-
-
    addUsuario(user: Usuario): Observable<any> {
     const nuevoUsuario = {
       creado_por: "SYSTEM",
@@ -35,7 +33,6 @@ export class UsuariosService {
       estado_usuario: user.estado_usuario,
       contrasena: user.contrasena,
       id_rol: user.id_rol,
-      rol: user.rol,
       fecha_ultima_conexion: "",
       fecha_vencimiento: user.fecha_vencimiento,
       intentos_fallidos: user.intentos_fallidos
@@ -77,5 +74,9 @@ export class UsuariosService {
     return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/updateUsuario`, usuario, { headers: headers })
   }
 
-
+  usuariosAllRoles(): Observable<Usuario[]> {
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.get<Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/usuariosAllRoles`, { headers: headers })
+  }
 }
