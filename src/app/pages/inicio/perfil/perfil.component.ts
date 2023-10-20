@@ -117,9 +117,8 @@ validarPassword() {
     this.toastr.warning('Completa todos los campos');
   } else if (this.confirmarContrasena !== this.nuevaContrasena) {
     this.toastr.warning('Las contraseñas no coinciden');
-  } else if (this.usuario.contrasena !== this.contrasenaActual) {
-    this.toastr.warning('Error, Ingrese la contraseña actual correcta');
   } else {
+    this.usuario.contrasena = this.nuevaContrasena;
     this._userService.cambiarContrasena(this.usuario).subscribe((data) => {
       if (data) {
         this.toastr.success('Contraseña actualizada con éxito', 'success');
@@ -128,6 +127,9 @@ validarPassword() {
       }
     });
   }
+this.mostrarBoton=false;
+this.botonDeshabilitado = true;
+this.inputDeshabilitado = true;
 }
 
 }
