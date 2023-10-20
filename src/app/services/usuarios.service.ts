@@ -35,6 +35,7 @@ export class UsuariosService {
       estado_usuario: user.estado_usuario,
       contrasena: user.contrasena,
       id_rol: user.id_rol,
+      rol: user.rol,
       fecha_ultima_conexion: "",
       fecha_vencimiento: user.fecha_vencimiento,
       intentos_fallidos: user.intentos_fallidos

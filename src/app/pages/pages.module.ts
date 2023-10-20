@@ -16,6 +16,7 @@ import { DataTablesModule } from "angular-datatables";
 import { MatIconModule } from '@angular/material/icon';
 import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.component';
 import { ParametrosComponent } from './mantenimiento/parametros/parametros.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ParametrosComponent } from './mantenimiento/parametros/parametros.compo
     UsuariosComponent,
     PreguntasComponent,
     ParametrosComponent,
+
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { ParametrosComponent } from './mantenimiento/parametros/parametros.compo
     SharedModule,
     FormsModule,
     DataTablesModule,
-    MatIconModule
+    MatIconModule,
+    BsDatepickerModule.forRoot()
   ],
   exports:[
     DashboardComponent,

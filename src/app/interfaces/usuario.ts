@@ -10,6 +10,7 @@ export interface Usuario {
     estado_usuario: number,
     contrasena: string,
     id_rol: number,
+    rol: string,
     fecha_ultima_conexion: Date,
     primer_ingreso: Date,
     fecha_vencimiento: Date,

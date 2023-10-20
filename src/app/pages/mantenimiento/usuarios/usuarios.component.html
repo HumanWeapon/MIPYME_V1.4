@@ -16,6 +16,7 @@
                             <th>Usuario</th>
                             <th>Nombre</th>
                             <th>Correo</th>
+                            <th>Rol</th>
                             <th>Estado</th>
                             <th>Creado</th>
                             <th>Ultima vez</th>
@@ -28,10 +29,13 @@
                             <td>{{ person.usuario }}</td>
                             <td>{{ person.nombre_usuario }}</td>
                             <td>{{ person.correo_electronico }}</td>
+                            <td>{{ person.rol }}</td>
                             <td>
                                 <ng-container *ngIf="person.estado_usuario === 1">Activo</ng-container>
                                 <ng-container *ngIf="person.estado_usuario === 2">Inactivo</ng-container>
                                 <ng-container *ngIf="person.estado_usuario === 3">Bloqueado</ng-container>
+                                <ng-container *ngIf="person.estado_usuario === 4">Vencido</ng-container>
+                                
                               </td>
                             <td>{{ person.fecha_creacion }}</td>
                             <td>{{ person.fecha_ultima_conexion }}</td>
@@ -63,50 +67,53 @@
 
 
 
-
-   
 <!-- Agregar Usuario Form -->
 <div class="modal fade" id="agregarUsuario">
   <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h4 class="modal-title">Agregar Usuario</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-              <form (submit)="agregarNuevoUsuario()">
-                  <div class="form-group">
-                      <label for="nuevoUsuario">Nombre de usuario:</label>
-                      <input type="text" [(ngModel)]="nuevoUsuario.usuario" name="nuevoUsuario.usuario" class="form-control" id="nuevoUsuario" placeholder="Nombre de usuario">
-                  </div>
-                  <div class="form-group">
-                      <label for="nuevoNombre">Nombre completo:</label>
-                      <input type="text" [(ngModel)]="nuevoUsuario.nombre_usuario" name="nuevoUsuario.nombre_usuario" class="form-control" id="nuevoNombre" placeholder="Nombre completo">
-                  </div>
-                  <div class="form-group">
-                      <label for="nuevoCorreo">Correo Electrónico:</label>
-                      <input type="email" [(ngModel)]="nuevoUsuario.correo_electronico" name="nuevoUsuario.correo_electronico" class="form-control" id="nuevoCorreo" placeholder="Correo Electrónico">
-                  </div>
-                  <div class="form-group">
-                    <label for="nuevoCorreo">Rol:</label>
-                    <input type="text" [(ngModel)]="nuevoUsuario.id_rol" name="nuevoUsuario.id_rol" class="form-control" id="nuevoRol" placeholder="Rol">
-                </div>
-                <div class="form-group">
-                  <label for="nuevoCorreo">Fecha Vencimiento:</label>
-                  <input type="datetime-local" [(ngModel)]="nuevoUsuario.fecha_vencimiento" name="nuevoUsuario.fecha_vencimiento" class="form-control" id="nuevoCorreo" placeholder="Fecha Vencimiento">
-              </div>
-              </form>
-          </div>
-          <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-              <button type="button" (click)="agregarNuevoUsuario()" class="btn btn-success">Guardar</button>
-          </div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Agregar Usuario</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+        <form (ngSubmit)="agregarNuevoUsuario()">
+          <div class="form-group">
+            <label for="nuevoUsuario">Nombre de usuario:</label>
+            <input type="text" [(ngModel)]="nuevoUsuario.usuario" name="nuevoUsuario.usuario" (input)="onInputChange($event)" class="form-control" id="nuevoUsuario" placeholder="Nombre de usuario">
+          </div>
+          <div class="form-group">
+            <label for="nuevoNombre">Nombre completo:</label>
+            <input type="text" [(ngModel)]="nuevoUsuario.nombre_usuario" name="nuevoUsuario.nombre_usuario" (input)="onInputChange($event)" class="form-control" id="nuevoNombre" placeholder="Nombre completo">
+          </div>
+          <div class="form-group">
+            <label for="nuevoCorreo">Correo Electrónico:</label>
+            <input type="text" [(ngModel)]="nuevoUsuario.correo_electronico" name="nuevoUsuario.correo_electronico" (input)="onInputChange($event)" class="form-control" id="nuevoCorreo" placeholder="Correo Electrónico">
+          </div>
+          <div class="form-group">
+            <label for="editarRol">Rol:</label>
+            <select [(ngModel)]="nuevoUsuario.id_rol" name="nuevoUsuario.id_rol" class="form-control" id="editarRol">
+              <option value="0">Selecciona un rol</option>
+              <option *ngFor="let rol of rol" [value]="rol.id_rol">{{ rol.rol }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="editarFechaVencimiento">Fecha Vencimiento:</label>
+            <input type="datetime-local" [(ngModel)]="usuarioEditando.fecha_vencimiento" name="fecha_vencimiento" class="form-control" id="editarFechaVencimiento" placeholder="Fecha Vencimiento">
+          </div>
+            
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 <!-- /Agregar Usuario Form -->
+
 
 
 <!-- Actualizar Usuario Form -->
@@ -120,32 +127,35 @@
               </button>
           </div>
           <div class="modal-body">
-              <form>
+              <form (ngSubmit)="editarUsuario()">
                 <div class="form-group">
-                    <label for="usuarioEditando">Nombre de usuario:</label>
-                    <input type="text" [(ngModel)]="usuarioEditando.usuario" name="usuarioEditando.usuario" class="form-control" id="editarUsuario" placeholder="Nombre de usuario">
+                    <label for="editarUsuario">Nombre de usuario:</label>
+                    <input type="text" [(ngModel)]="usuarioEditando.usuario" name="usuarioEditando" (input)="onInputChange($event)" class="form-control" id="editarUsuario" placeholder="Nombre de usuario">
                 </div>
                 <div class="form-group">
-                    <label for="usuarioEditando">Nombre completo:</label>
-                    <input type="text" [(ngModel)]="usuarioEditando.nombre_usuario" name="usuarioEditando.nombre_usuario" class="form-control" id="editarNombre" placeholder="Nombre completo">
+                    <label for="editarNombre">Nombre completo:</label>
+                    <input type="text" [(ngModel)]="usuarioEditando.nombre_usuario" name="nombre_usuario" (input)="onInputChange($event)" class="form-control" id="editarNombre" placeholder="Nombre completo">
                 </div>
                 <div class="form-group">
-                    <label for="usuarioEditando">Correo Electrónico:</label>
-                    <input type="email" [(ngModel)]="usuarioEditando.correo_electronico" name="usuarioEditando.correo_electronico" class="form-control" id="editarCorreo" placeholder="Correo Electrónico">
+                    <label for="editarCorreo">Correo Electrónico:</label>
+                    <input type="email" [(ngModel)]="usuarioEditando.correo_electronico" name="correo_electronico" (input)="onInputChange($event)" class="form-control" id="editarCorreo" placeholder="Correo Electrónico">
                 </div>
                 <div class="form-group">
-                  <label for="usuarioEditando">Rol:</label>
-                  <input type="text" [(ngModel)]="usuarioEditando.id_rol" name="usuarioEditando.id_rol" class="form-control" id="editarRol" placeholder="Rol">
+                  <label for="editarRol">Rol:</label>
+                  <select [(ngModel)]="usuarioEditando.rol" name="id_rol" class="form-control" id="editarRol">
+                    <option value="0">Selecciona un rol</option>
+                    <option *ngFor="let roles of rol " [value]="roles.id_rol">{{ roles.rol }}</option>
+                  </select>
                 </div>
                 <div class="form-group">
-                  <label for="usuarioEditando">Fecha Vencimiento:</label>
-                  <input type="datetime-local" [(ngModel)]="usuarioEditando.fecha_vencimiento" name="usuarioEditando.fecha_vencimiento" class="form-control" id="editarFechaVencimiento" placeholder="Fecha Vencimiento">
+                  <label for="editarFechaVencimiento">Fecha Vencimiento:</label>
+                  <input type="datetime-local" [(ngModel)]="usuarioEditando.fecha_vencimiento" name="fecha_vencimiento" class="form-control" id="editarFechaVencimiento" placeholder="Fecha Vencimiento">
                 </div>
               </form>
           </div>
           <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-              <button type="button" (click)="editarUsuario()" class="btn btn-success">Guardar</button>
+              <button type="submit" class="btn btn-success">Guardar</button>
           </div>
       </div>
   </div>
