@@ -129,6 +129,7 @@ export class LoginComponent {
       }
     })
   }
+  
   getUsuario(){
      this.getUser = {
       usuario: this.usuario,

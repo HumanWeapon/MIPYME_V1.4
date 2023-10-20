@@ -14,15 +14,15 @@
                 <div class="accordion-body">
                     <div class="mb-3">
                         <label for="formGroupExampleInput" class="form-label">Nombre</label>
-                        <input type="text" [disabled]="inputDeshabilitado" [(ngModel)]="usuarioEditando.nombre_usuario" name="usuarioEditando.nombre_usuario" class="form-control" id="formGroupExampleInput" placeholder="Nombre del Usuario">
-                    </div>
+                        <input type="text" [disabled]="inputDeshabilitado" [(ngModel)]="getUser.usuario" class="form-control" id="formGroupExampleInput" placeholder="Nombre del Usuario">
+                      </div>
                     <div class="mb-3">
                         <label for="formGroupExampleInput2" class="form-label">Correo</label>
-                        <input type="text" [disabled]="inputDeshabilitado" [(ngModel)]="usuarioEditando.correo_electronico" name="usuarioEditando.correo_electronico" class="form-control" id="formGroupExampleInput2" placeholder="Correo Electronico">
+                        <input type="text" [disabled]="inputDeshabilitado" [(ngModel)]="getUser.correo_electronico" name="usuarioEditando.correo_electronico" class="form-control" id="formGroupExampleInput2" placeholder="Correo Electronico">
                     </div>
                     <div class="row">
                       <div style="display: flex; gap: 10px">
-                        <button type="submit"  class="savebutton" (click)="editarUsuario()">Guardar Cambios</button>
+                        <button type="submit"  class="savebutton" >Guardar Cambios</button>
                         <button type="submit"  class="editbutton" (click)="habilitarInput()" (click)="mostrarboton()">Editar Usuario</button>
                         <button type="submit"  class="cancelbutton" *ngIf="mostrarBoton" (click)="cancelarInput()">Cancelar</button>
                       </div>
