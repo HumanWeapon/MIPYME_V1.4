@@ -11,45 +11,44 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered table-striped row-border hover">
-                        <thead>
-                          <tr>
-                            <th>Usuario</th>
-                            <th>Nombre</th>
-                            <th>Correo</th>
-                            <th>Rol</th>
-                            <th>Estado</th>
-                            <th>Creado</th>
-                            <th>Ultima vez</th>
-                            <th>Vence</th>
-                            <th>Aciones</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let usuer of usuariosAllRoles; let i = index">
-                            <td>{{ usuer.usuario }}</td>
-                            <td>{{ usuer.nombre_usuario }}</td>
-                            <td>{{ usuer.correo_electronico }}</td>
-                            <td>{{ usuer.roles.rol }}</td>
-                            <td>
-                                <ng-container *ngIf="usuer.estado_usuario === 1">Activo</ng-container>
-                                <ng-container *ngIf="usuer.estado_usuario === 2">Inactivo</ng-container>
-                                <ng-container *ngIf="usuer.estado_usuario === 3">Bloqueado</ng-container>
-                                <ng-container *ngIf="usuer.estado_usuario === 4">Vencido</ng-container>
-                                
-                              </td>
-                            <td>{{ usuer.fecha_creacion }}</td>
-                            <td>{{ usuer.fecha_ultima_conexion }}</td>
-                            <td>{{ usuer.fecha_vencimiento }}</td>
-                            <td class="text-center">
-                              <div class="btn-group">
-                                  <button type="button" (click)="obtenerIdUsuario(usuer, i)" data-toggle="modal" data-target="#abrirModalEditar"data-toggle="modal" data-target="#abrirModalEditar" class="btn btn-warning" ><i class="fas fa-solid fa-pen"></i></button>
-                                  <button type="button" (click)="inactivarUsuario(usuer, i)" class="btn btn-danger"><i class="fas fa-solid fa-user-lock"></i></button>
-                                  <button type="button" (click)="activarUsuario(usuer, i)" class="btn btn-primary"><i class="fas fa-solid fa-lock-open"></i></button>
-                                </div>
+                      <thead>
+                        <tr>
+                          <th>Usuario</th>
+                          <th>Nombre</th>
+                          <th>Correo</th>
+                          <th>Rol</th>
+                          <th>Estado</th>
+                          <th>Creado</th>
+                          <th>Ultima vez</th>
+                          <th>Vence</th>
+                          <th>Aciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let usuer of usuariosAllRoles; let i = index">
+                          <td>{{ usuer.usuario }}</td>
+                          <td>{{ usuer.nombre_usuario }}</td>
+                          <td>{{ usuer.correo_electronico }}</td>
+                          <td>{{ usuer.roles.rol }}</td>
+                          <td>
+                              <ng-container *ngIf="usuer.estado_usuario === 1">Activo</ng-container>
+                              <ng-container *ngIf="usuer.estado_usuario === 2">Inactivo</ng-container>
+                              <ng-container *ngIf="usuer.estado_usuario === 3">Bloqueado</ng-container>
+                              <ng-container *ngIf="usuer.estado_usuario === 4">Vencido</ng-container>
                             </td>
-                          </tr>
-                        </tbody>
-                    </table>
+                          <td>{{ usuer.fecha_creacion }}</td>
+                          <td>{{ usuer.fecha_ultima_conexion }}</td>
+                          <td>{{ usuer.fecha_vencimiento }}</td>
+                          <td class="text-center">
+                              <div class="btn-group">
+                                <button type="button" (click)="obtenerIdUsuario(usuer, i)" data-toggle="modal" data-target="#abrirModalEditar"data-toggle="modal" data-target="#abrirModalEditar" class="btn btn-warning" ><i class="fas fa-solid fa-pen"></i></button>
+                                <button type="button" (click)="inactivarUsuario(usuer, i)" class="btn btn-danger"><i class="fas fa-solid fa-user-lock"></i></button>
+                                <button type="button" (click)="activarUsuario(usuer, i)" class="btn btn-primary"><i class="fas fa-solid fa-lock-open"></i></button>
+                              </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                  </table>
     
                 </div>
                 <!-- /.card-body -->
@@ -85,7 +84,7 @@
           </div>
           <div class="form-group">
             <label for="nuevoNombre">Nombre completo:</label>
-            <input type="text" [(ngModel)]="nuevoUsuario.nombre_usuario" name="nuevoUsuario.nombre_usuario" (input)="onInputChange($event)" class="form-control" id="nuevoNombre" placeholder="Nombre completo">
+            <input type="text" [(ngModel)]="nuevoUsuario.nombre_usuario" name="nuevoUsuario.nombre_usuario" class="form-control" id="nuevoNombre" placeholder="Nombre completo">
           </div>
           <div class="form-group">
             <label for="nuevoCorreo">Correo Electrónico:</label>
@@ -127,29 +126,37 @@
               </button>
           </div>
           <div class="modal-body">
-              <form (ngSubmit)="editarUsuario()">
+              <form>
                 <div class="form-group">
                     <label for="editarUsuario">Nombre de usuario:</label>
                     <input type="text" [(ngModel)]="usuarioEditando.usuario" name="usuarioEditando" (input)="onInputChange($event)" class="form-control" id="editarUsuario" placeholder="Nombre de usuario">
                 </div>
                 <div class="form-group">
                     <label for="editarNombre">Nombre completo:</label>
-                    <input type="text" [(ngModel)]="usuarioEditando.nombre_usuario" name="nombre_usuario" (input)="onInputChange($event)" class="form-control" id="editarNombre" placeholder="Nombre completo">
+                    <input type="text" [(ngModel)]="usuarioEditando.nombre_usuario" name="nombre_usuario" class="form-control" id="editarNombre" placeholder="Nombre completo">
                 </div>
                 <div class="form-group">
                     <label for="editarCorreo">Correo Electrónico:</label>
                     <input type="email" [(ngModel)]="usuarioEditando.correo_electronico" name="correo_electronico" (input)="onInputChange($event)" class="form-control" id="editarCorreo" placeholder="Correo Electrónico">
                 </div>
                 <div class="form-group">
+                  <label for="editarRol">Rol:</label>
+                  <select class="form-control" id="editarRol" [(ngModel)]="usuarioEditando.id_rol" name="usuarioEditando.id_rol" class="form-control" >
+                    <option *ngFor="let item of rol; let value = index" [value]="item.id_rol">{{ item.rol }}</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
                   <label for="editarFechaVencimiento">Fecha Vencimiento:</label>
                   <input type="datetime-local" [(ngModel)]="usuarioEditando.fecha_vencimiento" name="fecha_vencimiento" class="form-control" id="editarFechaVencimiento" placeholder="Fecha Vencimiento">
                 </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-success" (click)="editarUsuario(rol)" data-dismiss="modal">Guardar</button>
+              </div>
               </form>
           </div>
-          <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-success">Guardar</button>
-          </div>
+
       </div>
   </div>
 </div>

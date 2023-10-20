@@ -13,7 +13,7 @@ import { Roles } from 'src/app/interfaces/roles';
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.css']
 })
-export class UsuariosComponent implements OnInit {
+export class UsuariosComponent implements OnInit  {
   usuarioEditando: Usuario = {
     id_usuario: 0,
     creado_por: '',
@@ -56,13 +56,13 @@ export class UsuariosComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
   listUsuarios: Usuario[] = [];
-  data: any;
+ 
 
   // We use this trigger because fetching the list of persons can be quite long,
   // thus we ensure the data is fetched before rendering
   dtTrigger: Subject<any> = new Subject<any>();
   modalEditar: NgbModalRef | undefined;
-  RolesService: any;
+
  
 
 
@@ -71,7 +71,7 @@ export class UsuariosComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router,
     private modalService: NgbModal,
-    private rolesService: RolesService
+    private _rolesService: RolesService
   ) {}
 
   ngOnInit(): void {
@@ -81,15 +81,23 @@ export class UsuariosComponent implements OnInit {
       language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
       responsive: true,
     };
-    this._userService.getAllUsuarios().subscribe((res: any) => {
-      this.listUsuarios = res;
-      this.dtTrigger.next(null);
+    this._userService.usuariosAllRoles().subscribe({
+      next: (data) =>{
+        this.usuariosAllRoles = data;
+        this.listUsuarios = data;
+        this.dtTrigger.next(null);
+      }
+
+    });
+
+    this._rolesService.getAllRoles().subscribe((data) => {
+      this.rol = data;
+      console.log(this.rol)
     });
 
     this._userService.usuariosAllRoles().subscribe({
       next: (data) =>{
         this.usuariosAllRoles = data;
-        console.log(this.usuariosAllRoles)
       }
     });
   }
@@ -98,27 +106,26 @@ export class UsuariosComponent implements OnInit {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
+
   
   onInputChange(event: any) {
     const inputValue = event.target.value;
     event.target.value = inputValue.toUpperCase();
+    event.target.value = inputValue.replace(/\s/g, '');
   }
-  
-  
-  
 
-  inactivarUsuario(usuario: Usuario, i: any) {
+  inactivarUsuario(usuario: any, i: any) {
     this._userService.inactivarUsuario(usuario).subscribe(data =>
       this.toastr.success('El usuario: ' + usuario.usuario + ' ha sido inactivado')
     );
-    this.listUsuarios[i].estado_usuario = 2;
+    this.usuariosAllRoles[i].estado_usuario = 2;
   }
 
-  activarUsuario(usuario: Usuario, i: any) {
+  activarUsuario(usuario: any, i: any) {
     this._userService.activarUsuario(usuario).subscribe(data =>
       this.toastr.success('El usuario: ' + usuario.usuario + ' ha sido activado')
     );
-    this.listUsuarios[i].estado_usuario = 1;
+    this.usuariosAllRoles[i].estado_usuario = 1;
   }
 
   agregarNuevoUsuario() {
@@ -167,14 +174,19 @@ export class UsuariosComponent implements OnInit {
     
   }
 
-  editarUsuario() {
+  editarUsuario(rol: any) {
     this._userService.editarUsuario(this.usuarioEditando).subscribe(data => {
       this.toastr.success('Usuario editado con éxito');
-      this.listUsuarios[this.indice].usuario = this.usuarioEditando.usuario;
-      this.listUsuarios[this.indice].nombre_usuario = this.usuarioEditando.nombre_usuario;
-      this.listUsuarios[this.indice].correo_electronico = this.usuarioEditando.correo_electronico;
-      this.listUsuarios[this.indice].id_rol = this.usuarioEditando.id_rol;
-      this.listUsuarios[this.indice].fecha_vencimiento = this.usuarioEditando.fecha_vencimiento;
+      if(this.usuariosAllRoles == null){
+        //no se puede editar el usuario
+      }else{
+      this.usuariosAllRoles[this.indice].usuario = this.usuarioEditando.usuario;
+      this.usuariosAllRoles[this.indice].nombre_usuario = this.usuarioEditando.nombre_usuario;
+      this.usuariosAllRoles[this.indice].correo_electronico = this.usuarioEditando.correo_electronico;
+      this.usuariosAllRoles[this.indice].roles.rol = rol.rol;
+      this.usuariosAllRoles[this.indice].fecha_vencimiento = this.usuarioEditando.fecha_vencimiento;
+      }
+
     });
   }
 }
