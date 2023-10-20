@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/enviroments/enviromet';
 import { Preguntas } from '../interfaces/preguntas';
 import { Observable, catchError } from 'rxjs';
@@ -35,20 +35,28 @@ export class PreguntasService {
       fecha_modificacion: preguntas.fecha_modificacion 
       
       };
-      return this.http.post<Preguntas>(`${this.myAppUrl}${this.myApiUrl}/postPregunta`, nuevoPregunta)
+      const token = localStorage.getItem('token')
+      const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+      return this.http.post<Preguntas>(`${this.myAppUrl}${this.myApiUrl}/postPregunta`, nuevoPregunta, { headers: headers })
   }
 
   
 
    getPregunta(preguntas: Preguntas): Observable<Preguntas> {
-    return this.http.post<Preguntas>(`${this.myAppUrl}${this.myApiUrl}/getPregunta`, preguntas)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Preguntas>(`${this.myAppUrl}${this.myApiUrl}/getPregunta`, preguntas, { headers: headers })
    }
 
    getAllPreguntas(): Observable<Preguntas[]> {
-    return this.http.get<Preguntas[]>(`${this.myAppUrl}${this.myApiUrl}/getAllPreguntas`)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.get<Preguntas[]>(`${this.myAppUrl}${this.myApiUrl}/getAllPreguntas`, { headers: headers })
    }
 
    editarPregunta(preguntas: Preguntas): Observable<any> {
-    return this.http.post<Preguntas>(`${this.myAppUrl}${this.myApiUrl}/updatePregunta`, preguntas)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Preguntas>(`${this.myAppUrl}${this.myApiUrl}/updatePregunta`, preguntas, { headers: headers })
   }
 }

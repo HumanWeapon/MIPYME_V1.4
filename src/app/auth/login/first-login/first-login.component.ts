@@ -72,7 +72,6 @@ export class FirstLoginComponent {
       this.usuario.usuario = user;
       this._usuarioService.getUsuario(this.usuario).subscribe(data => {
         this.usuario = data;
-        // Hacer lo que necesites con 'data'
       });
     } else {
       // Manejar el caso en el que 'usuario' no se encuentra en el localStorage
@@ -112,7 +111,7 @@ export class FirstLoginComponent {
         };
         this._preguntasUsuario.postPreguntasUsuario(preguntaUsuario).subscribe(data => {
           this.toastr.success('Pregunta registrada exitosamente');
-          this.router.navigate(['/dashboard'])
+          this.router.navigate(['/recuperar'])
         });
       }
       const updateUsuario = {

@@ -115,7 +115,7 @@ export class UsuariosComponent implements OnInit{
       nombre_usuario: this.nuevoUsuario.nombre_usuario,
       correo_electronico: this.nuevoUsuario.correo_electronico,
       estado_usuario: 1,
-      contrasena: 'fUHTah2dUB73xIG',
+      contrasena: this.nuevoUsuario.usuario,
       id_rol: this.nuevoUsuario.id_rol,
       fecha_ultima_conexion: new Date(),
       primer_ingreso: new Date(),

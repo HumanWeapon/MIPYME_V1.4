@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/enviroments/enviromet';
 import { Objetos } from '../interfaces/objetos';
 import { Observable, catchError } from 'rxjs';
@@ -39,20 +39,30 @@ export class ObjetosService {
 
   
    getObjeto(objetos: Objetos): Observable<Objetos> {
-    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/getObjeto`, objetos)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/getObjeto`, objetos, { headers: headers })
    }
 
    getAllObjetos(): Observable<Objetos[]> {
-    return this.http.get<Objetos[]>(`${this.myAppUrl}${this.myApiUrl}/getAllObjetos`)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.get<Objetos[]>(`${this.myAppUrl}${this.myApiUrl}/getAllObjetos`, { headers: headers })
    }
    inactivarObjeto(objetos: Objetos): Observable<Objetos>{
-    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/inactivateObjetos`, objetos)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/inactivateObjetos`, objetos, { headers: headers })
    }
    activarObjeto(objetos: Objetos): Observable<Objetos>{
-    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/activateObjeto`, objetos)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/activateObjeto`, objetos, { headers: headers })
    }
 
    editarObjeto(objetos: Objetos): Observable<any> {
-    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/updateObjetos`, objetos)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Objetos>(`${this.myAppUrl}${this.myApiUrl}/updateObjetos`, objetos, { headers: headers })
   }
 }
