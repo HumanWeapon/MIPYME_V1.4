@@ -14,16 +14,18 @@
               <div class="accordion-body">
                   <div class="mb-3">
                       <label for="formGroupExampleInput" class="form-label">Nombre</label>
-                      <input type="text" [(ngModel)]="usuario.nombre_usuario" name="usuario.nombre_usuario" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                      <input type="text" [disabled]="inputDeshabilitado" [(ngModel)]="usuario.nombre_usuario" name="usuario.nombre_usuario" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
                   </div>
                   <div class="mb-3">
                       <label for="formGroupExampleInput2" class="form-label">Correo</label>
-                      <input type="text" [(ngModel)]="usuario.correo_electronico" name="usuario.correo_electronico" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
+                      <input type="text" [disabled]="inputDeshabilitado" [(ngModel)]="usuario.correo_electronico" name="usuario.correo_electronico" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
                   </div>
                   <div class="row">
-                      <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-block">Cambiar datos</button>
-                      </div>
+                    <div style="display: flex; gap: 10px">
+                      <button type="submit"  class="savebutton" >Guardar Cambios</button>
+                      <button type="submit"  class="editbutton" (click)="habilitarInput()" (click)="mostrarboton()">Editar Usuario</button>
+                      <button type="submit"  class="cancelbutton" *ngIf="mostrarBoton" (click)="cancelarInput()">Cancelar</button>
+                    </div>
                       <!-- /.col -->
                   </div>
               </div>

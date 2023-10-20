@@ -14,6 +14,14 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 
 export class PerfilComponent  implements OnInit{
 
+  contrasenaActual: string = '';
+  nuevaContrasena: string = '';
+  confirmarContrasena: string = '';
+/*************************************************************/
+  inputDeshabilitadoPassword: boolean = true; // input Deshabilitado/bloqueado Password
+  inputDeshabilitado: boolean = true; // input Deshabilitado/bloqueado
+  mostrarBoton: boolean = false; //Oculta el Boton de Cancelar
+/********************************************************************************************** */
   usuario: Usuario = {
     id_usuario: 0,
     creado_por: '',
@@ -54,4 +62,45 @@ export class PerfilComponent  implements OnInit{
       });
     }
   }
+
+  //Bloqueo y Desbloqueo de Inputs
+ habilitarInput() {
+  this.inputDeshabilitado = false;
 }
+
+habilitarInputPassword() {
+  this.inputDeshabilitadoPassword = false;
+}
+
+deshabilitarInput() {
+  this.inputDeshabilitado = true;
+}
+//Fin Bloqueo y Desbloqueos de Inputs
+
+//Metodo de Ocultar/Mostrar Boton
+cancelarInput(){
+this.mostrarBoton=false;
+this.inputDeshabilitado = true;
+}
+
+cancelarInputPassword(){
+this.mostrarBoton=false;
+this.inputDeshabilitado = true;
+}
+
+mostrarboton() {
+this.mostrarBoton=true;
+}
+//Fin Metodo de Ocultar/Mostrar Boton
+
+
+cambiarContrasena() {
+  if (this.nuevaContrasena !== this.confirmarContrasena) {
+    alert('Las contraseñas no coinciden');
+    return;
+  }
+}
+
+
+}
+
