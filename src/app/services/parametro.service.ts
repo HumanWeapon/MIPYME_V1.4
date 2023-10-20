@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/enviroments/enviromet';
 import { Parametros } from '../interfaces/parametros';
 import { Observable, catchError } from 'rxjs';
@@ -35,19 +35,27 @@ export class ParametrosService {
       fecha_modificacion: parametro.fecha_modificacion,
       alerta_busqueda: parametro.alerta_busqueda
       };
-      return this.http.post<Parametros>(`${this.myAppUrl}${this.myApiUrl}/postParametro`, nuevoParametro)
+      const token = localStorage.getItem('token')
+      const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+      return this.http.post<Parametros>(`${this.myAppUrl}${this.myApiUrl}/postParametro`, nuevoParametro, { headers: headers })
   }
 
 
    getParametro(parametros: Parametros): Observable<Parametros> {
-    return this.http.post<Parametros>(`${this.myAppUrl}${this.myApiUrl}/getParametro`, parametros)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Parametros>(`${this.myAppUrl}${this.myApiUrl}/getParametro`, parametros, { headers: headers })
    }
 
    getAllParametros(): Observable<Parametros[]> {
-    return this.http.get<Parametros[]>(`${this.myAppUrl}${this.myApiUrl}/getAllParametros`)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.get<Parametros[]>(`${this.myAppUrl}${this.myApiUrl}/getAllParametros`, { headers: headers })
    }
   
    editarParametro(parametros: Parametros): Observable<any> {
-    return this.http.post<Parametros>(`${this.myAppUrl}${this.myApiUrl}/updateParametro`, parametros)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Parametros>(`${this.myAppUrl}${this.myApiUrl}/updateParametro`, parametros, { headers: headers })
   }
 }

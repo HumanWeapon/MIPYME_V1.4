@@ -113,15 +113,18 @@ export class LoginComponent {
     this.loading = true;
 
     this._userService.login(usuario).subscribe({
-      next: (data) => {
-        this.ultimaConexion = data
+      next: (token) => {
+        localStorage.setItem('token', token);
+        this.ultimaConexion = token
+
         this.getUsuario();
+        
         if(this.ultimaConexion == null){
           localStorage.setItem('firstLogin', this.usuario);
           this.router.navigate(['/firstlogin'])
         }
         else{
-          localStorage.setItem('token', data);
+          localStorage.setItem('usuario', this.usuario);
           this.router.navigate(['/dashboard'])
         }
       },
@@ -131,6 +134,7 @@ export class LoginComponent {
       }
     })
   }
+  
   getUsuario(){
      this.getUser = {
       usuario: this.usuario,
@@ -150,10 +154,18 @@ export class LoginComponent {
       fecha_vencimiento: new Date(),
       intentos_fallidos: 0
     }
-    this._userService.getUsuario(this.getUser).subscribe(data => {
-      this.getUser = data;
-      this.updateUltimaConexionUsuario()
+    this._userService.getUsuario(this.getUser).subscribe({
+      next: (data) => {
+        this.getUser = data;
+        console.log(data)
+        this.updateUltimaConexionUsuario()
+      },
+      error: (e: HttpErrorResponse) => {
+        this._errorService.msjError(e);
+        this.loading = false
+      }
     });
+
   }
   updateUltimaConexionUsuario(){
     const updateUsuario = {

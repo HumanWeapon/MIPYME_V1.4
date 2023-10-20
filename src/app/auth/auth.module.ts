@@ -13,8 +13,6 @@ import { MetodoComponent } from './login/metodo/metodo.component';
 import { RecuperarComponent } from './login/recuperar/recuperar.component';
 import { FirstLoginComponent } from './login/first-login/first-login.component';
 
-
-
 @NgModule({
   declarations: [
     SpinnerComponent,

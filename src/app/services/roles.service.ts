@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/enviroments/enviromet';
 import { Roles } from '../interfaces/roles';
 import { Observable, catchError } from 'rxjs';
@@ -34,24 +34,36 @@ export class RolesService {
       modificado_por: roles.modificado_por, 
       fecha_modificacion: roles.fecha_modificacion
       };
-      return this.http.post<Roles>(`${this.myAppUrl}${this.myApiUrl}/postRol`, nuevoRol)
+      const token = localStorage.getItem('token')
+      const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+      return this.http.post<Roles>(`${this.myAppUrl}${this.myApiUrl}/postRol`, nuevoRol, { headers: headers })
   }
 
    getRol(roles: Roles): Observable<Roles> {
-    return this.http.post<Roles>(`${this.myAppUrl}${this.myApiUrl}/getRol`, roles)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Roles>(`${this.myAppUrl}${this.myApiUrl}/getRol`, roles, { headers: headers })
    }
 
    getAllRoles(): Observable<Roles[]> {
-    return this.http.get<Roles[]>(`${this.myAppUrl}${this.myApiUrl}/getAllRoles`)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.get<Roles[]>(`${this.myAppUrl}${this.myApiUrl}/getAllRoles`, { headers: headers })
    }
    inactivarRol(roles: Roles): Observable<Roles>{
-    return this.http.post<Roles>(`${this.myAppUrl}${this.myApiUrl}/inactivateRol`, roles)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Roles>(`${this.myAppUrl}${this.myApiUrl}/inactivateRol`, roles, { headers: headers })
    }
    activarRol(roles: Roles): Observable<Roles>{
-    return this.http.post<Roles>(`${this.myAppUrl}${this.myApiUrl}/activateRol`, roles)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Roles>(`${this.myAppUrl}${this.myApiUrl}/activateRol`, roles, { headers: headers })
    }
   
    editarRol(roles: Roles): Observable<any> {
-    return this.http.post<Roles>(`${this.myAppUrl}${this.myApiUrl}/updateRoles`, roles)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Roles>(`${this.myAppUrl}${this.myApiUrl}/updateRoles`, roles, { headers: headers })
   }
 }

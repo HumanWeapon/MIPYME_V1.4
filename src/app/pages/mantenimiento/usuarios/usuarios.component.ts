@@ -130,7 +130,11 @@ export class UsuariosComponent implements OnInit {
       nombre_usuario: this.nuevoUsuario.nombre_usuario,
       correo_electronico: this.nuevoUsuario.correo_electronico,
       estado_usuario: 1,
+<<<<<<< HEAD
       contrasena: 'pyme12345',
+=======
+      contrasena: this.nuevoUsuario.usuario,
+>>>>>>> cd0bdd0db3bad5d75ba8e02e506d0697a7852fae
       id_rol: this.nuevoUsuario.id_rol,
       rol: this.nuevoUsuario.rol,
       fecha_ultima_conexion: new Date(),
@@ -164,6 +168,7 @@ export class UsuariosComponent implements OnInit {
       intentos_fallidos: usuario.intentos_fallidos,
     };
     this.indice = i;
+    
   }
 
   editarUsuario() {
