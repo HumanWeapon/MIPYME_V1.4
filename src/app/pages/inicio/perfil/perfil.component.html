@@ -14,11 +14,11 @@
               <div class="accordion-body">
                   <div class="mb-3">
                       <label for="formGroupExampleInput" class="form-label">Nombre</label>
-                      <input type="text" [disabled]="inputDeshabilitado" [(ngModel)]="usuario.nombre_usuario" name="usuario.nombre_usuario" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                      <input type="text" [disabled]="inputDeshabilitado" [(ngModel)]="usuario.nombre_usuario" name="usuario.nombre_usuario" class="form-control" id="formGroupExampleInput" placeholder="Nombre del Usuario">
                   </div>
                   <div class="mb-3">
                       <label for="formGroupExampleInput2" class="form-label">Correo</label>
-                      <input type="text" [disabled]="inputDeshabilitado" [(ngModel)]="usuario.correo_electronico" name="usuario.correo_electronico" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
+                      <input type="text" [disabled]="inputDeshabilitado" [(ngModel)]="usuario.correo_electronico" name="usuario.correo_electronico" class="form-control" id="formGroupExampleInput2" placeholder="Correo del Usuario">
                   </div>
                   <div class="row">
                     <div style="display: flex; gap: 10px">
@@ -44,33 +44,44 @@
                       <div class="card-body login-card-body">
                         <p class="login-box-msg">Ingresa tu contraseña actual y configura una contraseña nueva</p>
                         <form action="#" method="post">
-                          <div class="input-group mb-3">
-                            <input type="password" [(ngModel)]="usuario.contrasena" class="form-control" placeholder="Contraseña actual">
+                          <div class="mb-3">
+                            <label for="formGroupExampleInput2" class="form-label">Contraseña Actual</label>
+                            <div class="input-group">
+                            <input type="password" [(ngModel)]="contrasenaActual" name="contrasenaActual" [disabled]="inputDeshabilitado" class="form-control" placeholder="Contraseña actual">
                             <div class="input-group-append">
                               <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                               </div>
                             </div>
+                            </div>
                           </div>
-                          <div class="input-group mb-3">
-                              <input type="password" class="form-control" placeholder="Contraseña nueva">
+                          <div class="mb-3">
+                            <label for="formGroupExampleInput2" class="form-label">Contraseña Nueva</label>
+                            <div class="input-group">
+                            <input type="password" [(ngModel)]="nuevaContrasena" name="nuevaContrasena" [disabled]="inputDeshabilitado" class="form-control" placeholder="Contraseña nueva">
                               <div class="input-group-append">
                                 <div class="input-group-text">
                                   <span class="fas fa-lock"></span>
                                 </div>
                               </div>
                             </div>
-                          <div class="input-group mb-3">
-                            <input type="password" class="form-control" placeholder="Confirmar contraseña">
+                          </div>
+                          <div class="mb-3">
+                            <label for="formGroupExampleInput2" class="form-label">Confirmar Contraseña</label>
+                            <div class="input-group">
+                            <input type="password" [(ngModel)]="confirmarContrasena" name="confirmarContrasena" [disabled]="inputDeshabilitado"  class="form-control" placeholder="Confirmar contraseña">
                             <div class="input-group-append">
                               <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                               </div>
                             </div>
                           </div>
+                        </div>
                           <div class="row">
-                            <div class="col-12">
-                              <button type="submit" class="btn btn-primary btn-block">Change password</button>
+                            <div style="display: flex; gap: 10px">
+                              <button type="submit"  class="savebutton" [disabled]="botonDeshabilitado" (click)="validarPassword()" >Guardar Cambios</button>
+                              <button type="submit"  class="editbutton"  (click)="habilitarInput()" (click)="mostrarboton()">Cambiar Contraseña</button>
+                              <button type="submit"  class="cancelbutton" *ngIf="mostrarBoton" (click)="cancelarInput()">Cancelar</button>
                             </div>
                             <!-- /.col -->
                           </div>

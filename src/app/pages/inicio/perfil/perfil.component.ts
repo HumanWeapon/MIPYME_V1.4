@@ -112,18 +112,23 @@ this.botonDeshabilitado = true;
 this.inputDeshabilitado = true;
 }
 
-cambiarContrasena() {
-  if (this.nuevaContrasena !== this.confirmarContrasena) {
-    alert('Las contraseñas no coinciden');
-    return;
+validarPassword() {
+  if (this.confirmarContrasena === '' || this.nuevaContrasena === ''|| this.contrasenaActual === '') {
+    this.toastr.warning('Completa todos los campos');
+  } else if (this.confirmarContrasena !== this.nuevaContrasena) {
+    this.toastr.warning('Las contraseñas no coinciden');
+  } else if (this.usuario.contrasena !== this.contrasenaActual) {
+    this.toastr.warning('Error, Ingrese la contraseña actual correcta');
+  } else {
+    this._userService.cambiarContrasena(this.usuario).subscribe((data) => {
+      if (data) {
+        this.toastr.success('Contraseña actualizada con éxito', 'success');
+      } else {
+        this.toastr.error('Error al actualizar la contraseña', 'error');
+      }
+    });
   }
-
-
-
-  
 }
-
-
 
 }
 
