@@ -84,6 +84,16 @@ deshabilitarInput() {
 cancelarInput(){
 this.mostrarBoton=false;
 this.inputDeshabilitado = true;
+this.botonDeshabilitado=true;
+const userLocal = localStorage.getItem('usuario');
+    if(userLocal == null){
+
+    }else{
+      this.usuario.usuario = userLocal;
+      this._userService.getUsuario(this.usuario).subscribe(data => {
+        this.usuario = data;
+      });
+    }
 }
 
 cancelarInputPassword(){
