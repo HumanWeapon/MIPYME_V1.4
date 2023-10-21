@@ -127,10 +127,10 @@ validarPassword() {
       }
     });
   }
-this.mostrarBoton=false;
-this.botonDeshabilitado = true;
-this.inputDeshabilitado = true;
-}
+  this.mostrarBoton=false;
+  this.botonDeshabilitado = true;
+  this.inputDeshabilitado = true;
+  }
 
 }
 

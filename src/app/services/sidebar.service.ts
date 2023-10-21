@@ -8,7 +8,7 @@ export class SidebarService {
 
     {
       titulo:'Dashboard',
-      url: ' ',
+      url: 'dashboard',
       icono: 'nav-icon fas fa-solid fa-user',
       submenu: []
     },

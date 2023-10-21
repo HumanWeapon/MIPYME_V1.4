@@ -18,15 +18,15 @@ const routes: Routes = [
   {path:'dashboard',component:PagesComponent, 
   children:[
     {path:' ', component:DashboardComponent},
-    {path: 'usuarios', component: UsuariosComponent},
-    {path: 'objetos', component: ObjetosComponent},
-    {path: 'permisos', component: PermisosComponent},
-    {path: 'roles', component: RolesComponent},
-    {path: 'dashboard', component: DashboardComponent},
+    {path: 'usuarios', component: UsuariosComponent, data:{titulo: 'Administrar Usuarios'}},
+    {path: 'objetos', component: ObjetosComponent, data:{titulo: 'Administrar Objetos'}},
+    {path: 'permisos', component: PermisosComponent, data:{titulo: 'Administrar Permisos'}},
+    {path: 'roles', component: RolesComponent, data:{titulo: 'Administrar Roles'}},
+    {path: 'dashboard', component: DashboardComponent, data:{titulo: 'Dashboard'}},
     {path: 'form-group', component: UsuariosComponent},
-    {path: 'preguntas', component: PreguntasComponent},
-    {path: 'parametros', component: ParametrosComponent},
-    {path: 'perfil', component: PerfilComponent},
+    {path: 'preguntas', component: PreguntasComponent, data:{titulo: 'Administrar Preguntas'}},
+    {path: 'parametros', component: ParametrosComponent, data:{titulo: 'Administrar Parametros'}},
+    {path: 'perfil', component: PerfilComponent, data:{titulo: 'Mi Perfil'}},
   ]}
 ];
 
