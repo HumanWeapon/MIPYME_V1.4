@@ -5,85 +5,109 @@ import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { Usuario } from 'src/app/interfaces/usuario';
-import { ErrorService } from 'src/app/services/error.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { ErrorService } from 'src/app/services/error.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { RolesService } from 'src/app/services/roles.service'; // Asegúrate de que la ubicación sea correcta
+import { Roles } from 'src/app/interfaces/roles';
 
 
 @Component({
   selector: 'app-usuarios',
-  templateUrl:'./usuarios.component.html',
+  templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.css']
 })
-export class UsuariosComponent implements OnInit{
+
+export class UsuariosComponent implements OnInit  {
 
   usuarioEditando: Usuario = {
     id_usuario: 0,
     creado_por: '',
-    fecha_creacion: new Date,
+    fecha_creacion: new Date(),
     modificado_por: '',
-    fecha_modificacion: new Date,
+    fecha_modificacion: new Date(),
     usuario: '',
     nombre_usuario: '',
     correo_electronico: '',
     estado_usuario: 0,
     contrasena: '',
     id_rol: 0,
-    fecha_ultima_conexion: new Date,
-    primer_ingreso: new Date,
-    fecha_vencimiento: new Date,
+    fecha_ultima_conexion: new Date(),
+    primer_ingreso: new Date(),
+    fecha_vencimiento: new Date(),
     intentos_fallidos: 0,
   };
 
   nuevoUsuario: Usuario = {
     id_usuario: 0,
     creado_por: '',
-    fecha_creacion: new Date,
+    fecha_creacion: new Date(),
     modificado_por: '',
-    fecha_modificacion: new Date,
+    fecha_modificacion: new Date(),
     usuario: '',
     nombre_usuario: '',
     correo_electronico: '',
     estado_usuario: 0,
     contrasena: '',
     id_rol: 0,
-    fecha_ultima_conexion: new Date,
-    primer_ingreso: new Date,
-    fecha_vencimiento: new Date,
+    fecha_ultima_conexion: new Date(),
+    primer_ingreso: new Date(),
+    fecha_vencimiento: new Date(),
     intentos_fallidos: 0,
   };
   indice: any;
 
   dtOptions: DataTables.Settings = {};
   listUsuarios: Usuario[] = [];
-  data: any;
+  data: any; 
 
   // We use this trigger because fetching the list of persons can be quite long,
   // thus we ensure the data is fetched before rendering
   dtTrigger: Subject<any> = new Subject<any>();
   modalEditar: NgbModalRef | undefined;
 
+  rol: Roles[] = [];
+  usuariosAllRoles: any[] = []
+
+
   constructor(
     private _userService: UsuariosService,
     private toastr: ToastrService,
-    private router: Router, 
+    private router: Router,
     private _errorService: ErrorService,
-    private modalService: NgbModal 
-    ) { }
+    private modalService: NgbModal,
+    private _rolesService: RolesService
+  ) {}
 
-  
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 8,
       language: {url:'//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'},
-      responsive: true
+      responsive: true,
+      search: true
     };
-    this._userService.getAllUsuarios()
-      .subscribe((res: any) => {
-        this.listUsuarios = res;
+
+    this._userService.usuariosAllRoles().subscribe({
+      next: (data) =>{
+        this.usuariosAllRoles = data;
+        this.listUsuarios = data;
         this.dtTrigger.next(null);
-      });
+      }
+
+    });
+
+
+    this._rolesService.getAllRoles().subscribe((data) => {
+      this.rol = data;
+      console.log(this.rol)
+    });
+
+    this._userService.usuariosAllRoles().subscribe({
+      next: (data) =>{
+        this.usuariosAllRoles = data;
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -91,20 +115,31 @@ export class UsuariosComponent implements OnInit{
     this.dtTrigger.unsubscribe();
   }
 
-
- 
-  
-  inactivarUsuario(usuario: Usuario, i: any){
-    this._userService.inactivarUsuario(usuario).subscribe(data => this.toastr.success('El usuario: '+ usuario.usuario+ ' ha sido activado'));
-    this.listUsuarios[i].estado_usuario = 2;
+  onInputChange(event: any, field: string) {
+    const inputValue = event.target.value;
+    if (field === 'correo_electronico' || field === 'usuario') {
+      // Convierte a mayúsculas y elimina espacios en blanco
+      event.target.value = inputValue.toUpperCase().replace(/\s/g, '')
+    } else if (field === 'nombre_usuario') {
+      // Convierte a mayúsculas sin eliminar espacios en blanco
+      event.target.value = inputValue.toUpperCase();
+    }
   }
-  activarUsuario(usuario: Usuario, i: any){
-    this._userService.activarUsuario(usuario).subscribe(data => this.toastr.success('El usuario: '+ usuario.usuario+ ' ha sido activado'));
-    this.listUsuarios[i].estado_usuario = 1;
+  
+ inactivarUsuario(usuario: any, i: any) {
+    this._userService.inactivarUsuario(usuario).subscribe(data =>
+      this.toastr.success('El usuario: ' + usuario.usuario + ' ha sido inactivado')
+    );
+    this.usuariosAllRoles[i].estado_usuario = 2;
+  }
+  activarUsuario(usuario: any, i: any) {
+    this._userService.activarUsuario(usuario).subscribe(data =>
+      this.toastr.success('El usuario: ' + usuario.usuario + ' ha sido activado')
+    );
+    this.usuariosAllRoles[i].estado_usuario = 1;
   }
 
   agregarNuevoUsuario() {
-
     this.nuevoUsuario = {
       id_usuario: 0,
       creado_por: 'SYSTEM',
@@ -115,7 +150,7 @@ export class UsuariosComponent implements OnInit{
       nombre_usuario: this.nuevoUsuario.nombre_usuario,
       correo_electronico: this.nuevoUsuario.correo_electronico,
       estado_usuario: 1,
-      contrasena: 'fUHTah2dUB73xIG',
+      contrasena: this.nuevoUsuario.usuario,
       id_rol: this.nuevoUsuario.id_rol,
       fecha_ultima_conexion: new Date(),
       primer_ingreso: new Date(),
@@ -128,8 +163,9 @@ export class UsuariosComponent implements OnInit{
     });
   }
 
+  
 
-  obtenerIdUsuario(usuario: Usuario, i: any){
+  obtenerIdUsuario(usuario: Usuario, i: any) {
     this.usuarioEditando = {
       id_usuario: usuario.id_usuario,
       creado_por: usuario.creado_por,
@@ -148,17 +184,22 @@ export class UsuariosComponent implements OnInit{
       intentos_fallidos: usuario.intentos_fallidos,
     };
     this.indice = i;
+    
   }
-
-
-  editarUsuario(){
+  
+  editarUsuario(rol: any) {
     this._userService.editarUsuario(this.usuarioEditando).subscribe(data => {
       this.toastr.success('Usuario editado con éxito');
-      this.listUsuarios[this.indice].usuario = this.usuarioEditando.usuario;
-      this.listUsuarios[this.indice].nombre_usuario = this.usuarioEditando.nombre_usuario;
-      this.listUsuarios[this.indice].correo_electronico = this.usuarioEditando.correo_electronico;
-      this.listUsuarios[this.indice].id_rol = this.usuarioEditando.id_rol;
-      this.listUsuarios[this.indice].fecha_vencimiento = this.usuarioEditando.fecha_vencimiento;
+      if(this.usuariosAllRoles == null){
+        //no se puede editar el usuario
+      }else{
+      this.usuariosAllRoles[this.indice].usuario = this.usuarioEditando.usuario;
+      this.usuariosAllRoles[this.indice].nombre_usuario = this.usuarioEditando.nombre_usuario;
+      this.usuariosAllRoles[this.indice].correo_electronico = this.usuarioEditando.correo_electronico;
+      this.usuariosAllRoles[this.indice].roles.rol = rol.rol;
+      this.usuariosAllRoles[this.indice].fecha_vencimiento = this.usuarioEditando.fecha_vencimiento; 
+      }
+
     });
   }
 }

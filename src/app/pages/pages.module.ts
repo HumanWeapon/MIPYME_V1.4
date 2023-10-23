@@ -13,9 +13,10 @@ import { PermisosComponent } from './mantenimiento/permisos/permisos.component';
 import { UsuariosComponent } from './mantenimiento/usuarios/usuarios.component';
 import { FormsModule } from '@angular/forms';
 import { DataTablesModule } from "angular-datatables";
-import { Tabla2Component } from './mantenimiento/tabla2/tabla2.component';
 import { MatIconModule } from '@angular/material/icon';
 import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.component';
+import { ParametrosComponent } from './mantenimiento/parametros/parametros.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,9 @@ import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.componen
     RolesComponent,
     PermisosComponent,
     UsuariosComponent,
-    Tabla2Component,
     PreguntasComponent,
+    ParametrosComponent,
+
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.componen
     SharedModule,
     FormsModule,
     DataTablesModule,
-    MatIconModule
+    MatIconModule,
+    BsDatepickerModule.forRoot()
   ],
   exports:[
     DashboardComponent,

@@ -72,14 +72,12 @@ export class FirstLoginComponent {
       this.usuario.usuario = user;
       this._usuarioService.getUsuario(this.usuario).subscribe(data => {
         this.usuario = data;
-        // Hacer lo que necesites con 'data'
       });
     } else {
       // Manejar el caso en el que 'usuario' no se encuentra en el localStorage
     }
   }
   updateUltimaConexionUsuario(update: Usuario){
-    console.log(update)
     this._usuarioService.editarUsuario(update).subscribe(data => {
       console.log(data)
     })
@@ -113,7 +111,7 @@ export class FirstLoginComponent {
         };
         this._preguntasUsuario.postPreguntasUsuario(preguntaUsuario).subscribe(data => {
           this.toastr.success('Pregunta registrada exitosamente');
-          this.router.navigate(['/dashboard'])
+          this.router.navigate(['/recuperar'])
         });
       }
       const updateUsuario = {
@@ -132,7 +130,6 @@ export class FirstLoginComponent {
         primer_ingreso: this.usuario.primer_ingreso,
         fecha_vencimiento: this.usuario.fecha_vencimiento,
         intentos_fallidos: this.usuario.intentos_fallidos
-        
       }
       this.updateUltimaConexionUsuario(updateUsuario);
     }

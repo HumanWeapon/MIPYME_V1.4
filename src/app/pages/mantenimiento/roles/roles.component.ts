@@ -1,107 +1,140 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 import { Roles } from 'src/app/interfaces/roles';
-import { RolService } from 'src/app/services/roles.service';
+import { ErrorService } from 'src/app/services/error.service';
+import { RolesService } from 'src/app/services/roles.service';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-roles',
-  templateUrl: './roles.component.html',
+  templateUrl:'./roles.component.html',
   styleUrls: ['./roles.component.css']
 })
 export class RolesComponent implements OnInit{
 
-  listRol: Roles[] = [];
-  constructor(
-    private _rolService: RolService  ) { }
+  rolEditando: Roles = {
+    id_rol: 0, 
+    rol: '', 
+    descripcion: '', 
+    estado_rol: 0,
+    creado_por: '', 
+    fecha_creacion: new Date(), 
+    modificado_por: '', 
+    fecha_modificacion: new Date(),
+  };
+
+  nuevoRol: Roles = {
+    id_rol: 0, 
+    rol: '', 
+    descripcion: '', 
+    estado_rol: 0,
+    creado_por: '', 
+    fecha_creacion: new Date(), 
+    modificado_por: '', 
+    fecha_modificacion: new Date(),
+  };
+  indice: any;
 
   dtOptions: DataTables.Settings = {};
+  listRoles: Roles[] = [];
+  data: any;
+
+  // We use this trigger because fetching the list of persons can be quite long,
+  // thus we ensure the data is fetched before rendering
+  dtTrigger: Subject<any> = new Subject<any>();
+  modalEditar: NgbModalRef | undefined;
+
+  constructor(
+    private _rolService: RolesService,
+    private toastr: ToastrService,
+    private router: Router, 
+    private _errorService: ErrorService,
+    private modalService: NgbModal 
+    ) { }
+
   
   ngOnInit(): void {
-    this.getAllRoles();
     this.dtOptions = {
-      searching: true,
-      responsive: true,
+      pagingType: 'full_numbers',
+      pageLength: 8,
       language: {url:'//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'},
-      
-      ajax: (dataTablesParameters: any, callback) => {
-        this._rolService.getAllRoles().subscribe((roles) => {
-          // Mapea los datos de usuarios en el formato esperado por DataTables
-          const dataTableData = {
-            recordsTotal: roles.length,
-            recordsFiltered: roles.length,
-            data: roles,
-          };
-          callback(dataTableData);
-        });
-      },
-      columns: [
-        {
-          title: 'Rol',
-          data: 'rol',
-        },
-        {
-          title: 'Descripción',
-          data: 'descripcion',
-        },
-        
-        {
-          title: 'Creado por',
-          data: 'creado_por',
-        },
-        {
-          title: 'Fecha creación',
-          data: 'fecha_creacion',
-        },
-        {
-          title: 'Modificado Por',
-          data: 'modificado_por',
-        },
-        {
-          title: 'Fecha modificacion',
-          data: 'fecha_modificacion',
-        },
-        {
-          title: 'Action',
-          render: function (data, type, row) {
-            return `
-              <ng-container>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-danger" (click)="inactivarRol(roles)"><i class="fas fa-solid fa-user-lock"></i></button>
-                  <button type="button" class="btn btn-success" (click)="activarRol(roles)"><i class="fas fa-solid fa-lock-open"></i></button>
-                  <button type="button" class="btn btn-warning" (click)="editarRol(roles)"><i class="fas fa-solid fa-pen"></i></button>
-                </div>
-              </ng-container>
-            `;
-          }
-        }
-      ],
+      responsive: true
     };
+    this._rolService.getAllRoles()
+      .subscribe((res: any) => {
+        this.listRoles = res;
+        this.dtTrigger.next(null);
+      });
   }
 
-  inactivarRol(roles: Roles) {
-    // Llama al servicio para inactivar al usuario en la base de datos
-    this._rolService.inactivarRol(roles).subscribe(() => {
-      // Realiza alguna acción después de la inactivación, como recargar la lista de usuarios
-      this.getAllRoles();
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+  }
+
+
+  onInputChange(event: any, field: string) {
+    const inputValue = event.target.value;
+    if (field === 'rol') {
+      // Convierte a mayúsculas y elimina espacios en blanco
+      event.target.value = inputValue.toUpperCase().replace(/\s/g, '')
+    }
+  }
+
+  
+  inactivarRol(roles: Roles, i: any){
+    this._rolService.inactivarRol(roles).subscribe(data => this.toastr.success('El rol: '+ roles.rol+ ' ha sido inactivado'));
+    this.listRoles[i].estado_rol = 2;
+  }
+  activarRol(roles: Roles, i: any){
+    this._rolService.activarRol(roles).subscribe(data => this.toastr.success('El rol: '+ roles.rol+ ' ha sido activado'));
+    this.listRoles[i].estado_rol = 1;
+  }
+
+  agregarNuevoRol() {
+
+    this.nuevoRol = {
+      id_rol: 0, 
+      rol: this.nuevoRol.rol , 
+      descripcion: '', 
+      estado_rol: 1,
+      creado_por: '', 
+      fecha_creacion: new Date(), 
+      modificado_por: '', 
+      fecha_modificacion: new Date(),
+    };
+
+    this._rolService.addRol(this.nuevoRol).subscribe(data => {
+      this.toastr.success('Rol agregado con éxito');
     });
   }
 
-  activarRol(roles: Roles) {
-    // Llama al servicio para activar al rol en la base de datos
-    this._rolService.activarRol(roles).subscribe(() => {
-      // Realiza alguna acción después de la activación, como recargar la lista de usuarios
-      this.getAllRoles();
+
+  obtenerIdRol(roles: Roles, i: any){
+    this.rolEditando = {
+      id_rol: roles.id_rol, 
+      rol: roles.rol , 
+      descripcion: roles.descripcion, 
+      estado_rol: roles.estado_rol,
+      creado_por: roles.creado_por, 
+      fecha_creacion: roles.fecha_creacion, 
+      modificado_por: roles.modificado_por, 
+      fecha_modificacion: roles.fecha_modificacion,
+    };
+    this.indice = i;
+  }
+
+
+  editarRol(){
+    this._rolService.editarRol(this.rolEditando).subscribe(data => {
+      this.toastr.success('Rol editado con éxito');
+      this.listRoles[this.indice].rol = this.rolEditando.rol;
+      
     });
-  }
-
-  editarRol(roles: Roles) {
-    // Implementa la lógica para editar al usuario, por ejemplo, navegando a una página de edición
-    // Puedes usar Angular Router para navegar a una página de edición
-  }
-
-  getAllRoles(){
-    this._rolService.getAllRoles().subscribe(data => {
-      this.listRol = data;
-      console.log(this.listRol)
-    })
   }
 }

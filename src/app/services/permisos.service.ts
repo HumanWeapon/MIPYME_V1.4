@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/enviroments/enviromet';
 import { Permisos } from '../interfaces/permisos';
 import { Observable, catchError } from 'rxjs';
@@ -19,6 +19,7 @@ export class PermisosService {
     this.myApiUrl = 'api/permisos'
    }
 
+<<<<<<< HEAD
    
 
    addPermiso(per: Permisos): Observable<any> {
@@ -41,16 +42,36 @@ export class PermisosService {
   
   getPermiso(permisos: Permisos): Observable<Permisos> {
     return this.http.post<Permisos>(`${this.myAppUrl}${this.myApiUrl}/getPermiso`, permisos)
+=======
+
+   getPermiso(permisos: Permisos): Observable<Permisos> {
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Permisos>(`${this.myAppUrl}${this.myApiUrl}/getPermiso`, permisos, { headers: headers })
+>>>>>>> df04b965cc7d8ed1ca4d12355980e443634dc9c3
    }
 
    getAllPermisos(): Observable<Permisos[]> {
-    return this.http.get<Permisos[]>(`${this.myAppUrl}${this.myApiUrl}/getAllPermisos`)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.get<Permisos[]>(`${this.myAppUrl}${this.myApiUrl}/getAllPermisos`, { headers: headers })
    }
    inactivarPermiso(permisos: Permisos): Observable<Permisos>{
+<<<<<<< HEAD
       return this.http.post<Permisos>(`${this.myAppUrl}${this.myApiUrl}/inactivatePermisos`, permisos)
    }
    activarPermiso(permisos: Permisos): Observable<Permisos>{
     return this.http.post<Permisos>(`${this.myAppUrl}${this.myApiUrl}/activatePermisos`, permisos)
+=======
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Permisos>(`${this.myAppUrl}${this.myApiUrl}/inactivarPermiso`, permisos, { headers: headers })
+   }
+   activarPermiso(permisos: Permisos): Observable<Permisos>{
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Permisos>(`${this.myAppUrl}${this.myApiUrl}/activarPermiso`, permisos, { headers: headers })
+>>>>>>> df04b965cc7d8ed1ca4d12355980e443634dc9c3
    }
 
    editarPermiso(permisos: Permisos): Observable<any> {

@@ -7,22 +7,26 @@ import { UsuariosComponent } from './mantenimiento/usuarios/usuarios.component';
 import { ObjetosComponent } from './mantenimiento/objetos/objetos.component';
 import { PermisosComponent } from './mantenimiento/permisos/permisos.component';
 import { RolesComponent } from './mantenimiento/roles/roles.component';
-import { Tabla2Component } from './mantenimiento/tabla2/tabla2.component';
 import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.component';
+import { ParametrosComponent } from './mantenimiento/parametros/parametros.component';
+import { PerfilComponent } from './inicio/perfil/perfil.component';
+
+
 
 
 const routes: Routes = [
   {path:'dashboard',component:PagesComponent, 
   children:[
     {path:' ', component:DashboardComponent},
-    {path: 'usuarios', component: UsuariosComponent},
-    {path: 'objetos', component: ObjetosComponent},
-    {path: 'permisos', component: PermisosComponent},
-    {path: 'roles', component: RolesComponent},
-    {path: 'dashboard', component: DashboardComponent},
-    {path: 'table2', component: Tabla2Component},
+    {path: 'usuarios', component: UsuariosComponent, data:{titulo: 'Administrar Usuarios'}},
+    {path: 'objetos', component: ObjetosComponent, data:{titulo: 'Administrar Objetos'}},
+    {path: 'permisos', component: PermisosComponent, data:{titulo: 'Administrar Permisos'}},
+    {path: 'roles', component: RolesComponent, data:{titulo: 'Administrar Roles'}},
+    {path: 'dashboard', component: DashboardComponent, data:{titulo: 'Dashboard'}},
     {path: 'form-group', component: UsuariosComponent},
-    {path: 'preguntas', component: PreguntasComponent},
+    {path: 'preguntas', component: PreguntasComponent, data:{titulo: 'Administrar Preguntas'}},
+    {path: 'parametros', component: ParametrosComponent, data:{titulo: 'Administrar Parametros'}},
+    {path: 'perfil', component: PerfilComponent, data:{titulo: 'Mi Perfil'}},
   ]}
 ];
 

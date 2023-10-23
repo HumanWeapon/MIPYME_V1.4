@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/enviroments/enviromet';
@@ -18,16 +18,24 @@ export class PreguntasUsuarioService {
   }
 
   getPreguntasUsuario(id_usuario: Preguntas_Usuario): Observable<Preguntas_Usuario[]> {
-    return this.http.post<Preguntas_Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/getPreguntasusuario`, id_usuario)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Preguntas_Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/getPreguntasusuario`, id_usuario, { headers: headers })
   }
   validarRespuesta(respuesta: Preguntas_Usuario): Observable<Preguntas_Usuario[]>{
-    return this.http.post<Preguntas_Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/validarRespuestas`, respuesta)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Preguntas_Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/validarRespuestas`, respuesta, { headers: headers })
   }
   preguntasRespuestas(id_usuario: number): Observable<Preguntas_Usuario[]>{
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
     const requestData = { id_usuario: id_usuario };
-    return this.http.post<Preguntas_Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/preguntasRespuestas`, requestData)
+    return this.http.post<Preguntas_Usuario[]>(`${this.myAppUrl}${this.myApiUrl}/preguntasRespuestas`, requestData, { headers: headers })
   }
   postPreguntasUsuario(preguntas: Preguntas_Usuario): Observable<Preguntas_Usuario>{
-    return this.http.post<Preguntas_Usuario>(`${this.myAppUrl}${this.myApiUrl}/postPreguntaUsuario`, preguntas)
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Preguntas_Usuario>(`${this.myAppUrl}${this.myApiUrl}/postPreguntaUsuario`, preguntas, { headers: headers })
   }
 }

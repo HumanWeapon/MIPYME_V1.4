@@ -9,6 +9,7 @@ import { SidebarService } from 'src/app/services/sidebar.service';
 })
 export class SidebarComponent {
   menuItems:any[];
+  userName: string = '';
   //menuItems2:any[];
 
   constructor(private _sideBarService: SidebarService, private router:Router){
@@ -17,10 +18,15 @@ export class SidebarComponent {
   }
 
   ngOnInit(): void {
-
+    const local = localStorage.getItem('usuario');
+    if(local !== null){
+      this.userName = local;
+    }
+    
   }
 
   logout(){
     this.router.navigateByUrl('/login');
+    localStorage.clear();
   }
 }
