@@ -6,7 +6,7 @@ import { Permisos } from 'src/app/interfaces/permisos';
 import { Roles } from 'src/app/interfaces/roles';
 import { Objetos } from 'src/app/interfaces/objetos';
 import { PermisosService } from 'src/app/services/permisos.service';
-import { RolService } from 'src/app/services/roles.service';
+import { RolesService } from 'src/app/services/roles.service';
 import { ObjetosService } from 'src/app/services/objetos.service';
 import { NgZone } from '@angular/core';
 
@@ -89,7 +89,7 @@ export class PermisosComponent implements OnInit, OnDestroy {
   constructor(
     private _permService: PermisosService,
     private _objectService: ObjetosService,
-    private _rolesService: RolService,
+    private _rolesService: RolesService,
     private toastr: ToastrService,
     private ngZone: NgZone
   ) {}
