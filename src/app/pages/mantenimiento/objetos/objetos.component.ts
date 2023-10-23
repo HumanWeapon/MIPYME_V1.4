@@ -81,7 +81,17 @@ export class ObjetosComponent implements OnInit{
     this.dtTrigger.unsubscribe();
   }
 
-
+  onInputChange(event: any, field: string) {
+    const inputValue = event.target.value;
+    if (field === 'objeto') {
+      // Convierte a mayúsculas y elimina espacios en blanco
+      event.target.value = inputValue.toUpperCase().replace(/\s/g, '')
+    } else if (field === 'tipo_objeto' || field === 'descripcion'){
+      // Convierte a mayúsculas sin eliminar espacios en blanco
+      event.target.value = inputValue.toUpperCase();
+    }
+  }
+  
  
   
   inactivarObjeto(objetos: Objetos, i: any){

@@ -78,7 +78,14 @@ export class RolesComponent implements OnInit{
   }
 
 
- 
+  onInputChange(event: any, field: string) {
+    const inputValue = event.target.value;
+    if (field === 'rol') {
+      // Convierte a mayúsculas y elimina espacios en blanco
+      event.target.value = inputValue.toUpperCase().replace(/\s/g, '')
+    }
+  }
+
   
   inactivarRol(roles: Roles, i: any){
     this._rolService.inactivarRol(roles).subscribe(data => this.toastr.success('El rol: '+ roles.rol+ ' ha sido inactivado'));

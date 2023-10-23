@@ -70,7 +70,7 @@
               <form (submit)="agregarNuevoParametro()">
                   <div class="form-group">
                       <label for="nuevoParametro">Parametro:</label>
-                      <input type="text" [(ngModel)]="nuevoParametro.parametro"name="nuevoParametro.parametro" class="form-control" id="nuevoParametro" placeholder="Parametro">
+                      <input type="text" [(ngModel)]="nuevoParametro.parametro"name="nuevoParametro.parametro" (input)="onInputChange($event, 'parametro')" class="form-control" id="nuevoParametro" placeholder="Parametro">
                   </div>
                   <div class="form-group">
                       <label for="nuevoParametro">Valor:</label>
@@ -81,7 +81,7 @@
           </div>
           <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-              <button type="button" (click)="agregarNuevoParametro()" class="btn btn-success">Guardar</button>
+              <button type="button" (click)="agregarNuevoParametro()" class="btn btn-success" data-dismiss="modal">Guardar</button>
           </div>
       </div>
   </div>
@@ -103,7 +103,7 @@
               <form>
                 <div class="form-group">
                     <label for="parametroEditando">Parametro:</label>
-                    <input type="text" [(ngModel)]="parametroEditando.parametro" name="parametroEditando.parametro" class="form-control" id="editarParametro" placeholder="Parametro">
+                    <input type="text" [(ngModel)]="parametroEditando.parametro" name="parametroEditando.parametro" (input)="onInputChange($event, 'parametro')" class="form-control" id="editarParametro" placeholder="Parametro">
                 </div>
                 <div class="form-group">
                     <label for="parametroEditando">Valor:</label>
@@ -113,7 +113,7 @@
           </div>
           <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-              <button type="button" (click)="editarParametro()" class="btn btn-success">Guardar</button>
+              <button type="button" (click)="editarParametro()" class="btn btn-success" data-dismiss="modal">Guardar</button>
           </div>
       </div>
   </div>

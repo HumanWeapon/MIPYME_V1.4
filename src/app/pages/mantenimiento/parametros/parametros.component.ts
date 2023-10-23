@@ -81,6 +81,15 @@ export class ParametrosComponent implements OnInit{
   }
 
 
+  onInputChange(event: any, field: string) {
+    const inputValue = event.target.value;
+    if (field === 'parametro') {
+      // Convierte a mayúsculas y elimina espacios en blanco
+      event.target.value = inputValue.toUpperCase().replace(/\s/g, '')
+    }
+  }
+
+
   agregarNuevoParametro() {
 
     this.nuevoParametro = {
