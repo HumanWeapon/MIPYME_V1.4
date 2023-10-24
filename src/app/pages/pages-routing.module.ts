@@ -10,6 +10,9 @@ import { RolesComponent } from './mantenimiento/roles/roles.component';
 import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.component';
 import { ParametrosComponent } from './mantenimiento/parametros/parametros.component';
 import { PerfilComponent } from './inicio/perfil/perfil.component';
+import { ProductosComponent } from './empresas/productos/productos.component';
+import { ContactosComponent } from './empresas/contacto/contactos.component';
+import { RequisitosComponent } from './empresas/requisitos/requisitos.component';
 
 
 
@@ -27,6 +30,9 @@ const routes: Routes = [
     {path: 'preguntas', component: PreguntasComponent, data:{titulo: 'Administrar Preguntas'}},
     {path: 'parametros', component: ParametrosComponent, data:{titulo: 'Administrar Parametros'}},
     {path: 'perfil', component: PerfilComponent, data:{titulo: 'Mi Perfil'}},
+    {path: 'productos', component:ProductosComponent, data:{titulo: 'Producto'}},
+    {path: 'contactos', component:ContactosComponent, data:{titulo: 'Contacto'}},
+    {path: 'requisitos', component:RequisitosComponent, data:{titulo: 'Requisitos'}},
   ]}
 ];
 

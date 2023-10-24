@@ -17,6 +17,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.component';
 import { ParametrosComponent } from './mantenimiento/parametros/parametros.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ProductosComponent } from './empresas/productos/productos.component';
+import { ContactosComponent } from './empresas/contacto/contactos.component';
+import { RequisitosComponent } from './empresas/requisitos/requisitos.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     UsuariosComponent,
     PreguntasComponent,
     ParametrosComponent,
+    ProductosComponent,
+    ContactosComponent,
+    RequisitosComponent,
 
   ],
   imports: [

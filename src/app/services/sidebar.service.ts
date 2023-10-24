@@ -40,9 +40,9 @@ export class SidebarService {
       url: ' ',
       icono: 'nav-icon fas fa-regular fa-building',
       submenu: [
-        {titulo:'Contacto', url: ' ', icono: 'fa fa-users ml-1'},
-        {titulo:'Requisitos', url: ' ', icono: 'fa fa-users ml-1'},
-        {titulo:'Productos', url: ' ', icono: 'fa fa-user-shield ml-1'},
+        {titulo:'Contactos', url: 'contactos', icono: 'fa fa-users ml-1'},
+        {titulo:'Requisitos', url: 'requisitos', icono: 'fa fa-users ml-1'},
+        {titulo:'Productos', url: 'productos', icono: 'fa fa-user-shield ml-1'},
       ]
     },
     {
