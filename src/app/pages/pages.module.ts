@@ -21,6 +21,7 @@ import { ProductosComponent } from './empresas/productos/productos.component';
 import { ContactosComponent } from './empresas/contacto/contactos.component';
 import { RequisitosComponent } from './empresas/requisitos/requisitos.component';
 
+
 @NgModule({
   declarations: [
     MantenimientoComponent,
@@ -37,6 +38,7 @@ import { RequisitosComponent } from './empresas/requisitos/requisitos.component'
     ProductosComponent,
     ContactosComponent,
     RequisitosComponent,
+
 
   ],
   imports: [

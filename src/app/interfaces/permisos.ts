@@ -6,6 +6,7 @@ export interface Permisos {
     permiso_eliminacion: false,
     permiso_actualizacion: false,
     permiso_consultar: false,
+    estado_permiso: number,
     creado_por: string,
     fecha_creacion: Date ,
     modificado_por: string ,

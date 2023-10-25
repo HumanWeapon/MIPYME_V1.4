@@ -21,6 +21,7 @@
                           <th>Eliminar</th>
                           <th>Consultar</th>
                           <th>Actualizar</th>
+                          <th>Estado</th>
                           <th>Creado por</th>
                           <th>Creación</th>
                           <th>Modificación</th>
@@ -47,14 +48,19 @@
                           <td style="text-align: center;">
                             <ng-container *ngIf="perm.permiso_actualizacion; else noCheckbox">{{ '✓' }}</ng-container>
                             <ng-template #noCheckbox>{{ 'X' }}</ng-template>
-                          </td>                            
+                          </td>   
+                          <td>
+                            <ng-container *ngIf="perm.estado_permiso === 1">Activo</ng-container>
+                            <ng-container *ngIf="perm.estado_permiso === 2">Inactivo</ng-container>
+                          </td>                         
                           <td>{{ perm.creado_por}}</td>
                           <td>{{ perm.fecha_creacion }}</td>
                           <td>{{ perm.fecha_modificacion}}</td>
                           <td class="text-center">
                             <div class="btn-group">
                                 <button type="button" (click)="obtenerIdPermiso(perm, i)" data-toggle="modal" data-target="#abrirModalEditarPermiso" class="btn btn-warning" ><i class="fas fa-solid fa-pen"></i></button>                                
-                                                                
+                                <button type="button" (click)="inactivarPermiso(perm, i)" class="btn btn-danger"><i class="fas fa-solid fa-user-lock"></i></button>
+                                <button type="button" (click)="activarPermiso(perm, i)" class="btn btn-primary"><i class="fas fa-solid fa-lock-open"></i></button>                              
                               </div>
                           </td>
                         </tr>

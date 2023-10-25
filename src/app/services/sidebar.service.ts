@@ -15,14 +15,14 @@ export class SidebarService {
     {
       titulo:'Seguridad',
       url: ' ',
-      icono: 'nav-icon fas fa-regular fa-building',
+      icono: 'nav-icon fas fa-solid fa-lock',
       submenu: [
         {titulo:'Usuarios', url: 'usuarios', icono: 'fa fa-users ml-1'},
         {titulo:'Objetos', url: 'objetos', icono: 'fa fa-cubes ml-1'},
         {titulo:'Permisos', url: 'permisos', icono: 'fa fa-user-shield ml-1'},
-        {titulo:'Roles', url: 'roles', icono: 'fas fa-solid fa-street-view ml-1'},
-        {titulo:'Preguntas', url: 'preguntas', icono: 'fas fa-solid fa-street-view ml-1'},
-        {titulo:'Parametros', url: 'parametros', icono: 'fas fa-solid fa-street-view ml-1'}
+        {titulo:'Roles', url: 'roles', icono: 'fas fa-solid fa-users-gear ml-1'},
+        {titulo:'Preguntas', url: 'preguntas', icono: 'fas fa-solid fa-circle-question ml-1'},
+        {titulo:'Parametros', url: 'parametros', icono: 'fas fa-solid fa-chalkboard-user ml-1'}
       ]
     },
     {
@@ -30,7 +30,7 @@ export class SidebarService {
       url: ' ',
       icono: 'nav-icon fas fa-regular fa-building',
       submenu: [
-        {titulo:'Bitacora', url: ' ', icono: 'fa fa-users ml-1'},
+        {titulo:'Bitacora', url: ' ', icono: 'fas fa-solid fa-list-check ml-1'},
         {titulo:'Backups', url: ' ', icono: 'fa fa-users ml-1'},
         {titulo:'Restaurar', url: ' ', icono: 'fa fa-user-shield ml-1'},
       ]

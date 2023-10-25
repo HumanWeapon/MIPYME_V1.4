@@ -52,6 +52,19 @@ export class ParametrosService {
     const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
     return this.http.get<Parametros[]>(`${this.myAppUrl}${this.myApiUrl}/getAllParametros`, { headers: headers })
    }
+
+
+   inactivarParametro(parametros: Parametros): Observable<Parametros>{
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Parametros>(`${this.myAppUrl}${this.myApiUrl}/inactivateParametro`, parametros, { headers: headers })
+   }
+   activarParametro(parametros: Parametros): Observable<Parametros>{
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Parametros>(`${this.myAppUrl}${this.myApiUrl}/activateParametro`, parametros, { headers: headers })
+   }
+   
   
    editarParametro(parametros: Parametros): Observable<any> {
     const token = localStorage.getItem('token')

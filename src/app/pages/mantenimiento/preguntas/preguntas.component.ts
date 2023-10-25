@@ -8,6 +8,8 @@ import { Preguntas } from 'src/app/interfaces/preguntas';
 import { ErrorService } from 'src/app/services/error.service';
 import { PreguntasService } from 'src/app/services/preguntas.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Preguntas_Usuario } from 'src/app/interfaces/preguntasUsuario';
+import { NgZone } from '@angular/core';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class PreguntasComponent implements OnInit{
   preguntaEditando: Preguntas = {
     id_pregunta: 0,
     pregunta: '',
+    estado_pregunta: 0,
     creado_por: '',
     fecha_creacion: new Date() ,
     modificado_por: '' ,
@@ -30,6 +33,7 @@ export class PreguntasComponent implements OnInit{
   nuevoPregunta: Preguntas = {
     id_pregunta: 0,
     pregunta: '',
+    estado_pregunta: 0,
     creado_por: '',
     fecha_creacion: new Date() ,
     modificado_por: '' ,
@@ -52,7 +56,8 @@ export class PreguntasComponent implements OnInit{
     private toastr: ToastrService,
     private router: Router, 
     private _errorService: ErrorService,
-    private modalService: NgbModal 
+    private modalService: NgbModal,
+    private ngZone: NgZone 
     ) { }
 
   
@@ -75,7 +80,14 @@ export class PreguntasComponent implements OnInit{
     this.dtTrigger.unsubscribe();
   }
 
-
+  inactivarPregunta(preguntas: Preguntas, i: any){
+    this._questionService.inactivarPregunta(preguntas).subscribe(data => this.toastr.success('La pregunta: '+ preguntas.id_pregunta+ ' ha sido inactivada'));
+    this.listPreguntas[i].estado_pregunta = 2;
+  }
+  activarPregunta(preguntas: Preguntas, i: any){
+    this._questionService.activarPregunta(preguntas).subscribe(data => this.toastr.success('La pregunta: '+ preguntas.id_pregunta+ ' ha sido activada'));
+    this.listPreguntas[i].estado_pregunta = 1;
+  }
  
 
   agregarNuevoPregunta() {
@@ -83,6 +95,7 @@ export class PreguntasComponent implements OnInit{
     this.nuevoPregunta = {
       id_pregunta: 0,
       pregunta: this.nuevoPregunta.pregunta,
+      estado_pregunta: 1,
       creado_por: 'SYSTEM',
       fecha_creacion: new Date() ,
       modificado_por: 'SYSTEM' ,
@@ -92,7 +105,15 @@ export class PreguntasComponent implements OnInit{
 
     this._questionService.addPregunta(this.nuevoPregunta).subscribe(data => {
       this.toastr.success('Pregunta agregado con éxito');
+
+        // Recargar la página
+        location.reload();
+        // Actualizar la vista
+        this.ngZone.run(() => {        
+        });
+
     });
+
   }
 
 
@@ -100,6 +121,7 @@ export class PreguntasComponent implements OnInit{
     this.preguntaEditando = {  
       id_pregunta: preguntas.id_pregunta,
       pregunta: preguntas.pregunta,
+      estado_pregunta: preguntas.estado_pregunta,
       creado_por: preguntas.creado_por,
       fecha_creacion: preguntas.fecha_creacion ,
       modificado_por: preguntas.modificado_por,
@@ -114,6 +136,12 @@ export class PreguntasComponent implements OnInit{
     this._questionService.editarPregunta(this.preguntaEditando).subscribe(data => {
       this.toastr.success('Pregunta editada con éxito');
       this.listPreguntas[this.indice].pregunta = this.preguntaEditando.pregunta;
+
+        // Recargar la página
+        location.reload();
+        // Actualizar la vista
+        this.ngZone.run(() => {        
+        });
       
     });
   }

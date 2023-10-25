@@ -15,6 +15,7 @@
                           <tr>
                             <th>Codigo</th>
                             <th>Parámetro</th>
+                            <th>Estado</th>
                             <th>Valor</th>
                             <th>Fecha Creación</th>
                             <th>Fecha Modificación</th>
@@ -25,13 +26,18 @@
                           <tr *ngFor="let parametro of listParametros; let i = index">
                             <td>{{ parametro.id_parametro }}</td>
                             <td>{{ parametro.parametro }}</td>
+                            <td>
+                              <ng-container *ngIf="parametro.estado_parametro === 1">Activo</ng-container>
+                              <ng-container *ngIf="parametro.estado_parametro === 2">Inactivo</ng-container>
+                            </td>
                             <td>{{ parametro.valor }}</td>
                             <td>{{ parametro.fecha_creacion }}</td>
                             <td>{{ parametro.fecha_modificacion }}</td>
                             <td class="text-center">
                               <div class="btn-group">
                                   <button type="button" (click)="obtenerIdParametro(parametro, i)" data-toggle="modal" data-target="#abrirModalEditarParametro"data-toggle="modal" data-target="#abrirModalEditarParametro" class="btn btn-warning" ><i class="fas fa-solid fa-pen"></i></button>
-                                  
+                                  <button type="button" (click)="inactivarParametro(parametro, i)" class="btn btn-danger"><i class="fas fa-solid fa-user-lock"></i></button>
+                                  <button type="button" (click)="activarParametro(parametro, i)" class="btn btn-primary"><i class="fas fa-solid fa-lock-open"></i></button>
                                 </div>
                             </td>
                           </tr>

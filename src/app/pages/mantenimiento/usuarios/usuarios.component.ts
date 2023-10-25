@@ -10,6 +10,7 @@ import { ErrorService } from 'src/app/services/error.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { RolesService } from 'src/app/services/roles.service'; // Asegúrate de que la ubicación sea correcta
 import { Roles } from 'src/app/interfaces/roles';
+import { NgZone } from '@angular/core';
 
 
 @Component({
@@ -76,7 +77,8 @@ export class UsuariosComponent implements OnInit  {
     private router: Router,
     private _errorService: ErrorService,
     private modalService: NgbModal,
-    private _rolesService: RolesService
+    private _rolesService: RolesService,
+    private ngZone: NgZone
   ) {}
 
   ngOnInit(): void {
@@ -160,6 +162,13 @@ export class UsuariosComponent implements OnInit  {
 
     this._userService.addUsuario(this.nuevoUsuario).subscribe(data => {
       this.toastr.success('Usuario agregado con éxito');
+
+
+        // Recargar la página
+        location.reload();
+        // Actualizar la vista
+        this.ngZone.run(() => {        
+        });
     });
   }
 
@@ -199,6 +208,12 @@ export class UsuariosComponent implements OnInit  {
       this.usuariosAllRoles[this.indice].roles.rol = rol.rol;
       this.usuariosAllRoles[this.indice].fecha_vencimiento = this.usuarioEditando.fecha_vencimiento; 
       }
+
+        // Recargar la página
+        location.reload();
+        // Actualizar la vista
+        this.ngZone.run(() => {        
+        });
 
     });
   }
