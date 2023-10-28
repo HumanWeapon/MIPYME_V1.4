@@ -52,7 +52,7 @@ export class SidebarService {
       submenu: [
         {titulo:'Consultar', url: '', icono: 'fa fa-users ml-1'},
         {titulo:'Mis Consultas', url: '', icono: 'fa fa-users ml-1'},
-        {titulo:'Mi Perfil', url: 'perfil-pyme', icono: 'fa fa-user-shield ml-1'},
+        {titulo:'Mi Perfil', url: 'perfil-pyme', icono: 'fa fa-solid fa-user ml-1'},
       ]
     },
   ]
