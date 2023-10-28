@@ -40,9 +40,13 @@ export class SidebarService {
       url: ' ',
       icono: 'nav-icon fas fa-regular fa-building',
       submenu: [
-        {titulo:'Contactos', url: 'contactos', icono: 'fa fa-users ml-1'},
         {titulo:'Requisitos', url: 'requisitos', icono: 'fa fa-users ml-1'},
         {titulo:'Productos', url: 'productos', icono: 'fa fa-user-shield ml-1'},
+        {titulo:'Ciudades', url: 'ciudades', icono: 'fas fa-solid fa-location-dot ml-1'},
+        {titulo:'Contacto', url: 'contacto', icono: 'fas fa-solid fa-address-book ml-1'},
+        {titulo:'ContactoTelefono', url: 'contactoTelefono', icono: 'fas fa-solid fa-address-book ml-1'},
+        {titulo:'TipoDireccion', url: 'tipoDireccion', icono: 'fas fa-solid fa-city ml-1'},
+        {titulo:'TipoContacto', url: 'tipoContacto', icono: 'fas fa-solid fa-address-book ml-1'},
       ]
     },
     {

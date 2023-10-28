@@ -18,9 +18,13 @@ import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.componen
 import { ParametrosComponent } from './mantenimiento/parametros/parametros.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ProductosComponent } from './empresas/productos/productos.component';
-import { ContactosComponent } from './empresas/contacto/contactos.component';
 import { RequisitosComponent } from './empresas/requisitos/requisitos.component';
 import { PerfilPymeComponent } from './inicio/perfil-pyme/perfil-pyme.component';
+import { CiudadesComponent } from './empresas/ciudades/ciudades.component';
+import { ContactoComponent } from './empresas/contacto/contacto.component';
+import { ContactoTelefonoComponent } from './empresas/contacto-telefono/contacto-telefono.component';
+import { TipoContactoComponent } from './empresas/tipo-contacto/tipo-contacto.component';
+import { TipoDireccionComponent } from './empresas/tipo-direccion/tipo-direccion.component';
 
 
 @NgModule({
@@ -37,9 +41,13 @@ import { PerfilPymeComponent } from './inicio/perfil-pyme/perfil-pyme.component'
     PreguntasComponent,
     ParametrosComponent,
     ProductosComponent,
-    ContactosComponent,
     RequisitosComponent,
     PerfilPymeComponent,
+    CiudadesComponent,
+    ContactoComponent,
+    ContactoTelefonoComponent,
+    TipoContactoComponent,
+    TipoDireccionComponent,
 
 
   ],

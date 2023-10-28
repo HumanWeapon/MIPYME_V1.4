@@ -11,9 +11,13 @@ import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.componen
 import { ParametrosComponent } from './mantenimiento/parametros/parametros.component';
 import { PerfilComponent } from './inicio/perfil/perfil.component';
 import { ProductosComponent } from './empresas/productos/productos.component';
-import { ContactosComponent } from './empresas/contacto/contactos.component';
 import { RequisitosComponent } from './empresas/requisitos/requisitos.component';
 import { PerfilPymeComponent } from './inicio/perfil-pyme/perfil-pyme.component';
+import { CiudadesComponent } from './empresas/ciudades/ciudades.component';
+import { TipoDireccionComponent } from './empresas/tipo-direccion/tipo-direccion.component';
+import { TipoContactoComponent } from './empresas/tipo-contacto/tipo-contacto.component';
+import { ContactoComponent } from './empresas/contacto/contacto.component';
+import { ContactoTelefonoComponent } from './empresas/contacto-telefono/contacto-telefono.component';
 
 
 
@@ -32,9 +36,13 @@ const routes: Routes = [
     {path: 'parametros', component: ParametrosComponent, data:{titulo: 'Administrar Parametros'}},
     {path: 'perfil', component: PerfilComponent, data:{titulo: 'Mi Perfil'}},
     {path: 'productos', component:ProductosComponent, data:{titulo: 'Producto'}},
-    {path: 'contactos', component:ContactosComponent, data:{titulo: 'Contacto'}},
     {path: 'requisitos', component:RequisitosComponent, data:{titulo: 'Requisitos'}},
     {path: 'perfil-pyme', component:PerfilPymeComponent, data:{titulo: 'Mi Perfil Pyme'}},
+    {path: 'ciudades', component:CiudadesComponent, data:{titulo: 'Ciudades'}},
+    {path: 'tipoDireccion', component:TipoDireccionComponent, data:{titulo: 'TipoDireccion'}},
+    {path: 'tipoContacto', component:TipoContactoComponent, data:{titulo: 'TipoContacto'}},
+    {path: 'contacto', component:ContactoComponent, data:{titulo: 'Contacto'}},
+    {path: 'contactoTelefono', component:ContactoTelefonoComponent, data:{titulo: 'ContactoTelefono'}},
   ]}
 ];
 

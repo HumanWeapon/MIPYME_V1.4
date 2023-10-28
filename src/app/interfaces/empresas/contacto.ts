@@ -11,6 +11,6 @@ export interface Contacto {
     creado_por: string,
     fecha_creacion: Date,
     modificado_por: string,
-    fecha_modificado: Date,
+    fecha_modificacion: Date,
     estado: number,
 }
