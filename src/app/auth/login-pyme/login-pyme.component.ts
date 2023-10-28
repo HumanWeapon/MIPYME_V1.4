@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Pyme } from 'src/app/interfaces/empresas/pyme';
+
 
 @Component({
   selector: 'app-login-pyme',
@@ -8,10 +10,21 @@ import { Router } from '@angular/router';
 })
 export class LoginPymeComponent {
 
-  usuario: string = '';
+  pyme: string = '';
   contrasena: string = '';
   loading: boolean = false;
 
+  getPyme: Pyme = {
+    id_pyme: 0,
+    nombre_pyme: '',
+    categoria: '',
+    descripcion: '',
+    creado_por: '',
+    fecha_creacion: new Date(),
+    modificado_por: '',
+    fecha_modificacion: new Date(),
+    estado: 0
+  };
 
   constructor(private router: Router) {}
   
@@ -20,9 +33,16 @@ export class LoginPymeComponent {
   }
 
   eliminarEspaciosBlanco() {
-    this.usuario = this.usuario.replace(/\s/g, ''); // Elimina espacios en blanco
-    this.usuario = this.usuario.toUpperCase(); // Convierte el texto a mayúsculas
+    this.pyme = this.pyme.replace(/\s/g, ''); // Elimina espacios en blanco
+    this.pyme = this.pyme.toUpperCase(); // Convierte el texto a mayúsculas
     this.contrasena = this.contrasena.replace(/\s/g, ''); // Elimina espacios en blanco
   }
+
+
+
+
+
+
+
 
 }
