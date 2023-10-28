@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Pyme } from 'src/app/interfaces/empresas/pyme';
 import { environment } from 'src/enviroments/enviromet';
-import { Observable, catchError } from 'rxjs';
-import { Pyme } from '../interfaces/empresas/pyme';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PymeService {
+export class PymesService {
 
   public pyme: Pyme | undefined;
   
@@ -29,13 +29,5 @@ export class PymeService {
   getAllPymes(): Observable<Pyme[]> {
     return this.http.get<Pyme[]>(`${this.myAppUrl}${this.myApiUrl}/getAllPymes`)
   }
-
-  
-
-
-
-
-
-
 
 }
