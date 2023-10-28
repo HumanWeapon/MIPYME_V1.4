@@ -13,6 +13,7 @@ import { PerfilComponent } from './inicio/perfil/perfil.component';
 import { ProductosComponent } from './empresas/productos/productos.component';
 import { ContactosComponent } from './empresas/contacto/contactos.component';
 import { RequisitosComponent } from './empresas/requisitos/requisitos.component';
+import { PerfilPymeComponent } from './inicio/perfil-pyme/perfil-pyme.component';
 
 
 
@@ -33,6 +34,7 @@ const routes: Routes = [
     {path: 'productos', component:ProductosComponent, data:{titulo: 'Producto'}},
     {path: 'contactos', component:ContactosComponent, data:{titulo: 'Contacto'}},
     {path: 'requisitos', component:RequisitosComponent, data:{titulo: 'Requisitos'}},
+    {path: 'perfil-pyme', component:PerfilPymeComponent, data:{titulo: 'Mi Perfil Pyme'}},
   ]}
 ];
 

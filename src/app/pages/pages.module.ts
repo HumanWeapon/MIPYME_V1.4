@@ -20,6 +20,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ProductosComponent } from './empresas/productos/productos.component';
 import { ContactosComponent } from './empresas/contacto/contactos.component';
 import { RequisitosComponent } from './empresas/requisitos/requisitos.component';
+import { PerfilPymeComponent } from './inicio/perfil-pyme/perfil-pyme.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { RequisitosComponent } from './empresas/requisitos/requisitos.component'
     ProductosComponent,
     ContactosComponent,
     RequisitosComponent,
+    PerfilPymeComponent,
 
 
   ],

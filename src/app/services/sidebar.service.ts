@@ -49,7 +49,11 @@ export class SidebarService {
       titulo:'PYMES',
       url: ' ',
       icono: 'nav-icon fas fa-solid fa-user',
-      submenu: []
+      submenu: [
+        {titulo:'Consultar', url: '', icono: 'fa fa-users ml-1'},
+        {titulo:'Mis Consultas', url: '', icono: 'fa fa-users ml-1'},
+        {titulo:'Mi Perfil', url: 'perfil-pyme', icono: 'fa fa-user-shield ml-1'},
+      ]
     },
   ]
   constructor() { }

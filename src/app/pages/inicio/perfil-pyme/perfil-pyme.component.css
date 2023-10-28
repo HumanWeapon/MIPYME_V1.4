@@ -1,0 +1,83 @@
+
+ 
+ body {
+  font-family: var(--body-font);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2em;
+  width: 100%;
+  height: 100vh;
+ }
+ 
+ 
+ /****************************/
+ 
+ .editbutton {
+  width: 170px;
+       background: #e5e226;
+       font-weight: 400;
+       color: white;
+       border: 0 none;
+       border-radius: 25px;
+       cursor: pointer;
+       padding: 10px;
+       margin: 5px 5px;
+     text-decoration: none;
+     font-size: 14px;
+}
+.editbutton:hover, .editbutton:focus {
+  box-shadow: 0 0 0 1px white, 0 0 0 3px #e5e226;
+}
+
+ .savebutton {
+  width: 170px;
+       background: #27AE60;
+       font-weight: 400;
+       color: white;
+       border: 0 none;
+       border-radius: 25px;
+       cursor: pointer;
+       padding: 10px;
+       margin: 5px 5px;
+     text-decoration: none;
+     font-size: 14px;
+     
+ }
+ .savebutton:hover, .savebutton:focus {
+   box-shadow: 0 0 0 1px white, 0 0 0 3px #27AE60;
+ }
+ 
+ .cancelbutton {
+  width: 170px;
+       background: #d71919;
+       font-weight: 400;
+       color: white;
+       border: 0 none;
+       border-radius: 25px;
+       cursor: pointer;
+       padding: 10px;
+       margin: 5px 5px;
+     text-decoration: none;
+     font-size: 14px;
+     
+ }
+ .cancelbutton:hover, .cancelbutton:focus {
+   box-shadow: 0 0 0 1px white, 0 0 0 3px #d71919;
+ }
+
+ .espaciado {
+     display: block; /* Asegura que el <br> sea un elemento de bloque*/
+     height: 58px; /* Añade espacio vertical */
+     content: " ";
+    }
+ 
+ 
+ 
+   
+   
+  
+    
