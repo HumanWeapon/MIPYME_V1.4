@@ -8,6 +8,7 @@ import { Roles } from 'src/app/interfaces/roles';
 import { ErrorService } from 'src/app/services/error.service';
 import { RolesService } from 'src/app/services/roles.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgZone } from '@angular/core';
 
 
 @Component({
@@ -54,7 +55,8 @@ export class RolesComponent implements OnInit{
     private toastr: ToastrService,
     private router: Router, 
     private _errorService: ErrorService,
-    private modalService: NgbModal 
+    private modalService: NgbModal,
+    private ngZone: NgZone
     ) { }
 
   
@@ -78,7 +80,14 @@ export class RolesComponent implements OnInit{
   }
 
 
- 
+  onInputChange(event: any, field: string) {
+    const inputValue = event.target.value;
+    if (field === 'rol') {
+      // Convierte a mayúsculas y elimina espacios en blanco
+      event.target.value = inputValue.toUpperCase().replace(/\s/g, '')
+    }
+  }
+
   
   inactivarRol(roles: Roles, i: any){
     this._rolService.inactivarRol(roles).subscribe(data => this.toastr.success('El rol: '+ roles.rol+ ' ha sido inactivado'));
@@ -104,6 +113,12 @@ export class RolesComponent implements OnInit{
 
     this._rolService.addRol(this.nuevoRol).subscribe(data => {
       this.toastr.success('Rol agregado con éxito');
+
+        // Recargar la página
+        location.reload();
+        // Actualizar la vista
+        this.ngZone.run(() => {        
+        });
     });
   }
 
@@ -127,6 +142,12 @@ export class RolesComponent implements OnInit{
     this._rolService.editarRol(this.rolEditando).subscribe(data => {
       this.toastr.success('Rol editado con éxito');
       this.listRoles[this.indice].rol = this.rolEditando.rol;
+
+        // Recargar la página
+        location.reload();
+        // Actualizar la vista
+        this.ngZone.run(() => {        
+        });
       
     });
   }

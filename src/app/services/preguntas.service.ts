@@ -54,6 +54,18 @@ export class PreguntasService {
     return this.http.get<Preguntas[]>(`${this.myAppUrl}${this.myApiUrl}/getAllPreguntas`, { headers: headers })
    }
 
+
+   inactivarPregunta(preguntas: Preguntas): Observable<Preguntas>{
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Preguntas>(`${this.myAppUrl}${this.myApiUrl}/inactivatePreguntas`, preguntas, { headers: headers })
+   }
+   activarPregunta(preguntas: Preguntas): Observable<Preguntas>{
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Preguntas>(`${this.myAppUrl}${this.myApiUrl}/activatePreguntas`, preguntas, { headers: headers })
+   }
+
    editarPregunta(preguntas: Preguntas): Observable<any> {
     const token = localStorage.getItem('token')
     const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)

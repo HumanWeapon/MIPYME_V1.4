@@ -26,6 +26,7 @@ import { DataTablesModule } from 'angular-datatables';
   ],
   imports: [
     BrowserModule,
+    DataTablesModule,
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
@@ -40,8 +41,7 @@ import { DataTablesModule } from 'angular-datatables';
       preventDuplicates: true,
     }), 
     HttpClientModule, 
-    NgbModule,
-    DataTablesModule
+    NgbModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true}],
   bootstrap: [AppComponent]

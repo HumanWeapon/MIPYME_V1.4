@@ -8,6 +8,7 @@ import { Parametros } from 'src/app/interfaces/parametros';
 import { ErrorService } from 'src/app/services/error.service';
 import { ParametrosService } from 'src/app/services/parametro.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgZone } from '@angular/core';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class ParametrosComponent implements OnInit{
   parametroEditando: Parametros = {
     id_parametro: 0,
     parametro: '',
+    estado_parametro: 0,
     valor: 0,
     id_usuario: 0,
     creado_por: '',
@@ -32,6 +34,7 @@ export class ParametrosComponent implements OnInit{
   nuevoParametro: Parametros = {
     id_parametro: 0,
     parametro: '',
+    estado_parametro: 0,
     valor: 0,
     id_usuario: 0,
     creado_por: '',
@@ -57,7 +60,8 @@ export class ParametrosComponent implements OnInit{
     private toastr: ToastrService,
     private router: Router, 
     private _errorService: ErrorService,
-    private modalService: NgbModal 
+    private modalService: NgbModal,
+    private ngZone: NgZone
     ) { }
 
   
@@ -81,11 +85,31 @@ export class ParametrosComponent implements OnInit{
   }
 
 
+  onInputChange(event: any, field: string) {
+    const inputValue = event.target.value;
+    if (field === 'parametro') {
+      // Convierte a mayúsculas y elimina espacios en blanco
+      event.target.value = inputValue.toUpperCase().replace(/\s/g, '')
+    }
+  }
+
+
+  inactivarParametro(parametros: Parametros, i: any){
+    this._parametroService.inactivarParametro(parametros).subscribe(data => this.toastr.success('El parametro: '+ parametros.parametro+ ' ha sido inactivado'));
+    this.listParametros[i].estado_parametro = 2;
+  }
+  activarParametro(parametros: Parametros, i: any){
+    this._parametroService.activarParametro(parametros).subscribe(data => this.toastr.success('El parametro: '+ parametros.parametro+ ' ha sido activado'));
+    this.listParametros[i].estado_parametro = 1;
+  }
+
+
   agregarNuevoParametro() {
 
     this.nuevoParametro = {
       id_parametro: 0,
       parametro: this.nuevoParametro.parametro,
+      estado_parametro: this.nuevoParametro.estado_parametro,
       valor: this.nuevoParametro.valor,
       id_usuario: 0,
       creado_por: '',
@@ -98,6 +122,12 @@ export class ParametrosComponent implements OnInit{
     this._parametroService.addParametro(this.nuevoParametro).subscribe(data => {
       this.toastr.success('Parametro agregado con éxito');
     });
+
+      // Recargar la página
+      location.reload();
+      // Actualizar la vista
+      this.ngZone.run(() => {        
+      });
   }
 
 
@@ -105,6 +135,7 @@ export class ParametrosComponent implements OnInit{
     this.parametroEditando = {
       id_parametro: parametro.id_parametro,
       parametro: parametro.parametro,
+      estado_parametro: parametro.estado_parametro,
       valor: parametro.valor,
       id_usuario: parametro.id_usuario,
       creado_por: parametro.creado_por,
@@ -122,6 +153,12 @@ export class ParametrosComponent implements OnInit{
       this.toastr.success('Parametro editado con éxito');
       this.listParametros[this.indice].parametro = this.parametroEditando.parametro;
       this.listParametros[this.indice].valor = this.parametroEditando.valor;
+
+        // Recargar la página
+        location.reload();
+        // Actualizar la vista
+        this.ngZone.run(() => {        
+        });
       
     });
   }

@@ -75,7 +75,7 @@
               <form (submit)="agregarNuevoRol()">
                   <div class="form-group">
                       <label for="nuevoRol">Nombre del Rol:</label>
-                      <input type="text" [(ngModel)]="nuevoRol.rol" name="nuevoRol.rol" class="form-control" id="nuevoRol" placeholder="Nombre del rol">
+                      <input type="text" [(ngModel)]="nuevoRol.rol" name="nuevoRol.rol" (input)="onInputChange($event, 'rol')"class="form-control" id="nuevoRol" placeholder="Nombre del rol">
                       </div>
               </form>
           </div>
@@ -109,7 +109,7 @@
               <form>
                 <div class="form-group">
                     <label for="rolEditando">Nombre del Rol:</label>
-                    <input type="text" [(ngModel)]="rolEditando.rol" name="rolEditando.rol" class="form-control" id="editarRol" placeholder="Nombre del rol">
+                    <input type="text" [(ngModel)]="rolEditando.rol" name="rolEditando.rol" (input)="onInputChange($event, 'rol')" class="form-control" id="editarRol" placeholder="Nombre del rol">
                 </div>
               </form>
           </div>

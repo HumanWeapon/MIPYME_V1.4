@@ -7,6 +7,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ToastrService } from 'ngx-toastr';
 
 
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -123,12 +124,20 @@ this.inputDeshabilitado = true;
 }
 
 validarPassword() {
-  if (this.confirmarContrasena === '' || this.nuevaContrasena === ''|| this.contrasenaActual === '') {
+  // Obtener la contraseña almacenada en el Local Storage
+  const userLocal = localStorage.getItem('contrasena')
+  console.log(userLocal)
+  if (this.contrasenaActual === '' || this.nuevaContrasena === '' || this.confirmarContrasena === '') {
     this.toastr.warning('Completa todos los campos');
   } else if (this.confirmarContrasena !== this.nuevaContrasena) {
     this.toastr.warning('Las contraseñas no coinciden');
+  } else if (userLocal === null) {
+    this.toastr.warning('No se encontró una contraseña almacenada en el Local Storage');
+  } else if (this.contrasenaActual !== userLocal) {
+    this.toastr.warning('La contraseña actual no coincide con la contraseña almacenada');
   } else {
-    this.usuario.contrasena = this.nuevaContrasena;
+    // Contraseñas coinciden, procede a cambiar la contraseña
+    this.usuario.contrasena = this.nuevaContrasena; // Asigna la nueva contraseña
     this._userService.cambiarContrasena(this.usuario).subscribe((data) => {
       if (data) {
         this.toastr.success('Contraseña actualizada con éxito', 'success');
@@ -137,10 +146,16 @@ validarPassword() {
       }
     });
   }
-  this.mostrarBoton=false;
+
+  // Restablece los campos y deshabilita el botón después de procesar
+  this.contrasenaActual = '';
+  this.nuevaContrasena = '';
+  this.confirmarContrasena = '';
+  this.mostrarBoton = false;
   this.botonDeshabilitado = true;
   this.inputDeshabilitado = true;
-  }
+}
+
 
 }
 

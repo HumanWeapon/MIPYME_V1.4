@@ -17,6 +17,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.component';
 import { ParametrosComponent } from './mantenimiento/parametros/parametros.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ProductosComponent } from './empresas/productos/productos.component';
+import { RequisitosComponent } from './empresas/requisitos/requisitos.component';
+import { PerfilPymeComponent } from './inicio/perfil-pyme/perfil-pyme.component';
+import { CiudadesComponent } from './empresas/ciudades/ciudades.component';
+import { ContactoComponent } from './empresas/contacto/contacto.component';
+import { ContactoTelefonoComponent } from './empresas/contacto-telefono/contacto-telefono.component';
+import { TipoContactoComponent } from './empresas/tipo-contacto/tipo-contacto.component';
+import { TipoDireccionComponent } from './empresas/tipo-direccion/tipo-direccion.component';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +40,15 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     UsuariosComponent,
     PreguntasComponent,
     ParametrosComponent,
+    ProductosComponent,
+    RequisitosComponent,
+    PerfilPymeComponent,
+    CiudadesComponent,
+    ContactoComponent,
+    ContactoTelefonoComponent,
+    TipoContactoComponent,
+    TipoDireccionComponent,
+
 
   ],
   imports: [
