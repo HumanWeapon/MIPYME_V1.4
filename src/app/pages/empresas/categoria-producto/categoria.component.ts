@@ -1,8 +1,7 @@
 //Elaborado Por Breydy Flores
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { Categoria } from 'src/app/interfaces/empresas/categoria';
@@ -10,8 +9,8 @@ import { ErrorService } from 'src/app/services/error.service';
 import { CategoriaService } from 'src/app/services/negocio/categoria.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgZone } from '@angular/core';
-import { DataTablesModule } from 'angular-datatables';
-                       
+declare var $: any;
+      
 
 @Component({
   selector: 'app-categoria',
@@ -19,7 +18,7 @@ import { DataTablesModule } from 'angular-datatables';
   styleUrls: ['./categoria.component.css']
 })
 
-export class CategoriaComponent implements OnInit{
+export class CategoriaComponent implements OnInit, AfterViewInit {
  
 
   CategoriaEditando: Categoria = {
@@ -29,7 +28,7 @@ export class CategoriaComponent implements OnInit{
     creado_por: 'SYSTEM',
     fecha_creacion: new Date(), 
     modificado_por: 'SYSTEM',
-    fecha_modificado:new Date(), 
+    fecha_modificacion:new Date(), 
     estado: 0,
 
   };
@@ -41,12 +40,11 @@ export class CategoriaComponent implements OnInit{
     creado_por: 'SYSTEM',
     fecha_creacion: new Date(), 
     modificado_por: 'SYSTEM',
-    fecha_modificado:new Date(), 
+    fecha_modificacion:new Date(), 
     estado: 0,
-
   };
-  indice: any;
 
+  indice: any;
   dtOptions: DataTables.Settings = {};
   listCate: Categoria[] = [];
   data: any;
@@ -66,34 +64,44 @@ export class CategoriaComponent implements OnInit{
     private ngZone: NgZone
     ) { }
 
-  
-  ngOnInit(): void {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 7,
-      language: {url:'//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'},
-      responsive: true
-    };
-    this._categoriaService.getAllCategorias()
-      .subscribe((res: any) => {
-        this.listCate = res;
-        this.dtTrigger.next(null);
-      });
-  }
+    ngOnInit(): void {
+      this.dtOptions = {
+        pagingType: 'full_numbers',
+        pageLength: 7,
+        language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+        responsive: true
+      };
+    
+      this._categoriaService.getAllCategorias()
+        .subscribe((res: any) => {
+          this.listCate = res;
+          this.dtTrigger.next(0); // No es necesario pasar ningún valor
+    
+          // Inicializa la tabla DataTable una vez que los datos estén disponibles
+          const dataTable = $('#tablaCatProd').DataTable();
+        });
+    }
 
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
 
+<<<<<<< HEAD
 onInputChange(event: any, field: string) {
     if (field === 'categoria' || field === 'descripcion') {
+=======
+  onInputChange(event: any, field: string) {
+    if (field == 'categoria' || field == 'descripcion') {
+>>>>>>> 5a46d08f9c8896e76e3644a6e83a6b326c00b416
       const inputValue = event.target.value;
       const uppercaseValue = inputValue.toUpperCase();
       event.target.value = uppercaseValue;
-      }
     }
-
+  }
+  ngAfterViewInit(): void {
+    const dataTable = $('#tablaCatProd').DataTable();
+  }
 
   inactivarCategoria(categoria: Categoria, i: any){
     this._categoriaService.inactivarCategoria(categoria).subscribe(data => this.toastr.success('La categoria: '+ categoria.id_categoria + ' ha sido inactivada'));
@@ -107,29 +115,25 @@ onInputChange(event: any, field: string) {
   agregarNuevaCategoriaProducto() {
     const userlocal=localStorage.getItem('usuario')
     if (userlocal){
-      this.nuevaCategoriaProducto = {
-        id_categoria: 0,
+
+
+      const catProducto = {
         categoria: this.nuevaCategoriaProducto.categoria,
         descripcion:this.nuevaCategoriaProducto.descripcion,
-        creado_por: userlocal , 
+        creado_por: userlocal, 
         fecha_creacion: new Date(), 
-        modificado_por: 'SYSTEM', 
-        fecha_modificado: new Date(),
-        estado: 0,
-  
-      };
+        modificado_por: userlocal, 
+        fecha_modificacion: new Date(),
+        estado: 1,
+      }
+      console.log(catProducto)
+
+      this._categoriaService.addCategoriaProducto(catProducto).subscribe((data: Categoria) => {
+        console.log(data)
+        this.listCate.push(data);
+        this.toastr.success('Categoría agregada exitosamente');
+      });
     }
-   
-  
-    this._categoriaService.addCategoriaProducto(this.nuevaCategoriaProducto).subscribe(data => {
-      this.toastr.success('Categoria agregada con éxito');
-      
-       // Recargar la página
-       location.reload();
-       // Actualizar la vista
-       this.ngZone.run(() => {        
-       });
-    });
   }
 
 
@@ -141,7 +145,7 @@ onInputChange(event: any, field: string) {
       creado_por: Cate.creado_por,
       fecha_creacion: Cate.fecha_creacion, 
       modificado_por: Cate.modificado_por,
-      fecha_modificado: Cate.fecha_modificado, 
+      fecha_modificacion: Cate.fecha_modificacion, 
       estado: Cate.estado,
 
     };

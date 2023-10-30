@@ -18,6 +18,7 @@ import { TipoDireccionComponent } from './empresas/tipo-direccion/tipo-direccion
 import { TipoContactoComponent } from './empresas/tipo-contacto/tipo-contacto.component';
 import { ContactoComponent } from './empresas/contacto/contacto.component';
 import { ContactoTelefonoComponent } from './empresas/contacto-telefono/contacto-telefono.component';
+import { CategoriaComponent } from './empresas/categoria-producto/categoria.component';
 
 
 
@@ -39,10 +40,11 @@ const routes: Routes = [
     {path: 'requisitos', component:RequisitosComponent, data:{titulo: 'Requisitos'}},
     {path: 'perfil-pyme', component:PerfilPymeComponent, data:{titulo: 'Mi Perfil Pyme'}},
     {path: 'ciudades', component:CiudadesComponent, data:{titulo: 'Ciudades'}},
-    {path: 'tipoDireccion', component:TipoDireccionComponent, data:{titulo: 'TipoDireccion'}},
-    {path: 'tipoContacto', component:TipoContactoComponent, data:{titulo: 'TipoContacto'}},
+    {path: 'tipoDireccion', component:TipoDireccionComponent, data:{titulo: 'Tipo Direccion'}},
+    {path: 'tipoContacto', component:TipoContactoComponent, data:{titulo: 'Tipo Contacto'}},
     {path: 'contacto', component:ContactoComponent, data:{titulo: 'Contacto'}},
-    {path: 'contactoTelefono', component:ContactoTelefonoComponent, data:{titulo: 'ContactoTelefono'}},
+    {path: 'contactoTelefono', component:ContactoTelefonoComponent, data:{titulo: 'Contacto Telefono'}},
+    {path: 'categoriaproducto', component:CategoriaComponent, data:{titulo: 'Categoría de productos'}},
   ]}
 ];
 
