@@ -31,7 +31,6 @@ export class CategoriaComponent implements OnInit{
     modificado_por: 'SYSTEM',
     fecha_modificacion:new Date(), 
     estado: 0,
-
   };
 
   nuevaCategoriaProducto: Categoria = {
@@ -101,15 +100,17 @@ export class CategoriaComponent implements OnInit{
     }
   }
 
+  activarCategoria(categoria: Categoria, i: any){
+    this._categoriaService.activarCategoria(categoria).subscribe(data => this.toastr.success('La categoria: '+ categoria.id_categoria + ' ha sido activada'));
+    this.listCate[i].estado = 1; 
 
+  }
+  
   inactivarCategoria(categoria: Categoria, i: any){
     this._categoriaService.inactivarCategoria(categoria).subscribe(data => this.toastr.success('La categoria: '+ categoria.id_categoria + ' ha sido inactivada'));
     this.listCate[i].estado = 2; 
   }
-  activarCategoria(categoria: Categoria, i: any){
-    this._categoriaService.activarCategoria(categoria).subscribe(data => this.toastr.success('La categoria: '+ categoria.id_categoria + ' ha sido activada'));
-    this.listCate[i].estado = 1;
-  }
+  
 
   agregarNuevaCategoriaProducto() {
     const userlocal=localStorage.getItem('usuario')
@@ -153,7 +154,7 @@ export class CategoriaComponent implements OnInit{
     this._categoriaService.editarCategoriaProducto(this.CategoriaEditando).subscribe(data => {
       this.toastr.success('Categoria editada con éxito');
       this.listCate[this.indice].categoria = this.CategoriaEditando.categoria;
-      this.listCate[this.indice].descripcion = this.CategoriaEditando.descripcion;
+      this.listCate[this.indice].categoria = this.CategoriaEditando.descripcion;
         // Recargar la página
         location.reload();
         // Actualizar la vista
