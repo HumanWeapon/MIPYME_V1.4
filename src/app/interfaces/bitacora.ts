@@ -1,9 +1,8 @@
 export interface Bitacora {
     id_bitacora: number,
-    fecha_modificacion: Date,
-    usuario: string,
-    tabla: string,
+    fecha: Date,
+    id_usuario: string,
+    id_objeto: string,
     accion: string,
     descripcion: string
-    
 }

@@ -26,6 +26,7 @@ import { ContactoTelefonoComponent } from './empresas/contacto-telefono/contacto
 import { TipoContactoComponent } from './empresas/tipo-contacto/tipo-contacto.component';
 import { TipoDireccionComponent } from './empresas/tipo-direccion/tipo-direccion.component';
 import { CategoriaComponent } from './empresas/categoria-producto/categoria.component';
+import { BitacoraComponent } from './mantenimiento/bitacora/bitacora.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CategoriaComponent } from './empresas/categoria-producto/categoria.comp
     ContactoTelefonoComponent,
     TipoContactoComponent,
     TipoDireccionComponent,
-    CategoriaComponent
+    CategoriaComponent,
+    BitacoraComponent
 
   ],
   imports: [
