@@ -87,13 +87,8 @@ export class CategoriaComponent implements OnInit, AfterViewInit {
     this.dtTrigger.unsubscribe();
   }
 
-<<<<<<< HEAD
-onInputChange(event: any, field: string) {
-    if (field === 'categoria' || field === 'descripcion') {
-=======
   onInputChange(event: any, field: string) {
     if (field == 'categoria' || field == 'descripcion') {
->>>>>>> 5a46d08f9c8896e76e3644a6e83a6b326c00b416
       const inputValue = event.target.value;
       const uppercaseValue = inputValue.toUpperCase();
       event.target.value = uppercaseValue;

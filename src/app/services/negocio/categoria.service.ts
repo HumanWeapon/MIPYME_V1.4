@@ -22,17 +22,7 @@ export class CategoriaService {
    }
 
 
-   addCategoriaProducto(Cate: Categoria): Observable<any> {
-    const nuevaCategoriaProducto = {
-     categoria: Cate.categoria,
-      descripcion: Cate.descripcion,
-      creado_por: Cate.creado_por, 
-      fecha_creacion: Cate.fecha_creacion, 
-      modificado_por: Cate.modificado_por, 
-      fecha_modificado: Cate.fecha_modificado,
-      estado: Cate.estado,
-      };
-      return this.http.post<Categoria>(`${this.myAppUrl}${this.myApiUrl}/postCategoria`, nuevaCategoriaProducto)
+
    addCategoriaProducto(categoriaProducto: any): Observable<Categoria> {
     const token = localStorage.getItem('token')
     const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
