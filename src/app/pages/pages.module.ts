@@ -27,6 +27,7 @@ import { TipoContactoComponent } from './empresas/tipo-contacto/tipo-contacto.co
 import { TipoDireccionComponent } from './empresas/tipo-direccion/tipo-direccion.component';
 import { TipoEmpresaComponent } from './empresas/tipo-empresa/tipo-empresa.component';
 import { CategoriaComponent } from './empresas/categoria-producto/categoria.component';
+import { BitacoraComponent } from './mantenimiento/bitacora/bitacora.component';
 
 
 @NgModule({
@@ -50,8 +51,13 @@ import { CategoriaComponent } from './empresas/categoria-producto/categoria.comp
     ContactoTelefonoComponent,
     TipoContactoComponent,
     TipoDireccionComponent,
+<<<<<<< HEAD
     TipoEmpresaComponent,
     CategoriaComponent,
+=======
+    CategoriaComponent,
+    BitacoraComponent
+>>>>>>> 6129cc0ee2c5cdb67106dc089de2f5af84688ab8
 
   ],
   imports: [

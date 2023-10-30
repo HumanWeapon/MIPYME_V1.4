@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/enviroments/enviromet';
 import { Categoria } from '../../interfaces/empresas/categoria';
-import { Observable, catchError } from 'rxjs';
+import { tap } from 'rxjs/operators'
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { Observable, catchError } from 'rxjs';
 export class CategoriaService {
 
   public categoria: Categoria | undefined;
-  
+  private _refresh$ = new Subject<void>();
   private myAppUrl: string;
   private myApiUrl: string;
 
@@ -21,12 +22,18 @@ export class CategoriaService {
 
    }
 
-
+   get refresh$(){
+    return this._refresh$;
+  }
 
    addCategoriaProducto(categoriaProducto: any): Observable<Categoria> {
     const token = localStorage.getItem('token')
     const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
-    return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}/postCategoria`, categoriaProducto, { headers: headers })
+    return this.http.post<any>(`${this.myAppUrl}${this.myApiUrl}/postCategoria`, categoriaProducto, { headers: headers }).pipe(
+      tap(() =>{
+        this._refresh$.next();
+      })
+    )
   }
 
   

@@ -128,9 +128,6 @@ onInputChange(event: any, field: string) {
       
        // Recargar la página
        location.reload();
-       // Actualizar la vista
-       this.ngZone.run(() => {        
-       });
     });
   }
 
@@ -162,10 +159,6 @@ onInputChange(event: any, field: string) {
       
         // Recargar la página
         location.reload();
-        // Actualizar la vista
-        this.ngZone.run(() => {        
-        });
-    
     });
   }
 }
