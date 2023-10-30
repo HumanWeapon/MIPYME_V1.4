@@ -52,11 +52,8 @@ import { BitacoraComponent } from './mantenimiento/bitacora/bitacora.component';
     TipoDireccionComponent,
     CategoriaComponent,
     BitacoraComponent,
-<<<<<<< HEAD
     TipoEmpresaComponent
-=======
 
->>>>>>> 7f6161216d5e0aa30e1042fd6d6142f61ecdb2b0
 
   ],
   imports: [
