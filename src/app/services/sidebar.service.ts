@@ -42,11 +42,12 @@ export class SidebarService {
       submenu: [
         {titulo:'Requisitos', url: 'requisitos', icono: 'fa fa-users ml-1'},
         {titulo:'Productos', url: 'productos', icono: 'fa fa-user-shield ml-1'},
-        {titulo:'Ciudades', url: 'ciudades', icono: 'fas fa-solid fa-location-dot ml-1'},
+        {titulo:'Ciudades', url: 'ciudades', icono: 'fas fa-solid fa-address-book ml-1'},
         {titulo:'Contacto', url: 'contacto', icono: 'fas fa-solid fa-address-book ml-1'},
-        {titulo:'ContactoTelefono', url: 'contactoTelefono', icono: 'fas fa-solid fa-address-book ml-1'},
-        {titulo:'TipoDireccion', url: 'tipoDireccion', icono: 'fas fa-solid fa-city ml-1'},
-        {titulo:'TipoContacto', url: 'tipoContacto', icono: 'fas fa-solid fa-address-book ml-1'},
+        {titulo:'Contacto Telefono', url: 'contactoTelefono', icono: 'fas fa-solid fa-address-book ml-1'},
+        {titulo:'Tipo Direccion', url: 'tipoDireccion', icono: 'fas fa-solid fa-city ml-1'},
+        {titulo:'Tipo Contacto', url: 'tipoContacto', icono: 'fas fa-solid fa-address-book ml-1'},
+        {titulo:'Tipo Empresa', url: 'tipoEmpresa', icono: 'fas fa-solid fa-address-book ml-1'},
       ]
     },
     {
