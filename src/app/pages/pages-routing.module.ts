@@ -20,6 +20,7 @@ import { ContactoComponent } from './empresas/contacto/contacto.component';
 import { TipoEmpresaComponent } from './empresas/tipo-empresa/tipo-empresa.component';
 import { ContactoTelefonoComponent } from './empresas/contacto-telefono/contacto-telefono.component';
 import { CategoriaComponent } from './empresas/categoria-producto/categoria.component';
+import { BitacoraComponent } from './mantenimiento/bitacora/bitacora.component';
 
 
 
@@ -51,6 +52,7 @@ const routes: Routes = [
     {path: 'contacto', component:ContactoComponent, data:{titulo: 'Contacto'}},
     {path: 'contactoTelefono', component:ContactoTelefonoComponent, data:{titulo: 'Contacto Telefono'}},
     {path: 'categoriaproducto', component:CategoriaComponent, data:{titulo: 'Categoría de productos'}},
+    {path: 'bitacora', component:BitacoraComponent, data:{titulo: 'Bitácora'}},
   ]}
 ];
 

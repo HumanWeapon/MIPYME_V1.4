@@ -11,6 +11,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { RolesService } from 'src/app/services/roles.service'; // Asegúrate de que la ubicación sea correcta
 import { Roles } from 'src/app/interfaces/roles';
 import { NgZone } from '@angular/core';
+import { BitacoraService } from 'src/app/services/bitacora.service';
 
 
 @Component({
@@ -78,28 +79,16 @@ export class UsuariosComponent implements OnInit  {
     private _errorService: ErrorService,
     private modalService: NgbModal,
     private _rolesService: RolesService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private _bitacoraService: BitacoraService
   ) {}
 
   ngOnInit(): void {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
-      responsive: true,
-      search: true
-    };
+    this.getAllRoles();
+    this.getAllUsuarios();
+  }
 
-    this._userService.usuariosAllRoles().subscribe({
-      next: (data) =>{
-        this.usuariosAllRoles = data;
-        this.listUsuarios = data;
-        this.dtTrigger.next(null);
-      }
-
-    });
-
-
+  getAllRoles(){
     this._rolesService.getAllRoles().subscribe((data) => {
       this.rol = data;
       console.log(this.rol)
@@ -108,6 +97,21 @@ export class UsuariosComponent implements OnInit  {
     this._userService.usuariosAllRoles().subscribe({
       next: (data) =>{
         this.usuariosAllRoles = data;
+      }
+    });
+  }
+  getAllUsuarios(){
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 8,
+      language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+      responsive: true,
+    },
+    this._userService.usuariosAllRoles().subscribe({
+      next: (data) =>{
+        this.usuariosAllRoles = data;
+        this.listUsuarios = data;
+        this.dtTrigger.next(0);
       }
     });
   }
@@ -159,16 +163,11 @@ export class UsuariosComponent implements OnInit  {
       fecha_vencimiento: this.nuevoUsuario.fecha_vencimiento,
       intentos_fallidos: 0,
     };
-
+    this.insertBitacora();
     this._userService.addUsuario(this.nuevoUsuario).subscribe(data => {
       this.toastr.success('Usuario agregado con éxito');
-
-
         // Recargar la página
         location.reload();
-        // Actualizar la vista
-        this.ngZone.run(() => {        
-        });
     });
   }
 
@@ -197,6 +196,7 @@ export class UsuariosComponent implements OnInit  {
   }
   
   editarUsuario(rol: any) {
+    
     this._userService.editarUsuario(this.usuarioEditando).subscribe(data => {
       this.toastr.success('Usuario editado con éxito');
       if(this.usuariosAllRoles == null){
@@ -216,5 +216,23 @@ export class UsuariosComponent implements OnInit  {
         });
 
     });
+  }
+
+  insertBitacora(){
+    const userloca = localStorage.getItem('usuario');
+    this._userService.getOneUsuario(userloca).subscribe(data=>{
+      console.log(data);
+    })
+
+    /*const bitacora = {
+      fecha: new Date(),
+      id_usuario: this.usu,
+      id_objeto: string,
+      accion: string,
+      descripcion: string
+    }
+    this._bitacoraService.insertBitacora().subscribe(data =>{
+
+    })*/
   }
 }
