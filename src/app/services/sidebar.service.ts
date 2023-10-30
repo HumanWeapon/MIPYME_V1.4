@@ -44,9 +44,10 @@ export class SidebarService {
         {titulo:'Productos', url: 'productos', icono: 'fa fa-user-shield ml-1'},
         {titulo:'Ciudades', url: 'ciudades', icono: 'fas fa-solid fa-location-dot ml-1'},
         {titulo:'Contacto', url: 'contacto', icono: 'fas fa-solid fa-address-book ml-1'},
-        {titulo:'ContactoTelefono', url: 'contactoTelefono', icono: 'fas fa-solid fa-address-book ml-1'},
-        {titulo:'TipoDireccion', url: 'tipoDireccion', icono: 'fas fa-solid fa-city ml-1'},
-        {titulo:'TipoContacto', url: 'tipoContacto', icono: 'fas fa-solid fa-address-book ml-1'},
+        {titulo:'Contacto telefono', url: 'contactoTelefono', icono: 'fas fa-solid fa-address-book ml-1'},
+        {titulo:'Tipo direccion', url: 'tipoDireccion', icono: 'fas fa-solid fa-city ml-1'},
+        {titulo:'Tipo contacto', url: 'tipoContacto', icono: 'fas fa-solid fa-address-book ml-1'},
+        {titulo:'Categoría de producto', url: 'categoriaproducto', icono: 'fas fa-solid fa-address-book ml-1'},
       ]
     },
     {

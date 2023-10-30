@@ -14,7 +14,6 @@
                     <thead>
                       <tr>
                         <th>Categoria</th>
-                        <th>Producto</th>
                         <th>Descripción</th>
                         <th>Creado</th>
                         <th>Fecha Creación</th>
@@ -27,7 +26,6 @@
                     <tbody>
                       <tr *ngFor="let cate of listCate; let i = index">
                         <td>{{ cate.categoria}}</td>
-                        <td>{{cate.producto}}</td>
                         <td>{{ cate.descripcion }}</td>
                         <td>{{ cate.creado_por}}</td>
                         <td>{{ cate.fecha_creacion }}</td>
@@ -77,11 +75,7 @@
               <div class="form-group">
                   <label for="nuevaCategoriaProducto">Categoria:</label>
                   <input type="text" [(ngModel)]="nuevaCategoriaProducto.categoria" name="nuevaCategoriaProducto.categoria" (input)="onInputChange($event, 'categoria')"  class="form-control" id="nuevaCategoriaProducto" placeholder="Categoria">
-              </div>
-              <div class="form-group">
-                <label for="nuevaCategoriaProducto">Producto:</label>
-                <input type="text" [(ngModel)]="nuevaCategoriaProducto.producto" name="nuevaCategoriaProducto.producto" (input)="onInputChange($event, 'producto')" class="form-control" id="nuevaCategoriaProducto" placeholder="Producto">
-            </div>  
+              </div> 
               <div class="form-group">
                   <label for="nuevaCategoriaProducto">Descripción:</label>
                   <input type="text" [(ngModel)]="nuevaCategoriaProducto.descripcion" name="nuevaCategoriaProducto.descripcion" (input)="onInputChange($event, 'descripcion')" class="form-control" id="nuevaCategoriaProducto" placeholder="Descripción">
@@ -111,17 +105,13 @@
       <div class="modal-body">
           <form>
             <div class="form-group">
-                <label for="CategoriaEditando">Categoria</label>
-                <input type="text" [(ngModel)]="CategoriaEditando.categoria" name="CategoriaEditando.Categoria" class="form-control" id="CategoriaEditando" placeholder="Categoria" (input)="onInputChange($event, 'Categoria')" >
+              <label for="CategoriaEditando">Categoria</label>
+              <input type="text" [(ngModel)]="CategoriaEditando.categoria" name="CategoriaEditando.Categoria" class="form-control" id="CategoriaEditando" placeholder="Categoria" (input)="onInputChange($event, 'Categoria')" >
             </div>
-        <div class="form-group">
-         <label for="CategoriaEditando">Producto: </label>
-         <input type="text" [(ngModel)]="CategoriaEditando.producto" name="CategoriaProductoEditando.producto"  class="form-control" id="editarDescripcion" placeholder="Producto" (input)="onInputChange($event, 'Producto')" >
-        </div>
-               <div class="form-group">
-                <label for="CategoriaEditando">Descripción:</label>
-                <input type="text" [(ngModel)]="CategoriaEditando.descripcion" name="CategoriaProductoEditando.descripcion"  class="form-control" id="editarDescripcion" placeholder="Descripción" (input)="onInputChange($event, 'Descripcion')" >
-               </div>
+            <div class="form-group">
+              <label for="CategoriaEditando">Descripción:</label>
+              <input type="text" [(ngModel)]="CategoriaEditando.descripcion" name="CategoriaProductoEditando.descripcion"  class="form-control" id="editarDescripcion" placeholder="Descripción" (input)="onInputChange($event, 'Descripcion')" >
+            </div>
           </form>
       </div>
       <div class="modal-footer justify-content-between">

@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 
 import { SidebarService } from 'src/app/services/sidebar.service';
 
-declare var $: any;  
-
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -26,7 +24,6 @@ export class SidebarComponent implements OnInit{
     if(local !== null){
       this.userName = local;
     };
-    $('[data-widget="treeview"]').Treeview('init');
   }
 
   logout(){
