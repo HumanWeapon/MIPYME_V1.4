@@ -25,6 +25,7 @@ import { ContactoComponent } from './empresas/contacto/contacto.component';
 import { ContactoTelefonoComponent } from './empresas/contacto-telefono/contacto-telefono.component';
 import { TipoContactoComponent } from './empresas/tipo-contacto/tipo-contacto.component';
 import { TipoDireccionComponent } from './empresas/tipo-direccion/tipo-direccion.component';
+import { TipoEmpresaComponent } from './empresas/tipo-empresa/tipo-empresa.component';
 import { CategoriaComponent } from './empresas/categoria-producto/categoria.component';
 import { BitacoraComponent } from './mantenimiento/bitacora/bitacora.component';
 
@@ -50,8 +51,13 @@ import { BitacoraComponent } from './mantenimiento/bitacora/bitacora.component';
     ContactoTelefonoComponent,
     TipoContactoComponent,
     TipoDireccionComponent,
+<<<<<<< HEAD
+    TipoEmpresaComponent,
+    CategoriaComponent,
+=======
     CategoriaComponent,
     BitacoraComponent
+>>>>>>> 6129cc0ee2c5cdb67106dc089de2f5af84688ab8
 
   ],
   imports: [
