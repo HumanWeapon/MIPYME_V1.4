@@ -60,7 +60,7 @@ export class SidebarService {
       icono: 'nav-icon fas fa-solid fa-user',
       submenu: [
         {titulo:'Consultar', url: '', icono: 'fa fa-users ml-1'},
-        {titulo:'Mis Consultas', url: '', icono: 'fa fa-users ml-1'},
+        {titulo:'Mis Consultas', url: 'pymes', icono: 'fa fa-users ml-1'},
         {titulo:'Mi Perfil', url: 'perfil-pyme', icono: 'fa fa-solid fa-user ml-1'},
       ]
     },
