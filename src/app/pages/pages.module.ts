@@ -26,6 +26,8 @@ import { ContactoTelefonoComponent } from './empresas/contacto-telefono/contacto
 import { TipoContactoComponent } from './empresas/tipo-contacto/tipo-contacto.component';
 import { TipoDireccionComponent } from './empresas/tipo-direccion/tipo-direccion.component';
 import { TipoEmpresaComponent } from './empresas/tipo-empresa/tipo-empresa.component';
+import { CategoriaComponent } from './empresas/categoria-producto/categoria.component';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +51,7 @@ import { TipoEmpresaComponent } from './empresas/tipo-empresa/tipo-empresa.compo
     TipoContactoComponent,
     TipoDireccionComponent,
     TipoEmpresaComponent,
-
+    CategoriaComponent,
 
   ],
   imports: [

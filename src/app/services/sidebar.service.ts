@@ -48,6 +48,10 @@ export class SidebarService {
         {titulo:'Tipo Direccion', url: 'tipoDireccion', icono: 'fas fa-solid fa-city ml-1'},
         {titulo:'Tipo Contacto', url: 'tipoContacto', icono: 'fas fa-solid fa-address-book ml-1'},
         {titulo:'Tipo Empresa', url: 'tipoEmpresa', icono: 'fas fa-solid fa-address-book ml-1'},
+        {titulo:'Contacto telefono', url: 'contactoTelefono', icono: 'fas fa-solid fa-address-book ml-1'},
+        {titulo:'Tipo direccion', url: 'tipoDireccion', icono: 'fas fa-solid fa-city ml-1'},
+        {titulo:'Tipo contacto', url: 'tipoContacto', icono: 'fas fa-solid fa-address-book ml-1'},
+        {titulo:'Categoría de producto', url: 'categoriaproducto', icono: 'fas fa-solid fa-address-book ml-1'},
       ]
     },
     {
