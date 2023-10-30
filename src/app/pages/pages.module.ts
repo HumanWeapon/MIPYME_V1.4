@@ -28,6 +28,7 @@ import { TipoDireccionComponent } from './empresas/tipo-direccion/tipo-direccion
 import { TipoEmpresaComponent } from './empresas/tipo-empresa/tipo-empresa.component';
 import { CategoriaComponent } from './empresas/categoria-producto/categoria.component';
 import { BitacoraComponent } from './mantenimiento/bitacora/bitacora.component';
+import { PymesComponent } from './empresas/pymes/pymes.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { BitacoraComponent } from './mantenimiento/bitacora/bitacora.component';
     PagesComponent,
     ObjetosComponent,
     RolesComponent,
+    TipoEmpresaComponent,
     PermisosComponent,
     UsuariosComponent,
     PreguntasComponent,
@@ -45,6 +47,7 @@ import { BitacoraComponent } from './mantenimiento/bitacora/bitacora.component';
     ProductosComponent,
     RequisitosComponent,
     PerfilPymeComponent,
+    PymesComponent,
     CiudadesComponent,
     ContactoComponent,
     ContactoTelefonoComponent,
