@@ -1,16 +1,16 @@
 //Elaborado Por Breydy Flores
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Categoria } from 'src/app/interfaces/empresas/categoria';
 import { ErrorService } from 'src/app/services/error.service';
 import { CategoriaService } from 'src/app/services/negocio/categoria.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgZone } from '@angular/core';
-declare var $: any;
-      
+
+                       
 
 @Component({
   selector: 'app-categoria',
@@ -18,8 +18,9 @@ declare var $: any;
   styleUrls: ['./categoria.component.css']
 })
 
-export class CategoriaComponent implements OnInit, AfterViewInit {
+export class CategoriaComponent implements OnInit{
  
+  subscription: Subscription | undefined; 
 
   CategoriaEditando: Categoria = {
     id_categoria: 0,
@@ -63,28 +64,33 @@ export class CategoriaComponent implements OnInit, AfterViewInit {
     private modalService: NgbModal,
     private ngZone: NgZone
     ) { }
+  
+  ngOnInit(): void {
+    this.getCarProd();
 
-    ngOnInit(): void {
-      this.dtOptions = {
-        pagingType: 'full_numbers',
-        pageLength: 7,
-        language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
-        responsive: true
-      };
-    
-      this._categoriaService.getAllCategorias()
-        .subscribe((res: any) => {
-          this.listCate = res;
-          this.dtTrigger.next(0); // No es necesario pasar ningún valor
-    
-          // Inicializa la tabla DataTable una vez que los datos estén disponibles
-          const dataTable = $('#tablaCatProd').DataTable();
-        });
-    }
+    /*this.subscription = this._categoriaService.refresh$.subscribe( ()=>{
+      this.ngOnDestroy();
+      this.getCarProd();
+    } )*/
+  }
 
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
+  }
+
+  getCarProd(){
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 7,
+      language: {url:'//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'},
+      responsive: true
+    };
+    this._categoriaService.getAllCategorias()
+      .subscribe((res: any) => {
+        this.listCate = res;
+        this.dtTrigger.next(0);
+      });
   }
 
   onInputChange(event: any, field: string) {
@@ -94,9 +100,7 @@ export class CategoriaComponent implements OnInit, AfterViewInit {
       event.target.value = uppercaseValue;
     }
   }
-  ngAfterViewInit(): void {
-    const dataTable = $('#tablaCatProd').DataTable();
-  }
+
 
   inactivarCategoria(categoria: Categoria, i: any){
     this._categoriaService.inactivarCategoria(categoria).subscribe(data => this.toastr.success('La categoria: '+ categoria.id_categoria + ' ha sido inactivada'));
@@ -121,12 +125,9 @@ export class CategoriaComponent implements OnInit, AfterViewInit {
         fecha_modificacion: new Date(),
         estado: 1,
       }
-      console.log(catProducto)
-
       this._categoriaService.addCategoriaProducto(catProducto).subscribe((data: Categoria) => {
-        console.log(data)
-        this.listCate.push(data);
         this.toastr.success('Categoría agregada exitosamente');
+        location.reload();
       });
     }
   }

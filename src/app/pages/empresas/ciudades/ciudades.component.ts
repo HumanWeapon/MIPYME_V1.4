@@ -126,12 +126,8 @@ onInputChange(event: any, field: string) {
 
     this._ciudadService.addCiudad(this.nuevoCiudad).subscribe(data => {
       this.toastr.success('Ciudad agregado con éxito');
-      
        // Recargar la página
        location.reload();
-       // Actualizar la vista
-       this.ngZone.run(() => {        
-       });
     });
   }
 
