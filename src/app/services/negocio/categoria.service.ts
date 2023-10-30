@@ -9,6 +9,9 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class CategoriaService {
+  updateCategoria(CategoriaEditando: Categoria) {
+    throw new Error('Method not implemented.');
+  }
 
   public categoria: Categoria | undefined;
   private _refresh$ = new Subject<void>();
