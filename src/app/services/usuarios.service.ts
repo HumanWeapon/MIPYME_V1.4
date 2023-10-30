@@ -43,6 +43,11 @@ export class UsuariosService {
   login(usuario: Usuario): Observable<string> {
     return this.http.post<string>(`${this.myAppUrl}${this.myApiUrl}/login`, usuario)
   }
+  getOneUsuario(usuario: any): Observable<Usuario> {
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Usuario>(`${this.myAppUrl}${this.myApiUrl}/getUsuario`, usuario)
+  }
 
   getUsuario(usuario: Usuario): Observable<Usuario> {
     const token = localStorage.getItem('token')

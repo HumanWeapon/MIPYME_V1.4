@@ -30,7 +30,7 @@ export class SidebarService {
       url: ' ',
       icono: 'nav-icon fas fa-solid fa-wrench',
       submenu: [
-        {titulo:' Bitácora', url: ' ', icono: 'fa fa-solid fa-list-ul ml-1'},
+        {titulo:' Bitácora', url: 'bitacora', icono: 'fa fa-solid fa-list-ul ml-1'},
         {titulo:'Backups', url: ' ', icono: 'fa fa-users ml-1'},
         {titulo:'Restaurar', url: ' ', icono: 'fa fa-user-shield ml-1'},
       ]
