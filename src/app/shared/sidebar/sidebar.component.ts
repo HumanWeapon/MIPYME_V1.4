@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { SidebarService } from 'src/app/services/sidebar.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { SidebarService } from 'src/app/services/sidebar.service';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
   menuItems:any[];
   userName: string = '';
   //menuItems2:any[];
@@ -18,11 +19,11 @@ export class SidebarComponent {
   }
 
   ngOnInit(): void {
+    this.menuItems = this._sideBarService.menu;
     const local = localStorage.getItem('usuario');
     if(local !== null){
       this.userName = local;
-    }
-    
+    };
   }
 
   logout(){

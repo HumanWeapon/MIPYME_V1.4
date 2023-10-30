@@ -8,6 +8,7 @@ import { Objetos } from 'src/app/interfaces/objetos';
 import { ErrorService } from 'src/app/services/error.service';
 import { ObjetosService } from 'src/app/services/objetos.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgZone } from '@angular/core';
 
 
 @Component({
@@ -53,12 +54,14 @@ export class ObjetosComponent implements OnInit{
   dtTrigger: Subject<any> = new Subject<any>();
   modalEditar: NgbModalRef | undefined;
 
+
   constructor(
     private _objService: ObjetosService,
     private toastr: ToastrService,
     private router: Router, 
     private _errorService: ErrorService,
-    private modalService: NgbModal 
+    private modalService: NgbModal,
+    private ngZone: NgZone
     ) { }
 
   
@@ -120,6 +123,12 @@ export class ObjetosComponent implements OnInit{
 
     this._objService.addObjeto(this.nuevoObjeto).subscribe(data => {
       this.toastr.success('Objeto agregado con éxito');
+      
+       // Recargar la página
+       location.reload();
+       // Actualizar la vista
+       this.ngZone.run(() => {        
+       });
     });
   }
 
@@ -147,6 +156,11 @@ export class ObjetosComponent implements OnInit{
       this.listObjetos[this.indice].objeto = this.objetoEditando.objeto;
       this.listObjetos[this.indice].descripcion = this.objetoEditando.descripcion;
       this.listObjetos[this.indice].estado_objeto = this.objetoEditando.estado_objeto;
+        // Recargar la página
+        location.reload();
+        // Actualizar la vista
+        this.ngZone.run(() => {        
+        });
     
     });
   }

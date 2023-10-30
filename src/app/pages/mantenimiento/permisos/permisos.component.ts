@@ -27,6 +27,7 @@ export class PermisosComponent implements OnInit, OnDestroy {
     permiso_eliminacion: false,
     permiso_actualizacion: false,
     permiso_consultar: false,
+    estado_permiso: 0,
     creado_por: '',
     fecha_creacion: new Date(),
     modificado_por: '',
@@ -41,6 +42,7 @@ export class PermisosComponent implements OnInit, OnDestroy {
     permiso_eliminacion: false,
     permiso_actualizacion: false,
     permiso_consultar: false,
+    estado_permiso: 0,
     creado_por: '',
     fecha_creacion: new Date(),
     modificado_por: '',
@@ -55,6 +57,7 @@ export class PermisosComponent implements OnInit, OnDestroy {
     permiso_eliminacion: false,
     permiso_actualizacion: false,
     permiso_consultar:false,
+    estado_permiso: 0,
     creado_por: '',
     fecha_creacion: new Date(),
     modificado_por: '',
@@ -70,6 +73,7 @@ export class PermisosComponent implements OnInit, OnDestroy {
       permiso_eliminacion: false,
       permiso_actualizacion: false,
       permiso_consultar: false,
+      estado_permiso: 0,
       creado_por: '',
       fecha_creacion: new Date(),
       modificado_por: '',
@@ -127,17 +131,15 @@ export class PermisosComponent implements OnInit, OnDestroy {
     });
   }
 
-  inactivarPermiso(permisos: Permisos, i: any) {
-    this._permService.inactivarPermiso(permisos).subscribe(() => {
-      this.toastr.success('El permiso ' + permisos.id_permisos + ' ha sido inactivado');
-    });
+  inactivarPermiso(permisos: Permisos, i: any){
+    this._permService.inactivarPermiso(permisos).subscribe(data => this.toastr.success('El permiso: ha sido inactivado'));
+    this.listPermisos[i].estado_permiso = 2;
+  }
+  activarPermiso(permisos: Permisos, i: any){
+    this._permService.activarPermiso(permisos).subscribe(data => this.toastr.success('El permiso: ha sido activado'));
+    this.listPermisos[i].estado_permiso = 1;
   }
 
-  activarPermiso(permisos: Permisos, i: any) {
-    this._permService.activarPermiso(permisos).subscribe(() => {
-      this.toastr.success('El permiso ' + permisos.id_permisos + ' ha sido activado');
-    });
-  }
 
   agregarNuevoPermiso() {
     this.nuevoPermiso.id_rol = 3; // Asigna el ID del rol 

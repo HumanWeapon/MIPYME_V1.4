@@ -38,4 +38,5 @@ export class PreguntasUsuarioService {
     const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
     return this.http.post<Preguntas_Usuario>(`${this.myAppUrl}${this.myApiUrl}/postPreguntaUsuario`, preguntas, { headers: headers })
   }
+
 }

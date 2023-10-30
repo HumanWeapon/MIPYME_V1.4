@@ -1,5 +1,5 @@
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="position:fixed;">
     <!-- Brand Logo -->
     <a href="../../index3.html" class="brand-link">
       <img src="../../../assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -11,7 +11,7 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-          <a title="Ver Perfil" routerLink="perfil" class="d-block ml-2"> Sesión Iniciada: {{userName}} </a>
+          <a title="Ver Perfil" routerLink="perfil" class="d-block ml-2"> Sesión Iniciada: {{ userName }} </a>
         </div>
       </div>
 
@@ -29,10 +29,20 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <!-- Dashboard -->
+        <ul class="nav nav-pills nav-sidebar flex-column">
+          <li class="nav-item">
+            <a routerLink="dashboard" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p class="ml-2"> Dashboard
+                <span class="badge badge-warning"></span>
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <nav>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
           <li class="nav-item" *ngFor="let item of menuItems">
             <a  [routerLink]='item.url' class="nav-link" style="cursor: pointer;">
               <i class="{{item.icono}}"></i>
@@ -54,19 +64,23 @@
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
-      <hr class="hr" />
+      
+      <hr class="hr"/>
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column">
           <li class="nav-item">
             <a class="nav-link" (click)="logout()">
-              <i class="nav-icon fas fa-solid fa-right-from-bracket"></i>
-              <p class="ml-2">Cerrar Sesión
-                <span class="badge badge-warning ml-2"></span>
+              <i class="nav-icon fas fa-th"></i>
+              <p class="ml-2" >Cerrar Sesión
+                <span class="badge badge-warning"></span>
               </p>
             </a>
           </li>
         </ul>
       </nav>
+      
     </div>
+
+
     <!-- /.sidebar -->
   </aside>
