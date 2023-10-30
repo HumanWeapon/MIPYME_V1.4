@@ -25,7 +25,6 @@ export class CategoriaComponent implements OnInit{
   CategoriaEditando: Categoria = {
     id_categoria: 0,
     categoria: "",
-    producto: "",
     descripcion: "",
     creado_por: 'SYSTEM',
     fecha_creacion: new Date(), 
@@ -38,7 +37,6 @@ export class CategoriaComponent implements OnInit{
   nuevaCategoriaProducto: Categoria = {
     id_categoria: 0,
     categoria: "",
-    producto: "",
     descripcion: "",
     creado_por: 'SYSTEM',
     fecha_creacion: new Date(), 
@@ -89,7 +87,7 @@ export class CategoriaComponent implements OnInit{
   }
 
 onInputChange(event: any, field: string) {
-    if (field === 'categoria' || field === 'producto'|| field === 'descripcion') {
+    if (field === 'categoria' || field === 'descripcion') {
       const inputValue = event.target.value;
       const uppercaseValue = inputValue.toUpperCase();
       event.target.value = uppercaseValue;
@@ -112,7 +110,6 @@ onInputChange(event: any, field: string) {
       this.nuevaCategoriaProducto = {
         id_categoria: 0,
         categoria: this.nuevaCategoriaProducto.categoria,
-        producto:this.nuevaCategoriaProducto.producto,
         descripcion:this.nuevaCategoriaProducto.descripcion,
         creado_por: userlocal , 
         fecha_creacion: new Date(), 
@@ -140,7 +137,6 @@ onInputChange(event: any, field: string) {
     this.CategoriaEditando = {
       id_categoria: Cate.id_categoria,
       categoria: Cate.categoria,
-      producto: Cate.producto,
       descripcion: Cate.descripcion,
       creado_por: Cate.creado_por,
       fecha_creacion: Cate.fecha_creacion, 
@@ -157,7 +153,6 @@ onInputChange(event: any, field: string) {
     this._categoriaService.editarCategoriaProducto(this.CategoriaEditando).subscribe(data => {
       this.toastr.success('Categoria editada con éxito');
       this.listCate[this.indice].categoria = this.CategoriaEditando.categoria;
-      this.listCate[this.indice].producto = this.CategoriaEditando.producto;
       this.listCate[this.indice].descripcion = this.CategoriaEditando.descripcion;
         // Recargar la página
         location.reload();

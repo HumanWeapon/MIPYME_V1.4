@@ -22,11 +22,9 @@ export class CategoriaService {
    }
 
 
-
    addCategoriaProducto(Cate: Categoria): Observable<any> {
     const nuevaCategoriaProducto = {
      categoria: Cate.categoria,
-     producto: Cate.producto, 
       descripcion: Cate.descripcion,
       creado_por: Cate.creado_por, 
       fecha_creacion: Cate.fecha_creacion, 

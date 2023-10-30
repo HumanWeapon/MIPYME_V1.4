@@ -5,7 +5,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarCategoriaProducto">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarCategoria">
                 <i class="fas fa-user-plus"></i> Agregar Categoria Producto</button>
             </div>
             <!-- /.card-header -->
@@ -27,12 +27,10 @@
                     <tbody>
                       <tr *ngFor="let cate of listCate; let i = index">
                         <td>{{ cate.categoria}}</td>
-                        <td>{{cate.producto}}</td>
                         <td>{{ cate.descripcion }}</td>
                         <td>{{ cate.creado_por}}</td>
                         <td>{{ cate.fecha_creacion }}</td>
                         <td>{{ cate.modificado_por}}</td>
-                        <td>{{ cate.fecha_modificacion}}</td>
                         <td>
                           <ng-container *ngIf="cate.estado === 1">Activo</ng-container>
                           <ng-container *ngIf="cate.estado === 2">Inactivo</ng-container>
@@ -63,7 +61,7 @@
   <!-- /.content -->
 
 <!-- Agregar Categoria Form -->
-<div class="modal fade" id="agregarCategoriaProducto">
+<div class="modal fade" id="agregarCategoria">
 <div class="modal-dialog">
   <div class="modal-content">
       <div class="modal-header">
@@ -76,15 +74,11 @@
           <form (submit)="agregarNuevaCategoriaProducto()">
               <div class="form-group">
                   <label for="nuevaCategoriaProducto">Categoria:</label>
-                  <input type="text" [(ngModel)]="nuevaCategoriaProducto.categoria" name="nuevaCategoriaProducto.categoria" (input)="onInputChange($event, 'categoria')"  class="form-control" id="nuevaCategoriaProducto" placeholder="Categoria">
-              </div>
-              <div class="form-group">
-                <label for="nuevaCategoriaProducto">Producto:</label>
-                <input type="text" [(ngModel)]="nuevaCategoriaProducto.producto" name="nuevaCategoriaProducto.producto" (input)="onInputChange($event, 'producto')" class="form-control" id="nuevaCategoriaProducto" placeholder="Producto">
-            </div>  
+                  <input type="text" [(ngModel)]="nuevaCategoriaProducto.categoria" name="nuevaCategoriaProducto.categoria" (input)="onInputChange($event, 'categoria')"  class="form-control" id="nuevaCategoriaProducto" placeholder="categoria">
+              </div> 
               <div class="form-group">
                   <label for="nuevaCategoriaProducto">Descripción:</label>
-                  <input type="text" [(ngModel)]="nuevaCategoriaProducto.descripcion" name="nuevaCategoriaProducto.descripcion" (input)="onInputChange($event, 'descripcion')" class="form-control" id="nuevaCategoriaProducto" placeholder="Descripción">
+                  <input type="text" [(ngModel)]="nuevaCategoriaProducto.descripcion" name="nuevaCategoriaProducto.descripcion" (input)="onInputChange($event, 'descripcion')" class="form-control" id="nuevaCategoriaProducto" placeholder="descripción">
               </div>    
           </form>
       </div>
@@ -112,15 +106,11 @@
           <form>
             <div class="form-group">
                 <label for="CategoriaEditando">Categoria</label>
-                <input type="text" [(ngModel)]="CategoriaEditando.categoria" name="CategoriaEditando.Categoria" class="form-control" id="CategoriaEditando" placeholder="Categoria" (input)="onInputChange($event, 'Categoria')" >
+                <input type="text" [(ngModel)]="CategoriaEditando.categoria" name="CategoriaEditando.Categoria" class="form-control" id="editarCategoria" placeholder="Categoria" (input)="onInputChange($event, 'categoria')" >
             </div>
-        <div class="form-group">
-         <label for="CategoriaEditando">Producto: </label>
-         <input type="text" [(ngModel)]="CategoriaEditando.producto" name="CategoriaProductoEditando.producto"  class="form-control" id="editarDescripcion" placeholder="Producto" (input)="onInputChange($event, 'Producto')" >
-        </div>
                <div class="form-group">
                 <label for="CategoriaEditando">Descripción:</label>
-                <input type="text" [(ngModel)]="CategoriaEditando.descripcion" name="CategoriaProductoEditando.descripcion"  class="form-control" id="editarDescripcion" placeholder="Descripción" (input)="onInputChange($event, 'Descripcion')" >
+                <input type="text" [(ngModel)]="CategoriaEditando.descripcion" name="CategoriaProductoEditando.descripcion"  class="form-control" id="editarDescripcion" placeholder="Descripción" (input)="onInputChange($event, 'descripcion')" >
                </div>
           </form>
       </div>
