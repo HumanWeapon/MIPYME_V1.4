@@ -51,13 +51,10 @@ import { BitacoraComponent } from './mantenimiento/bitacora/bitacora.component';
     ContactoTelefonoComponent,
     TipoContactoComponent,
     TipoDireccionComponent,
-<<<<<<< HEAD
     TipoEmpresaComponent,
     CategoriaComponent,
-=======
     CategoriaComponent,
     BitacoraComponent
->>>>>>> 6129cc0ee2c5cdb67106dc089de2f5af84688ab8
 
   ],
   imports: [
