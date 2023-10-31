@@ -54,7 +54,7 @@ const routes: Routes = [
     {path: 'contactoTelefono', component:ContactoTelefonoComponent, data:{titulo: 'Contacto Telefono'}},
     {path: 'categoriaproducto', component:CategoriaComponent, data:{titulo: 'Categoría de productos'}},
     {path: 'bitacora', component:BitacoraComponent, data:{titulo: 'Bitácora'}},
-    {path: 'pymes', component:PymesComponent,data:{titulo:'Pymes'}},
+    {path: 'pymes', component:PymesComponent, data:{titulo:'Pymes'}},
   ]}
 ];
 
