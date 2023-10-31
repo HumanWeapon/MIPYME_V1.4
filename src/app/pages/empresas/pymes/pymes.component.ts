@@ -65,12 +65,15 @@ export class PymesComponent implements OnInit  {
   ) {}
 
   ngOnInit(): void {
+    this.getAllPyme();
+  }
+
+  getAllPyme(){
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10,
       language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
       responsive: true,
-      search: true
     };
 
     this._pymeService.getAllPymes().subscribe({
@@ -81,8 +84,9 @@ export class PymesComponent implements OnInit  {
       }
 
     });
-  }
 
+
+  }
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();

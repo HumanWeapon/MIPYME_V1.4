@@ -65,7 +65,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Agregar Pyme</h4>
+        <h4 class="modal-title">Agregar</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -73,23 +73,33 @@
       
       <div class="modal-body">
         <form (ngSubmit)="agregarNuevaPyme()">
+          <table id="example" class="table table-striped" style="width:100%">
+          <!-- Campo: Nombre de la Pyme -->
           <div class="form-group">
             <label for="nuevaPyme">Nombre de la Pyme:</label>
             <input type="text" [(ngModel)]="nuevaPyme.nombre_pyme" name="nombre_pyme" (input)="onInputChange($event, 'nombre_pyme')" class="form-control" id="nuevaPyme" placeholder="Nombre de la Pyme">
           </div>
+
+          <!-- Campo: Categoría -->
           <div class="form-group">
-            <label for="nuevaCategoria">Categoria:</label>
-            <input type="text" [(ngModel)]="nuevaPyme.categoria" name="categoria" (input)="onInputChange($event, 'categoria')" class="form-control" id="categoria" placeholder="Categoria">
+            <label for="nuevaCategoria">Categoría:</label>
+            <input type="text" [(ngModel)]="nuevaPyme.categoria" name="categoria" (input)="onInputChange($event, 'categoria')" class="form-control" id="categoria" placeholder="Categoría">
           </div>
+
+          <!-- Campo: Descripción -->
           <div class="form-group">
-            <label for="nuevaDescripcion">Descripcion:</label>
-            <input type="text" [(ngModel)]="nuevaPyme.descripcion" name="descripcion" (input)="onInputChange($event, 'descripcion')"class="form-control" id="descripcion" placeholder="Descripcion">
+            <label for="nuevaDescripcion">Descripción:</label>
+            <input type="text" [(ngModel)]="nuevaPyme.descripcion" name="descripcion" (input)="onInputChange($event, 'descripcion')" class="form-control" id="descripcion" placeholder="Descripción">
           </div>
-            
+
+          <!-- Botones -->
           <div class="modal-footer justify-content-between">
+            <!-- Botón Cancelar -->
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            <!-- Botón Guardar -->
             <button type="submit" class="btn btn-success" (click)="agregarNuevaPyme()" data-dismiss="modal">Guardar</button>
           </div>
+          </table>
         </form>
       </div>
     </div>
