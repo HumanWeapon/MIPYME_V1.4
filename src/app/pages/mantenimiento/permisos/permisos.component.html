@@ -46,7 +46,9 @@
                           <td style="text-align: center;">
                             <ng-container *ngIf="perm.permiso_actualizacion; else noCheckbox">{{ '✓' }}</ng-container>
                             <ng-template #noCheckbox>{{ 'X' }}</ng-template>
-                          </td>   
+                          </td>  
+                          <td> {{ perm.creado_por}} </td> 
+
                           <td>
                             <ng-container *ngIf="perm.estado_permiso === 1">Activo</ng-container>
                             <ng-container *ngIf="perm.estado_permiso === 2">Inactivo</ng-container>

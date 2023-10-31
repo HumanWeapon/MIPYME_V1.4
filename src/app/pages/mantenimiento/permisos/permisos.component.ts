@@ -108,10 +108,9 @@ export class PermisosComponent implements OnInit, OnDestroy {
       language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
       responsive: true,
     };
-
     this._permService.getAllPermisos().subscribe((res: any) => {
       this.listPermisos = res;
-      this.dtTrigger.next(null);
+      this.dtTrigger.next(0);
     });
   }
 

@@ -53,10 +53,10 @@ import { PymesComponent } from './empresas/pymes/pymes.component';
     ContactoTelefonoComponent,
     TipoContactoComponent,
     TipoDireccionComponent,
+    TipoEmpresaComponent,
     CategoriaComponent,
     BitacoraComponent,
     TipoEmpresaComponent
-
 
   ],
   imports: [
