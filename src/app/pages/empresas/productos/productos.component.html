@@ -76,14 +76,21 @@
       </div>
       <div class="modal-body">
           <form (submit)="agregarNuevoProducto()">
-              <div class="form-group">
-                  <label for="nuevoObjeto">Nombre del Producto:</label>
-                  <input type="text" [(ngModel)]="nuevoProducto.producto" name="nuevoProducto.producto" (input)="onInputChange($event, 'producto')" class="form-control" id="nuevoProducto" placeholder="Nombre del producto">
-              </div>
-              <div class="form-group">
-                  <label for="nuevoDescripcion">Descripción</label>
-                  <input type="text" [(ngModel)]="nuevoProducto.descripcion" name="nuevoProducto.descripcion" (input)="onInputChange($event, 'descripcion')" class="form-control" id="nuevodescripcion" placeholder="Descripción">
-              </div>
+            <div class="form-group">
+                <label for="nuevoObjeto">Nombre del Producto:</label>
+                <input type="text" [(ngModel)]="nuevoProducto.producto" name="nuevoProducto.producto" (input)="onInputChange($event, 'producto')" class="form-control" id="nuevoProducto" placeholder="Nombre del producto">
+            </div>
+            <div class="form-group">
+                <label for="nuevoDescripcion">Descripción</label>
+                <input type="text" [(ngModel)]="nuevoProducto.descripcion" name="nuevoProducto.descripcion" (input)="onInputChange($event, 'descripcion')" class="form-control" id="nuevodescripcion" placeholder="Descripción">
+            </div>
+
+            <div class="form-group">
+              <label for="editarRol">Categoría:</label>
+              <select class="form-control" id="editarRol" [(ngModel)]="nuevoProducto.id_categoria" name="id_categoria">
+                <option *ngFor="let item of listCategorias" [ngValue]="item.id_categoria">{{ item.categoria }}</option>
+              </select>
+            </div>
                           
           </form>
       </div>

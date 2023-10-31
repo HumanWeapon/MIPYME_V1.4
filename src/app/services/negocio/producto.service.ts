@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/enviroments/enviromet';
 import { Observable, catchError } from 'rxjs';
-import { Productos } from '../interfaces/empresas/producto';
+import { Productos } from '../../interfaces/empresas/producto';
 
 @Injectable({
   providedIn: 'root'
@@ -23,18 +23,10 @@ export class ProductosService {
 
 
 
-   addProducto(pro: Productos): Observable<any> {
-    const nuevoProducto = {
-      producto: pro.producto, 
-      descripcion: pro.descripcion, 
-      creado_por: pro.creado_por, 
-      fecha_creacion: pro.fecha_creacion, 
-      modificado_por: pro.modificado_por, 
-      fecha_modificacion: pro.fecha_modificacion,
-      estado_: pro.estado
-
-      };
-      return this.http.post<Productos>(`${this.myAppUrl}${this.myApiUrl}/postProducto`, nuevoProducto)
+   addProducto(producto: Productos): Observable<any> {
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Productos>(`${this.myAppUrl}${this.myApiUrl}/postProducto`, producto,{ headers: headers })
   }
 
   
