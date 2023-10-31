@@ -20,6 +20,19 @@ export class PymesService {
     // Asignar un valor a una clave en localStorage
    }
 
+
+   postPyme(pyme: Pyme): Observable<any> {
+    const nuevaPyme = {
+                nombre_pyme: pyme.nombre_pyme,
+                categoria: pyme.categoria,
+                descripcion: pyme.descripcion, 
+                creado_por: pyme.creado_por,
+                estado: pyme.estado
+      };
+      return this.http.post<Pyme>(`${this.myAppUrl}${this.myApiUrl}/postPyme`, nuevaPyme)
+  }
+
+
    getPyme(pyme: Pyme): Observable<Pyme> {
     const token = localStorage.getItem('token')
     const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
@@ -29,5 +42,30 @@ export class PymesService {
   getAllPymes(): Observable<Pyme[]> {
     return this.http.get<Pyme[]>(`${this.myAppUrl}${this.myApiUrl}/getAllPymes`)
   }
+
+  inactivarPyme(pyme: Pyme): Observable<Pyme>{
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Pyme>(`${this.myAppUrl}${this.myApiUrl}/inactivatePyme`, pyme, { headers: headers })
+  }
+
+  activarPyme(pyme: Pyme): Observable<Pyme>{
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Pyme>(`${this.myAppUrl}${this.myApiUrl}/activatePyme`, pyme, { headers: headers })
+  }
+
+  cambiarContrasena(pyme: Pyme): Observable<Pyme>{
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.put<Pyme>(`${this.myAppUrl}${this.myApiUrl}/cambiarContrasena`, pyme, { headers: headers })
+  }
+
+  editarPyme(pyme: Pyme): Observable<any> {
+    const token = localStorage.getItem('token')
+    const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
+    return this.http.post<Pyme>(`${this.myAppUrl}${this.myApiUrl}/updatePyme`, pyme, { headers: headers })
+  }
+
 
 }

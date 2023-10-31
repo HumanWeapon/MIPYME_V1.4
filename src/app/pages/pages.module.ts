@@ -18,7 +18,7 @@ import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.componen
 import { ParametrosComponent } from './mantenimiento/parametros/parametros.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ProductosComponent } from './empresas/productos/productos.component';
-import { RequisitosComponent } from './empresas/requisitos/requisitos.component';
+import { RequisitoComponent } from './empresas/requisitos/requisitos.component';
 import { PerfilPymeComponent } from './inicio/perfil-pyme/perfil-pyme.component';
 import { CiudadesComponent } from './empresas/ciudades/ciudades.component';
 import { ContactoComponent } from './empresas/contacto/contacto.component';
@@ -28,6 +28,7 @@ import { TipoDireccionComponent } from './empresas/tipo-direccion/tipo-direccion
 import { TipoEmpresaComponent } from './empresas/tipo-empresa/tipo-empresa.component';
 import { CategoriaComponent } from './empresas/categoria-producto/categoria.component';
 import { BitacoraComponent } from './mantenimiento/bitacora/bitacora.component';
+import { PymesComponent } from './empresas/pymes/pymes.component';
 
 @NgModule({
   declarations: [
@@ -38,22 +39,24 @@ import { BitacoraComponent } from './mantenimiento/bitacora/bitacora.component';
     PagesComponent,
     ObjetosComponent,
     RolesComponent,
+    TipoEmpresaComponent,
     PermisosComponent,
     UsuariosComponent,
     PreguntasComponent,
     ParametrosComponent,
     ProductosComponent,
-    RequisitosComponent,
+    RequisitoComponent,
     PerfilPymeComponent,
+    PymesComponent,
     CiudadesComponent,
     ContactoComponent,
     ContactoTelefonoComponent,
     TipoContactoComponent,
     TipoDireccionComponent,
+    TipoEmpresaComponent,
     CategoriaComponent,
     BitacoraComponent,
     TipoEmpresaComponent,
-
 
   ],
   imports: [

@@ -11,7 +11,7 @@ import { PreguntasComponent } from './mantenimiento/preguntas/preguntas.componen
 import { ParametrosComponent } from './mantenimiento/parametros/parametros.component';
 import { PerfilComponent } from './inicio/perfil/perfil.component';
 import { ProductosComponent } from './empresas/productos/productos.component';
-import { RequisitosComponent } from './empresas/requisitos/requisitos.component';
+import { RequisitoComponent } from './empresas/requisitos/requisitos.component';
 import { PerfilPymeComponent } from './inicio/perfil-pyme/perfil-pyme.component';
 import { CiudadesComponent } from './empresas/ciudades/ciudades.component';
 import { TipoDireccionComponent } from './empresas/tipo-direccion/tipo-direccion.component';
@@ -21,6 +21,7 @@ import { TipoEmpresaComponent } from './empresas/tipo-empresa/tipo-empresa.compo
 import { ContactoTelefonoComponent } from './empresas/contacto-telefono/contacto-telefono.component';
 import { CategoriaComponent } from './empresas/categoria-producto/categoria.component';
 import { BitacoraComponent } from './mantenimiento/bitacora/bitacora.component';
+import { PymesComponent } from './empresas/pymes/pymes.component';
 
 
 
@@ -39,7 +40,7 @@ const routes: Routes = [
     {path: 'parametros', component: ParametrosComponent, data:{titulo: 'Administrar Parametros'}},
     {path: 'perfil', component: PerfilComponent, data:{titulo: 'Mi Perfil'}},
     {path: 'productos', component:ProductosComponent, data:{titulo: 'Producto'}},
-    {path: 'requisitos', component:RequisitosComponent, data:{titulo: 'Requisitos'}},
+    {path: 'requisitos', component:RequisitoComponent, data:{titulo: 'Requisitos'}},
     {path: 'perfil-pyme', component:PerfilPymeComponent, data:{titulo: 'Mi Perfil Pyme'}},
     {path: 'ciudades', component:CiudadesComponent, data:{titulo: 'Ciudades'}},
     {path: 'tipoDireccion', component:TipoDireccionComponent, data:{titulo: 'Tipo de Direccion'}},
@@ -53,6 +54,7 @@ const routes: Routes = [
     {path: 'contactoTelefono', component:ContactoTelefonoComponent, data:{titulo: 'Contacto Telefono'}},
     {path: 'categoriaproducto', component:CategoriaComponent, data:{titulo: 'Categoría de productos'}},
     {path: 'bitacora', component:BitacoraComponent, data:{titulo: 'Bitácora'}},
+    {path: 'pymes', component:PymesComponent, data:{titulo:'Pymes'}},
   ]}
 ];
 

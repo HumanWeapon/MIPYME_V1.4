@@ -72,6 +72,7 @@ export class TipoEmpresaComponent implements OnInit{
         // Do not forget to unsubscribe the event
         this.dtTrigger.unsubscribe();
       }
+
       onInputChange(event: any, field: string) {
         if (field === 'tipo_empresa' || field === 'descripcion') {
           const inputValue = event.target.value;
@@ -79,6 +80,7 @@ export class TipoEmpresaComponent implements OnInit{
           event.target.value = uppercaseValue;
         }
       }
+      
       inactivarTipoEmpresa(tipoEmpresa: TipoEmpresa, i: any){
         this.tipoempresaService.inactivarTipoEmpresa(tipoEmpresa).subscribe(data => this.toastr.success('El tipo de empresa: '+ tipoEmpresa.tipo_empresa + ' ha sido inactivado'));
         this.listTipoE[i].estado = 2; 

@@ -1,14 +1,11 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from  '@angular/router';
-import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { Productos } from 'src/app/interfaces/empresas/producto';
-import { ErrorService } from 'src/app/services/error.service';
-import { ProductosService } from 'src/app/services/producto.service';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { NgZone } from '@angular/core';
+import { ProductosService } from 'src/app/services/negocio/producto.service';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { CategoriaService } from 'src/app/services/negocio/categoria.service';
+import { Categoria } from 'src/app/interfaces/empresas/categoria';
 
 
 @Component({
@@ -49,6 +46,7 @@ export class ProductosComponent implements OnInit{
   dtOptions: DataTables.Settings = {};
   listProductos: Productos[] = [];
   data: any;
+  listCategorias: Categoria[] = [];
 
   // We use this trigger because fetching the list of persons can be quite long,
   // thus we ensure the data is fetched before rendering
@@ -60,14 +58,18 @@ export class ProductosComponent implements OnInit{
   constructor(
     private _objService: ProductosService,
     private toastr: ToastrService,
-    private router: Router, 
-    private _errorService: ErrorService,
-    private modalService: NgbModal,
-    private ngZone: NgZone
+    private _categoriaProductos: CategoriaService
     ) { }
 
   
   ngOnInit(): void {
+
+    this._categoriaProductos.getAllCategorias().subscribe(data => {
+      this.listCategorias = data
+      console.log(this.listCategorias)
+    });
+
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 8,
@@ -111,28 +113,26 @@ export class ProductosComponent implements OnInit{
 
   agregarNuevoProducto() {
 
-    this.nuevoProducto = {
-      id_producto: 0, 
-      id_categoria: 0, 
-      producto: this.nuevoProducto.producto, 
-      descripcion:this.nuevoProducto.descripcion, 
-      estado: 0,
-      creado_por: 'SYSTEM', 
-      fecha_creacion: new Date(), 
-      modificado_por: 'SYSTEM', 
-      fecha_modificacion: new Date()
+    const usuarioLocal = localStorage.getItem('usuario')
+    if(usuarioLocal){
+      this.nuevoProducto = {
+        id_producto: 0, 
+        id_categoria: this.nuevoProducto.id_categoria, 
+        producto: this.nuevoProducto.producto, 
+        descripcion:this.nuevoProducto.descripcion, 
+        estado: 1,
+        creado_por: usuarioLocal, 
+        fecha_creacion: new Date(), 
+        modificado_por: usuarioLocal, 
+        fecha_modificacion: new Date()
 
-    };
-
-    this._objService.addProducto(this.nuevoProducto).subscribe(data => {
-      this.toastr.success('Producto agregado con éxito');
-      
-       // Recargar la página
-       location.reload();
-       // Actualizar la vista
-       this.ngZone.run(() => {        
-       });
-    });
+      };
+      console.log(this.nuevoProducto);
+      this._objService.addProducto(this.nuevoProducto).subscribe(data => {
+        this.toastr.success('Producto agregado con éxito');
+         location.reload();
+      });
+    }
   }
 
 
@@ -160,12 +160,7 @@ export class ProductosComponent implements OnInit{
       this.listProductos[this.indice].producto = this.productoEditando.producto;
       this.listProductos[this.indice].descripcion = this.productoEditando.descripcion;
       this.listProductos[this.indice].estado = this.productoEditando.estado;
-        // Recargar la página
-        location.reload();
-        // Actualizar la vista
-        this.ngZone.run(() => {        
-        });
-    
+      location.reload();
     });
   }
 }
