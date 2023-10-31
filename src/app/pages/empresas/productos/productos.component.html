@@ -84,17 +84,9 @@
                   <label for="nuevoDescripcion">Descripción</label>
                   <input type="text" [(ngModel)]="nuevoProducto.descripcion" name="nuevoProducto.descripcion" (input)="onInputChange($event, 'descripcion')" class="form-control" id="nuevodescripcion" placeholder="Descripción">
               </div>
-            <div class="form-group">
-                <label for="nuevoObjeto">Nombre del Producto:</label>
-                <input type="text" [(ngModel)]="nuevoProducto.producto" name="nuevoProducto.producto" (input)="onInputChange($event, 'producto')" class="form-control" id="nuevoProducto" placeholder="Nombre del producto">
-            </div>
-            <div class="form-group">
-                <label for="nuevoDescripcion">Descripción</label>
-                <input type="text" [(ngModel)]="nuevoProducto.descripcion" name="nuevoProducto.descripcion" (input)="onInputChange($event, 'descripcion')" class="form-control" id="nuevodescripcion" placeholder="Descripción">
-            </div>
 
             <div class="form-group">
-              <label for="editarRol">Categoría:</label>
+              <label for="editarCategoria">Categoría:</label>
               <select class="form-control" id="editarRol" [(ngModel)]="nuevoProducto.id_categoria" name="id_categoria">
                 <option *ngFor="let item of listCategorias" [ngValue]="item.id_categoria">{{ item.categoria }}</option>
               </select>
@@ -111,35 +103,41 @@
 </div>
 <!-- /Agregar Usuario Form -->
 
+<!-- Actualizar Usuario Form -->
+<div class="modal fade" id="abrirModalEditarObjeto">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Editar Producto</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <form>
+                <div class="form-group">
+                    <label for="editarProducto">Producto:</label>
+                    <input type="text" [(ngModel)]="productoEditando.producto" name="productoEditando" (input)="onInputChange($event, 'producto')" class="form-control" id="editarProducto" placeholder="Nombre del producto">
+                </div>
+                <div class="form-group">
+                    <label for="editarDescripcion">Descripción:</label>
+                    <input type="text" [(ngModel)]="productoEditando.descripcion" name="descripcion" (input)="onInputChange($event, 'descripcion')" class="form-control" id="editarDescripcion" placeholder="Descripción">
+                </div>
+                <div class="form-group">
+                  <label for="editarCategoria">Categoría:</label>
+                  <select class="form-control" id="editarCategoria" [(ngModel)]="productoEditando.id_categoria" name="id_categoria">
+                    <option *ngFor="let item of listCategorias" [ngValue]="item.id_categoria">{{ item.categoria }}</option>
+                  </select>
+                </div>
 
-<!-- Actualizar Producto Form -->
-<div class="modal fade" id="abrirModalEditarProducto">
-<div class="modal-dialog">
-  <div class="modal-content">
-      <div class="modal-header">
-          <h4 class="modal-title">Editar Producto</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </button>
-      </div>
-      <div class="modal-body">
-          <form>
-            <div class="form-group">
-                <label for="productoEditando">Nombre de producto:</label>
-                <input type="text" [(ngModel)]="productoEditando.producto" name="productoEditando.producto" (input)="onInputChange($event, 'producto')" class="form-control" id="editarProducto" placeholder="Nombre del producto">
-            </div>
-            <div class="form-group">
-                <label for="productoEditando">Descripción:</label>
-                <input type="text" [(ngModel)]="productoEditando.descripcion" name="producto.descripcion" (input)="onInputChange($event, 'descripcion')" class="form-control" id="editarDescripcion" placeholder="Descripción">
-            </div>
-           
-          </form>
-      </div>
-      <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-          <button type="button" (click)="editarProducto()" class="btn btn-success" data-dismiss="modal">Guardar</button>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-success" (click)="editarProducto(cat)" data-dismiss="modal">Guardar</button>
+              </div>
+              </form>
+          </div>
+
       </div>
   </div>
-</div>
 </div>
 <!-- /Actualizar Usuario Form -->

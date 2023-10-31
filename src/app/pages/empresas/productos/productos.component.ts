@@ -53,7 +53,8 @@ export class ProductosComponent implements OnInit{
   dtTrigger: Subject<any> = new Subject<any>();
   modalEditar: NgbModalRef | undefined;
 
-  
+  cat: Categoria[] = [];
+  productoAllCategoria: any[] = []
 
   constructor(
     private _objService: ProductosService,
@@ -154,13 +155,19 @@ export class ProductosComponent implements OnInit{
   }
 
 
-  editarProducto(){
+  editarProducto(cat: any) {
+    
     this._objService.editarProducto(this.productoEditando).subscribe(data => {
       this.toastr.success('Producto editado con éxito');
-      this.listProductos[this.indice].producto = this.productoEditando.producto;
-      this.listProductos[this.indice].descripcion = this.productoEditando.descripcion;
-      this.listProductos[this.indice].estado = this.productoEditando.estado;
-      location.reload();
+      if(this.productoAllCategoria == null){
+        //no se puede editar el usuario
+      }else{
+      this.productoAllCategoria[this.indice].producto = this.productoEditando.producto;
+      this.productoAllCategoria[this.indice].descripcion = this.productoEditando.descripcion;
+      this.productoAllCategoria[this.indice].categoria.cat = cat.cat;
+       // Recargar la página
+       location.reload();
+      }
+
     });
-  }
-}
+  }}
