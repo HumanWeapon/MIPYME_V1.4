@@ -9,6 +9,8 @@ import { PymesService } from 'src/app/services/negocio/pymes.service';
 import { ErrorService } from 'src/app/services/error.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgZone } from '@angular/core';
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 
 @Component({
@@ -58,9 +60,6 @@ export class PymesComponent implements OnInit  {
   constructor(
     private _pymeService: PymesService,
     private toastr: ToastrService,
-    private router: Router,
-    private _errorService: ErrorService,
-    private modalService: NgbModal,
     private ngZone: NgZone
   ) {}
 
@@ -74,6 +73,9 @@ export class PymesComponent implements OnInit  {
       pageLength: 10,
       language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
       responsive: true,
+      search: true,
+      dom: 'lfrtip', // Ejemplo de cadena de configuración
+      
     };
 
     this._pymeService.getAllPymes().subscribe({
@@ -91,21 +93,81 @@ export class PymesComponent implements OnInit  {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
   }
-
   
- inactivarPyme(pyme: any, i: any) {
-    this._pymeService.inactivarPyme(pyme).subscribe(data =>
-      this.toastr.success('La Pyme: ' + pyme.pyme + ' ha sido inactivada')
-    );
-    this.pymesAll[i].estado = 2;
+/**********************************************************/
+// Variable de estado para alternar funciones
+isActive = false;
+
+toggleFunction(pyme: any, i: number) {
+  // Cambia el estado en cada clic
+  this.isActive = !this.isActive;
+
+  // Ejecuta una función u otra según el estado
+  if (pyme.estado === 2 ) {
+    this.activarPyme(pyme, i); // Ejecuta la primera función
+  } else {
+    this.inactivarPyme(pyme, i); // Ejecuta la segunda función
   }
-  activarPyme(pyme: any, i: any) {
-    this._pymeService.activarPyme(pyme).subscribe(data =>
-      this.toastr.success('La Pyme: ' + pyme.pyme + ' ha sido activada')
+}
+  
+  activarPyme(nombre_pyme: any, i: number) {
+    this._pymeService.activarPyme(nombre_pyme).subscribe(data =>
+      this.toastr.success('La Pyme: ' + nombre_pyme.nombre_pyme + ' ha sido activada')
     );
     this.pymesAll[i].estado = 1;
   }
 
+  inactivarPyme(nombre_pyme: any, i: number) {
+    this._pymeService.inactivarPyme(nombre_pyme).subscribe(data =>
+      this.toastr.success('La Pyme: ' + nombre_pyme.nombre_pyme + ' ha sido inactivada')
+    );
+    this.pymesAll[i].estado = 2;
+  }
+/*****************************************************************************************************/
+
+/*generatePDF() {
+  const doc = new jsPDF();
+
+  const data: any[][] =[]
+  const headers = ['Nombre Pyme', 'Categoria', 'Descripcion', 'Creado', 'Estado'];
+
+  // Recorre los datos de tu DataTable y agrégalo a la matriz 'data'
+  this.pymesAll.forEach((pyme, index) => {
+    const row = [
+      pyme.nombre_pyme,
+      pyme.categoria,
+      pyme.descripcion,
+      pyme.creado,
+      this.getEstadoText(pyme.estado) // Función para obtener el texto del estado
+    ];
+    data.push(row);
+  });
+
+  doc.autoTable({
+    head: [headers],
+    body: data,
+  });
+
+  doc.save('Pymes.pdf');
+}
+
+getEstadoText(estado: number): string {
+  switch (estado) {
+    case 1:
+      return 'Activo';
+    case 2:
+      return 'Inactivo';
+    case 3:
+      return 'Vencido';
+    case 4:
+      return 'Bloqueado';
+    default:
+      return 'Desconocido';
+  }
+}
+*/
+
+/**************************************************************/
   agregarNuevaPyme() {
     this.nuevaPyme={
       id_pyme: 0,
@@ -131,6 +193,8 @@ export class PymesComponent implements OnInit  {
     });
   }
 
+
+/*******************************************************************************/
   onInputChange(event: any, field: string) {
     if (field === 'nombre_pyme' || field === 'descripcion') {
       const inputValue = event.target.value;
@@ -139,6 +203,9 @@ export class PymesComponent implements OnInit  {
     }
   }
 
+
+
+/************************************************************************************/
   obtenerIdPyme(pyme: Pyme, i: any) {
     this.pymeEditando = {
       id_pyme: pyme.id_pyme,
@@ -152,8 +219,12 @@ export class PymesComponent implements OnInit  {
       estado: pyme.estado
     };
     this.indice = i;
-    
   }
+
+
+  /************************************************************************/
+
+
   
  /* editarUsuario(rol: any) {
     this._userService.editarUsuario(this.usuarioEditando).subscribe(data => {
