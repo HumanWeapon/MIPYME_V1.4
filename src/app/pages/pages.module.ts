@@ -56,7 +56,7 @@ import { PymesComponent } from './empresas/pymes/pymes.component';
     TipoEmpresaComponent,
     CategoriaComponent,
     BitacoraComponent,
-    TipoEmpresaComponent
+    TipoEmpresaComponent,
 
   ],
   imports: [
