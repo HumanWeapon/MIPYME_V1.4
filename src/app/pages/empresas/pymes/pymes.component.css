@@ -3,3 +3,21 @@
     right: 25px; /* Ajusta la distancia desde el borde derecho */
     top: 10px; /* Ajusta la distancia desde el borde superior */
   }
+
+  /* Establece un ancho máximo para la tabla dentro del modal */
+.modal-body table {
+  width: 580px; /* Ajusta este valor según tus necesidades */
+  height: 560px; /* Ajusta este valor según tus necesidades */
+}
+  
+.modal-content {
+  width: 630px; /* Establece el ancho del contenido del modal como "auto" */
+}
+.modal-body {
+  max-height: 80vh; /* Ajusta este valor según tus necesidades */
+  overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+}
+
+.descripcion-column {
+  width: 285px; /* Ajusta el ancho según tus necesidades */
+}

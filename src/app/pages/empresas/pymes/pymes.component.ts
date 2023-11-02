@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { ToastrService } from 'ngx-toastr';
@@ -139,7 +139,7 @@ generatePDF() {
       pyme.nombre_pyme,
       pyme.categoria,
       pyme.descripcion,
-      pyme.creado,
+      pyme.creado_por,
       this.getEstadoText(pyme.estado) // Función para obtener el texto del estado
     ];
     data.push(row);
@@ -150,7 +150,9 @@ generatePDF() {
     body: data,
   });
 
-  doc.save('Pymes.pdf');
+  //doc.save('Pymes.pdf');
+  //doc.output('dataurlnewwindow');
+  doc.output('dataurlnewwindow', null, 'Pymes.pdf');
 }
 
 getEstadoText(estado: number): string {
@@ -167,6 +169,7 @@ getEstadoText(estado: number): string {
       return 'Desconocido';
   }
 }
+
 
 
 /**************************************************************/
