@@ -21,8 +21,6 @@ export class ProductosService {
 
    }
 
-
-
    addProducto(producto: Productos): Observable<any> {
     const token = localStorage.getItem('token')
     const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 import { Pyme } from 'src/app/interfaces/empresas/pyme';
 import { environment } from 'src/enviroments/enviromet';
 
@@ -21,12 +22,16 @@ export class PymesService {
    }
 
 
-   postPyme(pyme: Pyme): Observable<any> {
+   addPyme(pyme: Pyme): Observable<any> {
     const nuevaPyme = {
+                id_tipo_empresa:pyme.id_tipo_empresa,
                 nombre_pyme: pyme.nombre_pyme,
                 categoria: pyme.categoria,
                 descripcion: pyme.descripcion, 
-                creado_por: pyme.creado_por,
+                creado_por: "SYSTEM",
+                fecha_creacion: pyme.fecha_creacion,
+                modificado_por: "SYSTEM",
+                fecha_modificacion: pyme.fecha_modificacion,
                 estado: pyme.estado
       };
       return this.http.post<Pyme>(`${this.myAppUrl}${this.myApiUrl}/postPyme`, nuevaPyme)
@@ -53,6 +58,12 @@ export class PymesService {
     const token = localStorage.getItem('token')
     const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
     return this.http.post<Pyme>(`${this.myAppUrl}${this.myApiUrl}/activatePyme`, pyme, { headers: headers })
+  }
+
+  deletePyme(id_pyme: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/deletePyme?id_pyme=${id_pyme}`, { headers: headers });
   }
 
   cambiarContrasena(pyme: Pyme): Observable<Pyme>{

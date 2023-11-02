@@ -11,6 +11,8 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgZone } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { TipoEmpresa } from 'src/app/interfaces/empresas/tipoEmpresa';
+
 
 
 @Component({
@@ -23,6 +25,7 @@ export class PymesComponent implements OnInit  {
 
   pymeEditando: Pyme = {
     id_pyme: 0,
+    id_tipo_empresa:0,
     nombre_pyme: '',
     categoria: '',
     descripcion: '',
@@ -33,8 +36,10 @@ export class PymesComponent implements OnInit  {
     estado: 0
   };
 
+
   nuevaPyme: Pyme = {
     id_pyme: 0,
+    id_tipo_empresa:0,
     nombre_pyme: '',
     categoria: '',
     descripcion: '',
@@ -55,6 +60,7 @@ export class PymesComponent implements OnInit  {
   dtTrigger: Subject<any> = new Subject<any>();
   modalEditar: NgbModalRef | undefined;
 
+  tipo_empresa: TipoEmpresa[]=[];
   pymesAll: any[] = []
 
   constructor(
@@ -171,11 +177,11 @@ getEstadoText(estado: number): string {
 }
 
 
-
 /**************************************************************/
   agregarNuevaPyme() {
     this.nuevaPyme={
       id_pyme: 0,
+      id_tipo_empresa:this.nuevaPyme.id_tipo_empresa,
       nombre_pyme: this.nuevaPyme.nombre_pyme,
       categoria: this.nuevaPyme.categoria,
       descripcion: this.nuevaPyme.descripcion,
@@ -186,9 +192,8 @@ getEstadoText(estado: number): string {
       estado: 1
     };
 
-    this._pymeService.postPyme(this.nuevaPyme).subscribe(data => {
+    this._pymeService.addPyme(this.nuevaPyme).subscribe(data => {
       this.toastr.success('Pyme agregada con éxito');
-
 
         // Recargar la página
         location.reload();
@@ -214,6 +219,7 @@ getEstadoText(estado: number): string {
   obtenerIdPyme(pyme: Pyme, i: any) {
     this.pymeEditando = {
       id_pyme: pyme.id_pyme,
+      id_tipo_empresa:pyme.id_tipo_empresa,
       nombre_pyme: pyme.nombre_pyme,
       categoria: pyme.categoria,
       descripcion:pyme.descripcion,
@@ -252,4 +258,27 @@ getEstadoText(estado: number): string {
 
     });
   }*/
+
+  deletePyme(id_pyme: number, i: number) {
+    if (id_pyme !== undefined) {
+      this._pymeService.deletePyme(id_pyme).subscribe(
+        (data) => {
+          // Elimina la pyme de la lista actual en el componente después de la eliminación
+          this.pymesAll.splice(i, 1);
+          this.toastr.success('La Pyme ha sido eliminada con éxito');
+        },
+        (error) => {
+          console.error('Error al eliminar la pyme', error);
+          this.toastr.error('Error al eliminar la Pyme');
+        }
+      );
+    } else {
+      console.error('El valor de id_pyme es indefinido o no válido.');
+    }
+  }
+  
+  
+
+
+
 }
