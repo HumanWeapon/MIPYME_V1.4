@@ -9,8 +9,7 @@ import { PymesService } from 'src/app/services/negocio/pymes.service';
 import { ErrorService } from 'src/app/services/error.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NgZone } from '@angular/core';
-import * as jsPDF from 'jspdf';
-import 'jspdf-autotable';
+
 
 
 @Component({
