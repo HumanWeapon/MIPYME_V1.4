@@ -22,6 +22,7 @@ import { ContactoTelefonoComponent } from './empresas/contacto-telefono/contacto
 import { CategoriaComponent } from './empresas/categoria-producto/categoria.component';
 import { BitacoraComponent } from './mantenimiento/bitacora/bitacora.component';
 import { PymesComponent } from './empresas/pymes/pymes.component';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path:'dashboard',component:PagesComponent, 
   children:[
     {path:' ', component:DashboardComponent},
+    {path: 'search', component: SearchComponent, data:{titulo: 'Buscar Productos'}},
     {path: 'usuarios', component: UsuariosComponent, data:{titulo: 'Administrar Usuarios'}},
     {path: 'objetos', component: ObjetosComponent, data:{titulo: 'Administrar Objetos'}},
     {path: 'permisos', component: PermisosComponent, data:{titulo: 'Administrar Permisos'}},
