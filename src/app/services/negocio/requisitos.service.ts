@@ -59,6 +59,6 @@ export class RequisitoService {
    editarRequisito(requisito: Requisito): Observable<any> {
     const token = localStorage.getItem('token')
     const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`)
-    return this.http.post<Requisito>(`${this.myAppUrl}${this.myApiUrl}/updateTipo_Requisito`, requisito, { headers: headers })
+    return this.http.post<Requisito>(`${this.myAppUrl}${this.myApiUrl}/updateTipoRequisito`, requisito, { headers: headers })
   }
 }
