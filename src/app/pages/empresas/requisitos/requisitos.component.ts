@@ -151,15 +151,24 @@ onInputChange(event: any, field: string) {
   }
 
 
-  editarRequisito(){
+  /*editarRequisito2(){
     this._requisitoService.editarRequisito(this.RequisitoEditando).subscribe(data => {
       this.toastr.success('requisito editado con éxito');
       this.listrequisito[this.indice].tipo_requisito = this.RequisitoEditando.tipo_requisito;
-      this.listrequisito[this.indice].descripcion = this.RequisitoEditando.descripcion;
-
-      
+      this.listrequisito[this.indice].descripcion = this.RequisitoEditando.descripcion;      
         // Recargar la página
         location.reload();
     });
+  }*/
+  editarRequisito(){
+    this._requisitoService.editarRequisito(this.RequisitoEditando).subscribe(data => {
+      this.toastr.success('Requisito editado con éxito');
+      this.listrequisito[this.indice].tipo_requisito = this.RequisitoEditando.tipo_requisito;
+      this.listrequisito[this.indice].descripcion = this.RequisitoEditando.descripcion;      
+    }, error => {
+      this.toastr.error('Hubo un error al editar el requisito');
+    });
   }
+  
+
 }
