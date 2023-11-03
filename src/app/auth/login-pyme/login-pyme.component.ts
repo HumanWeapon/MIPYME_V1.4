@@ -16,6 +16,7 @@ export class LoginPymeComponent {
 
   getPyme: Pyme = {
     id_pyme: 0,
+    id_tipo_empresa:0,
     nombre_pyme: '',
     categoria: '',
     descripcion: '',

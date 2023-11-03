@@ -15,8 +15,8 @@
                   <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"class="table table-bordered table-striped row-border hover">
                       <thead>
                         <tr>
-                          <th>Nombre Pyme</th>
-                          <th>Categoria</th>
+                          <th>Nombre Empresa</th>
+                          <th>Tipo Empresa</th>
                           <th>Descripcion</th>
                           <th>Creado</th>
                           <th>Estado</th>
@@ -26,7 +26,7 @@
                       <tbody>
                         <tr *ngFor="let pyme of pymesAll; let i = index">
                           <td>{{ pyme.nombre_pyme }}</td>
-                          <td>{{ pyme.categoria }}</td>
+                          <td>{{ getTipoEmpresaNombre(pyme.id_tipo_empresa) }}</td>
                           <td>{{ pyme.descripcion }}</td>
                           <td>{{ pyme.creado_por}}</td>
                           <td>
@@ -59,38 +59,46 @@
   </section>
     <!-- /.content -->
 
-<!-- Agregar Usuario Form-->
+<!-- Agregar Pyme Form-->
 <div class="modal fade" id="agregarPyme">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Agregar Pyme</h4>
+        <h4 class="modal-title">Agregar Empresa</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      
       <div class="modal-body">
         <form (ngSubmit)="agregarNuevaPyme()">
           <table id="example" class="table table-striped" style="width:100%">
           <!-- Campo: Nombre de la Pyme -->
           <div class="form-group">
-            <label for="nuevaPyme">Nombre de la Pyme:</label>
-            <input type="text" [(ngModel)]="nuevaPyme.nombre_pyme" name="nombre_pyme" (input)="onInputChange($event, 'nombre_pyme')" class="form-control" id="nuevaPyme" placeholder="Nombre de la Pyme">
+            <label for="nuevaPyme">Nombre de la Empresa:</label>
+            <input type="text" [(ngModel)]="nuevaPyme.nombre_pyme" name="nombre_pyme" (input)="onInputChange($event, 'nombre_pyme')" class="form-control" id="nuevaPyme" placeholder="Nombre de la Empresa">
           </div>
-
-          <!-- Campo: Categoría -->
           <div class="form-group">
-            <label for="nuevaCategoria">Categoría:</label>
-            <input type="text" [(ngModel)]="nuevaPyme.categoria" name="categoria" (input)="onInputChange($event, 'categoria')" class="form-control" id="categoria" placeholder="Categoría">
+            <label for="tipoEmpresa">Tipo de Empresa</label>
+            <select [(ngModel)]="nuevoRegistro.id_tipo_empresa" name="nuevoRegistro.id_tipo_empresa" class="form-control" id="tipoEmpresa">
+              <option value="0">Selecciona un tipo de Empresa</option>
+              <option *ngFor="let tipoEmpresa of empresa" [value]="tipoEmpresa.id_tipo_empresa">{{ tipoEmpresa.tipo_empresa }}</option>
+            </select>
           </div>
-
           <!-- Campo: Descripción -->
           <div class="form-group">
             <label for="nuevaDescripcion">Descripción:</label>
             <input type="text" [(ngModel)]="nuevaPyme.descripcion" name="descripcion" (input)="onInputChange($event, 'descripcion')" class="form-control" id="descripcion" placeholder="Descripción">
           </div>
-
+          <div class="form-group">
+            <label for="estado">Estado</label>
+            <select [(ngModel)]="nuevaPyme.estado" name="pyme.estado" class="form-control" id="estado">
+              <option value="0">Selecciona un Estado</option>
+              <option value="1">ACTIVO</option>
+              <option value="2">INACTIVO</option>
+              <option value="3">VENCIDO</option>
+              <option value="4">BLOQUEADO</option>
+            </select>
+          </div>
           <!-- Botones -->
           <div class="modal-footer justify-content-between">
             <!-- Botón Cancelar -->

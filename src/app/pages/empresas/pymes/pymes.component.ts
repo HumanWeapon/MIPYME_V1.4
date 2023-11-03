@@ -12,6 +12,7 @@ import { NgZone } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { TipoEmpresa } from 'src/app/interfaces/empresas/tipoEmpresa';
+import { TipoEmpresaService } from 'src/app/services/negocio/tipoEmpresa.service';
 
 
 
@@ -60,17 +61,44 @@ export class PymesComponent implements OnInit  {
   dtTrigger: Subject<any> = new Subject<any>();
   modalEditar: NgbModalRef | undefined;
 
-  tipo_empresa: TipoEmpresa[]=[];
-  pymesAll: any[] = []
+  empresa: TipoEmpresa[]=[];
+  pymesAll: any[] = [];
+
+  nuevoRegistro: any = {
+    id_tipo_empresa: 0, // Valor inicial, ajusta según tus necesidades
+    // Otras propiedades para tu nuevo registro
+  };
+
 
   constructor(
     private _pymeService: PymesService,
     private toastr: ToastrService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private _tipoEmpresaService: TipoEmpresaService
   ) {}
 
   ngOnInit(): void {
     this.getAllPyme();
+    this.getAllEmpresa();
+  }
+
+  getAllEmpresa(){
+    this._tipoEmpresaService.getAllTipoEmpresa().subscribe((data) => {
+      this.empresa = data;
+      console.log(this.empresa)
+    });
+
+    this._pymeService.pymesAllTipoEmpresa().subscribe({
+      next: (data) =>{
+        this.pymesAll = data;
+      }
+    });
+  }
+
+
+  getTipoEmpresaNombre(idTipoEmpresa: number): string {
+    const tipoEmpresa = this.empresa.find(empresa => empresa.id_tipo_empresa === idTipoEmpresa);
+    return tipoEmpresa ? tipoEmpresa.tipo_empresa : 'Desconocido';
   }
 
   getAllPyme(){
@@ -95,6 +123,7 @@ export class PymesComponent implements OnInit  {
 
 
   }
+
   ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();

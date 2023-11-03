@@ -71,7 +71,6 @@ export class UsuariosComponent implements OnInit  {
   rol: Roles[] = [];
   usuariosAllRoles: any[] = []
 
-
   constructor(
     private _userService: UsuariosService,
     private toastr: ToastrService,
