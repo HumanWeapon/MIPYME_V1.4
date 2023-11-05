@@ -214,23 +214,25 @@ getEstadoText(estado: number): string {
       nombre_pyme: this.nuevaPyme.nombre_pyme,
       categoria: this.nuevaPyme.categoria,
       descripcion: this.nuevaPyme.descripcion,
-      creado_por: 'SYSTEM',
+      creado_por: 'ISMAELM',
       fecha_creacion: new Date(),
-      modificado_por: 'SYSTEM',
+      modificado_por: 'ISMAELM',
       fecha_modificacion: new Date(),
       estado: 1
     };
 
-    this._pymeService.addPyme(this.nuevaPyme).subscribe(data => {
-      this.toastr.success('Pyme agregada con éxito');
-
-        // Recargar la página
+    this._pymeService.addPyme(this.nuevaPyme).subscribe(
+      data => {
+        this.toastr.success('Pyme agregada con éxito');
         location.reload();
-        // Actualizar la vista
-        this.ngZone.run(() => {        
-        });
-    });
+      },
+      error => {
+        console.error('Error al agregar la Pyme:', error);
+        // Puedes mostrar un mensaje de error o tomar medidas adicionales aquí.
+      }
+    );
   }
+    
 
 
 /*******************************************************************************/
